@@ -415,28 +415,6 @@
 *
 * @access public
 */
- function getGlobal($varname) {
-  return getObject("ThisComputer")->getProperty($varname);
- }
-
-/**
-* Title
-*
-* Description
-*
-* @access public
-*/
- function setGlobal($varname, $value) {
-  return getObject("ThisComputer")->setProperty($varname, $value);
- }
-
-/**
-* Title
-*
-* Description
-*
-* @access public
-*/
  function getRandomLine($filename) {
   if (file_exists(ROOT.'texts/'.$filename.'.txt')) {
    $filename=ROOT.'texts/'.$filename.'.txt';
