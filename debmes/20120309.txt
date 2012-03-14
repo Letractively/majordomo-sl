@@ -1,0 +1,4 @@
+09.03.2012 11:06:53
+Mar 09, 2012 11:06:53 http://
+Error:
+1053: Server shutdown in progress<br>SELECT * FROM objects WHERE TITLE LIKE 'ThisComputer'

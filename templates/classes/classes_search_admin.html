@@ -1,0 +1,113 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+﻿<big><#LANG_MODULE_OBJECTS#></big>
+<!-- table classes search -->
+<p align=center>
+<b>
+[ <a href="?view_mode=edit_classes">Add new Class</a> ]
+</b>
+</p>
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_classes" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+[#begin RESULT#]
+<tr >
+ <td
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" valign="top">
+  <b>
+   [#TITLE#]
+  </a></b>
+ </td>
+ <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <table border=0>
+  [#if "<#ACTION#>"=="admin"#]
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]">Edit</a></b>
+   </td>
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=properties">Properties</a></b>
+   </td>   
+<td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=methods">Methods</a></b>
+   </td>      
+<td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=objects">Objects</a></b>
+   </td>      
+   
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=edit_classes&parent_id=[#ID#]">Expand</a>
+   </td>
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=export_classes&id=[#ID#]">Export</a>
+   </td>   
+  [#if !OBJECTS#]
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <a href="?view_mode=delete_classes&id=[#ID#]" onClick="return confirm('Delete record?')">X</a>
+   </td>
+  [#endif OBJECTS#]
+  [#endif ACTION#]
+  </table>
+  [#if OBJECTS#]
+  Objects:
+   <table border=0>
+         [#begin OBJECTS#]
+         <tr>
+                 <td><a href="?(panel:{action=classes}classes:{view_mode=edit_classes,instance=adm,tab=objects,id=<#RESULT.ID#>})&md=objects&view_mode=edit_objects&id=[#ID#]">[#TITLE#]</a></td>
+                 <td>&nbsp;</td>
+        </tr>
+        [#if METHODS#]
+         <tr>
+         	 <td>&nbsp;</td>
+         	 <td>
+         	 	<small>
+         	 	
+         	 	[#begin METHODS#]
+         	 	 <li><a href="?(panel:{action=classes}classes:{view_mode=edit_classes,instance=adm,tab=objects,id=<#RESULT.ID#>})&md=objects&view_mode=edit_objects&id=<#OBJECTS.ID#>&tab=methods&overwrite=1&method_id=[#ID#]">[#TITLE#]</a></li>
+         	 	[#end METHODS#]
+         	
+         	 	</td>
+        </tr>
+        [#endif METHODS#]
+         [#end OBJECTS#]
+  </table>
+  [#endif OBJECTS#]
+ </td>
+</tr>
+[#if RESULT#]
+ <tr><td colspan=100 style="padding-left:20px" bgcolor="#FFFFFF">
+  <table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+   [#tree RESULT#]
+  </table>
+ </td></tr>
+[#endif RESULT#]
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_classes">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No data</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>
+
+<hr size=1>
+<form action="?" enctype="multipart/form-data" method="post">
+<table border="0">
+ <tr>
+  <td valign="top">Import Class from the file:</td>
+  <td valign="top"><input type="file" name="file" enctype="multipart/form-data"></td>
+  <td valign="top"><label><input type="checkbox" name="overwrite" value="1"> overwrite</label></td>
+  <td valign="top"><input type="submit" name="submit" value="Import"></td>
+ </tr>
+</table>
+<input type="hidden" name="view_mode" value="import_classes">
+</form>

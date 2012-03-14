@@ -1,0 +1,302 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+<!-- Table 'commands' edit -->
+<p align=center>
+ <a href="?">&lt;&lt;&lt; Back</a>
+</p>
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out all required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New record</b></td>
+</tr>
+[#else ID#]
+<tr>
+ <td align=right>ID:</td>
+ <td><b>[#ID#]</b></td>
+</tr>
+
+[#endif ID#]
+<tr>
+ <td align=right>Parent:</td>
+ <td><select name="parent_id">
+ <option value="0">ROOT
+ [#begin PARENTS#]
+ <option value="[#ID#]"[#if ID="<#PARENT_ID#>"#] selected[#endif#]>[#TITLE#]
+ [#end PARENTS#]
+ </select></td>
+</tr>
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ TITLE:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]" size="70">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ PRIORITY:
+ </td>
+ <td>
+  <input type="text" name="priority" value="[#PRIORITY#]" size="5">
+ </td>
+</tr>
+
+<tr>
+ <td valign="top" align="right">Type:</td>
+ <td valign="top"><select name="type">
+  <option value="">none
+  <option value="label"[#if TYPE="label"#] selected[#endif#]>Label
+  <option value="window"[#if TYPE="window"#] selected[#endif#]>New window
+  <option value="url"[#if TYPE="url"#] selected[#endif#]>URL
+  <option value="command"[#if TYPE="command"#] selected[#endif#]>JS Command
+  <option value="button"[#if TYPE="button"#] selected[#endif#]>Button
+  <option value="switch"[#if TYPE="switch"#] selected[#endif#]>On/off switch
+  <option value="selectbox"[#if TYPE="selectbox"#] selected[#endif#]>Select Box
+  <option value="sliderbox"[#if TYPE="sliderbox"#] selected[#endif#]>Slider Box
+  <option value="plusminus"[#if TYPE="plusminus"#] selected[#endif#]>Plus/Minus Box
+  <option value="timebox"[#if TYPE="timebox"#] selected[#endif#]>Time Picker
+  <option value="textbox"[#if TYPE="textbox"#] selected[#endif#]>Text Box
+  <!--#
+  <option value="datebox"[#if TYPE="datebox"#] selected[#endif#]>(n/a) Date Picker
+  #-->
+  <option value="custom"[#if TYPE="custom"#] selected[#endif#]>Custom HTML Box
+ </select></td>
+</tr>
+
+<tr>
+ <td valign="top" align="right">Icon:</td>
+ <td valign="top">
+ [#if ICON!=""#]
+ <input type="checkbox" name="delete_icon" value="1"> delete<br>
+ <img src="/cms/icons/[#ICON#]" border="0">
+ [#ICON#]<br>
+ [#endif#]
+ <input type="file" name="icon">
+ </td>
+</tr>
+
+[#if TYPE=="plusminus" || TYPE=="sliderbox"#]
+<tr>
+ <td align=right>
+ MIN VALUE:
+ </td>
+ <td>
+  <input type="text" name="min_value" value="[#MIN_VALUE#]" size="20">
+ </td>
+</tr>
+<tr>
+ <td align=right>
+ MAX VALUE:
+ </td>
+ <td>
+  <input type="text" name="max_value" value="[#MAX_VALUE#]" size="20">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ STEP VALUE:
+ </td>
+ <td>
+  <input type="text" name="step_value" value="[#STEP_VALUE#]" size="20">
+ </td>
+</tr>
+[#endif TYPE#]
+
+[#if TYPE=="selectbox" || TYPE=="custom"#]
+<tr>
+ <td align=right valign="top">
+ Data:
+ </td>
+ <td valign="top">
+  <textarea name="data" cols="50" rows="5">[#DATA#]</textarea>
+ </td>
+</tr>
+
+[#endif TYPE#]
+
+<tr>
+ <td align=right>
+ AUTO UPDATE LABEL:
+ </td>
+ <td>
+  <input type="text" name="auto_update" value="[#AUTO_UPDATE#]" size="10"> (seconds)
+ </td>
+</tr> 
+
+
+[#if TYPE=="plusminus" || TYPE=="sliderbox"  || TYPE=="selectbox" || TYPE=="switch" || TYPE=="timebox" || TYPE=="textbox"#]
+<tr>
+ <td align=right>
+ CURRENT VALUE:
+ </td>
+ <td>
+  <input type="text" name="cur_value" value="" size="20"> (<b>[#CUR_VALUE#]</b>)
+ </td>
+</tr>
+[#endif TYPE#]
+
+[#if TYPE=="plusminus" || TYPE=="sliderbox"  || TYPE=="selectbox" || TYPE=="switch" || TYPE=="custom" || TYPE=="timebox" || TYPE=="textbox"#]
+<tr>
+ <td align=right>
+ LINKED OBJECT.PROPERTY:
+ </td>
+ <td>
+  <input type="text" name="linked_object" value="[#LINKED_OBJECT#]" size="20">
+  .
+  <input type="text" name="linked_property" value="[#LINKED_PROPERTY#]" size="20">
+ </td>
+</tr>
+[#endif TYPE#]
+
+[#if TYPE=="plusminus" || TYPE=="sliderbox" || TYPE=="selectbox" || TYPE=="button" || TYPE=="switch" || TYPE=="timebox" || TYPE=="textbox"#]
+<tr>
+ <td align=right>
+ ON_CHANGE OBJECT.METHOD:
+ </td>
+ <td>
+  <input type="text" name="onchange_object" value="[#ONCHANGE_OBJECT#]" size="20">
+  .
+  <input type="text" name="onchange_method" value="[#ONCHANGE_METHOD#]" size="20">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ ON_CHANGE SCRIPT:
+ </td>
+ <td>
+   <select name="script_id">
+    <option value="0">
+    [#begin SCRIPTS#]
+        <option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
+        [#end SCRIPTS#]
+   </select> 
+ </td>
+</tr>
+
+<tr>
+ <td align=right valign="top">
+ [#if ERR_CODE#]<font color="red">[#endif#]ON_CHANGE CODE:
+ </td>
+ <td>
+ [#ERRORS#]
+  <textarea name="code" rows="5" cols="50">[#CODE#]</textarea>
+ </td>
+</tr>
+
+
+
+[#endif TYPE#]
+
+[#if TYPE="command"#]
+<!-- COMMAND (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_COMMAND#]<b><font color="red">[#endif#]
+ COMMAND:
+ </td>
+ <td>
+  <input type="text" name="command" value="[#COMMAND#]" size="50">
+ </td>
+</tr>
+[#endif TYPE#]
+
+[#if TYPE=="window" || TYPE=="url" || TYPE==""#]
+<!-- URL (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_URL#]<b><font color="red">[#endif#]
+ URL:
+ </td>
+ <td>
+  <input type="text" name="url" value="[#URL#]" size="50">
+ </td>
+</tr>
+[#if TYPE!="url"#]
+<tr>
+ <td align=right>
+ TARGET WINDOW:
+ </td>
+ <td>
+  <input type="text" name="window" value="[#WINDOW#]" size="50">
+ </td>
+</tr>
+<!-- WIDTH (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_WIDTH#]<b><font color="red">[#endif#]
+ WIDTH:
+ </td>
+ <td>
+  <input type="text" name="width" value="[#WIDTH#]">
+ </td>
+</tr>
+<!-- HEIGHT (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_HEIGHT#]<b><font color="red">[#endif#]
+ HEIGHT:
+ </td>
+ <td>
+  <input type="text" name="height" value="[#HEIGHT#]">
+ </td>
+</tr>
+[#endif TYPE#]
+[#endif TYPE#]
+
+<!--#
+<tr>
+ <td valign="top">&nbsp;</td>
+ <td valign="top">
+  <label><input type="checkbox" name="autostart" value="1"[#if AUTOSTART="1"#] checked[#endif#]> AUTOSTART</label>
+ </td>
+</tr>
+#-->
+
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Submit">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?">Cancel</a>
+ </td>
+</tr>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+</form>
+</table>
+[#if ID!=""#]
+
+HTML code for templates:<br>
+<b>[<span></span>#module name="commands" id="[#ID#]" action=""#<span></span>]</b>
+
+
+
+[#endif#]

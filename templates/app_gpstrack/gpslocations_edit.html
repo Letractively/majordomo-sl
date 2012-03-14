@@ -1,0 +1,101 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+
+<!-- Table 'gpslocations' edit -->
+<p align=center>
+ <a href="?data_source=<#DATA_SOURCE#>">&lt;&lt;&lt; Back</a>
+</p>
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out all required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New Record</b></td>
+</tr>
+[#endif ID#]
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ TITLE:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]">
+ </td>
+</tr>
+<!-- LAT (float) -->
+<tr>
+ <td align=right>
+ [#if ERR_LAT#]<b><font color="red">[#endif#]
+ LAT:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="lat" value="[#LAT#]">
+ </td>
+</tr>
+<!-- LON (float) -->
+<tr>
+ <td align=right>
+ [#if ERR_LON#]<b><font color="red">[#endif#]
+ LON:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="lon" value="[#LON#]">
+ </td>
+</tr>
+<!-- RANGE (float) -->
+<tr>
+ <td align=right>
+ [#if ERR_RANGE#]<b><font color="red">[#endif#]
+ RANGE:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="range" value="[#RANGE#]">
+ </td>
+</tr>
+<!-- VIRTUAL_USER_ID (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_VIRTUAL_USER_ID#]<b><font color="red">[#endif#]
+ VIRTUAL_USER_ID:
+ </td>
+ <td>
+  <input type="text" name="virtual_user_id" value="[#VIRTUAL_USER_ID#]">
+ </td>
+</tr>
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Submit">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+ </td>
+</tr>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+</form>
+</table>

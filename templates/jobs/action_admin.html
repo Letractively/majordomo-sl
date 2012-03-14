@@ -1,0 +1,44 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+<table border="0">
+ <form action="?" method="post">
+ <tr>
+  <td valign="top">Title:</td>
+  <td valign="top"><input type="text" name="title"></td>
+ </tr>
+ <tr>
+  <td valign="top">Command:</td>
+  <td valign="top"><input type="text" name="commands"></td>
+ </tr>
+ <tr>
+  <td valign="top">Run in:</td>
+  <td valign="top">
+   <input type="text" name="runin" value="0" size="10">
+   <select name="runtype">
+    <option value="s">seconds
+    <option value="m">minutes
+    <option value="h">hours
+   </select>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">&nbsp;</td>
+  <td valign="top"><input type="submit" name="submit" value="Add job"></td>
+ </tr>
+ <input type="hidden" name="mode" value="add">
+ </form>
+</table>
+[#if JOBS#]
+<hr size="1">
+<table border="1" cellpadding=5>
+ [#begin JOBS#]
+ <tr>
+  <td valign="top"><b>[#TITLE#]</b></td>
+  <td valign="top">[#COMMANDS#]</td>
+  <td valign="top">[#if PROCESSED="1"#]processed ([#STARTED#])[#else#]in queue ([#RUNTIME#])[#endif#]</td>
+  <td valign="top"><a href="?id=[#ID#]&mode=cancel" onClick="return confirm('Are you sure?')">Cancel</a></td>
+ </tr>
+ [#end JOBS#]
+</table>
+[#endif JOBS#]
