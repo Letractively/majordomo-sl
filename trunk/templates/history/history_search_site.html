@@ -1,0 +1,212 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+<!-- table history search -->
+[#if MODE="search_history"#]
+<!-- search form -->
+<table border=0>
+<tr>
+ <td colspan=10><b>Search</b></td>
+</tr>
+<form action="?" method="post" name="frmSearch">
+ [#if !IS_SET_OBJECT_ID#]
+ <tr>
+  <td align=right>Object ID:</td>
+  <td><!-- int -->
+&nbsp;&nbsp;&nbsp;
+from <input type="text" name="object_id_min" value="[#OBJECT_ID_MIN#]" size=5>
+to <input type="text" name="object_id_max" value="[#OBJECT_ID_MAX#]" size=5>
+</td>
+ </tr>
+ [#endif IS_SET_OBJECT_ID#]
+ [#if !IS_SET_METHOD_ID#]
+ <tr>
+  <td align=right>Method ID:</td>
+  <td><!-- int -->
+&nbsp;&nbsp;&nbsp;
+from <input type="text" name="method_id_min" value="[#METHOD_ID_MIN#]" size=5>
+to <input type="text" name="method_id_max" value="[#METHOD_ID_MAX#]" size=5>
+</td>
+ </tr>
+ [#endif IS_SET_METHOD_ID#]
+ [#if !IS_SET_VALUE_ID#]
+ <tr>
+  <td align=right>Value ID:</td>
+  <td><!-- int -->
+&nbsp;&nbsp;&nbsp;
+from <input type="text" name="value_id_min" value="[#VALUE_ID_MIN#]" size=5>
+to <input type="text" name="value_id_max" value="[#VALUE_ID_MAX#]" size=5>
+</td>
+ </tr>
+ [#endif IS_SET_VALUE_ID#]
+ <tr>
+  <td colspan=2>
+   <input type="submit" name="submit" value="Search">
+   //
+   <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+  </td>
+ </tr>
+<input type="hidden" name="mode" value="search_history">
+</form>
+</table>
+<!-- / search form -->
+[#endif MODE#]
+<p align=center>
+<b>
+[#if MODE!="search_history"#]<a href="?mode=search_history">Search</a> 
+&nbsp;&nbsp;&nbsp;
+[#endif#]
+//
+&nbsp;&nbsp;&nbsp;
+</b>
+</p>
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- paging -->
+[#if PAGES#]
+<table border=0 align=center>
+<td align=right><b>Pages:</b>&nbsp;</td>
+[#begin PREVPAGE#]<td><a href="?view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
+[#begin PAGES#]
+<td>[#if !SELECTED#]<a href="?view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">[#else#]<b>[#endif#][#NUM#]</td>
+[#end PAGES#]
+[#begin NEXTPAGE#]<td><a href="?view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&gt;&gt;&gt;</a></td>[#end NEXTPAGE#]
+</table>
+[#endif PAGES#]
+<!-- / paging -->
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_history" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+<tr>
+ <td align=center bgcolor="#AAAAAA">
+ <b>Added</b>
+ </td>
+[#if !IS_SET_OBJECT_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>Object ID</b>
+ </td>
+[#endif IS_SET_OBJECT_ID#]
+[#if !IS_SET_METHOD_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>Method ID</b>
+ </td>
+[#endif IS_SET_METHOD_ID#]
+[#if !IS_SET_VALUE_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>Value ID</b>
+ </td>
+[#endif IS_SET_VALUE_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>Old Value</b>
+ </td>
+ <td align=center bgcolor="#AAAAAA">
+ <b>New Value</b>
+ </td>
+ <td align=center bgcolor="#AAAAAA">
+ <b>Details</b>
+ </td>
+<td bgcolor="#AAAAAA">&nbsp;</td>
+</tr>
+[#begin RESULT#]
+<tr >
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if ADDED!=""#]
+   [#ADDED#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+[#if "<#IS_SET_OBJECT_ID#>"!="1"#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if OBJECT_ID!=""#]
+   [#OBJECT_ID#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+[#endif IS_SET_OBJECT_ID#]
+[#if "<#IS_SET_METHOD_ID#>"!="1"#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if METHOD_ID!=""#]
+   [#METHOD_ID#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+[#endif IS_SET_METHOD_ID#]
+[#if "<#IS_SET_VALUE_ID#>"!="1"#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if VALUE_ID!=""#]
+   [#VALUE_ID#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+[#endif IS_SET_VALUE_ID#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if OLD_VALUE!=""#]
+   [#OLD_VALUE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if NEW_VALUE!=""#]
+   [#NEW_VALUE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if DETAILS!=""#]
+   [#DETAILS#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <table border=0>
+  </table>
+ </td>
+</tr>
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_history">
+</form>
+<!-- / search results (list) -->
+<!-- paging -->
+[#if PAGES#]
+<table border=0 align=center>
+<td align=right><b>Pages:</b>&nbsp;</td>
+[#begin PREVPAGE#]<td><a href="?view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
+[#begin PAGES#]
+<td>[#if !SELECTED#]<a href="?view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">[#else#]<b>[#endif#][#NUM#]</td>
+[#end PAGES#]
+[#begin NEXTPAGE#]<td><a href="?view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&gt;&gt;&gt;</a></td>[#end NEXTPAGE#]
+</table>
+[#endif PAGES#]
+<!-- / paging -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No records found</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

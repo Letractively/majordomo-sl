@@ -1,0 +1,89 @@
+<!--#
+ @version 0.3 (auto-set)
+#-->
+﻿&nbsp;
+[#if OVERWRITE=""#]
+<table border="0">
+ [#begin METHODS#]
+ <tr>
+  <td valign="top">[#CLASS_TITLE#]</td>
+  <td valign="top">-&gt;</td>
+  <td valign="top"><b>[#TITLE#]</b>
+  [#if CUSTOMIZED="1"#]<font color="red">*</font>[#endif#]
+  </td>
+  <td valign="top">[ <a href="?view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=<#TAB#>&overwrite=1&method_id=[#ID#]">Setup</a> ]</td>
+ </tr>
+ [#end METHODS#]
+</table>
+[#else OVERWRITE#]
+
+[#if OK#]
+<p><font color="green">Data has been saved!</font></p>
+[#endif#]
+
+<table border="0">
+ <form action="?" method="post">
+ <tr>
+  <td valign="top">Method: 
+        <b><a href="?view_mode=edit_objects&id=<#ID#>&tab=methods">All</a></b>
+        -&gt;
+        <b> <a href="?(panel:{action=classes})&md=classes&view_mode=edit_classes&id=[#METHOD_CLASS_ID#]&tab=methods">[#METHOD_CLASS_TITLE#]</a> -&gt; [#METHOD_TITLE#]</b></td>
+ </tr>
+
+ <tr>
+  <td valign="top">
+   [#if ERR_CODE#]<font color='red'>[#endif#]Execute:<br>
+   <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> script:
+   <select name="script_id">
+    <option value="0">
+    [#begin SCRIPTS#]
+        <option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
+        [#end SCRIPTS#]
+   </select>
+    
+   <br>
+   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#]> код:<br>
+   [#if ERRORS#][#ERRORS#][#endif ERRORS#]
+   <textarea name="code" rows="20" cols="120" id="mCode">[#CODE#]</textarea>
+
+
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  Call parent method:<br>
+  <label><input type="radio" name="call_parent" value="1"[#if CALL_PARENT="1"#] checked[#endif#]> before code execution</label><br>
+  <label><input type="radio" name="call_parent" value="2"[#if CALL_PARENT="2"#] checked[#endif#]> after code execution</label><br>
+  <label><input type="radio" name="call_parent" value="0"[#if CALL_PARENT="0"#] checked[#endif#]> never</label>
+  </td>
+ </tr> 
+ <tr>
+  <td valign="top">
+  <input type="submit" name="submit" value="Update">
+  &nbsp;
+  <a href="?view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=<#TAB#>">Cancel</a>
+  &nbsp;&nbsp;&nbsp;
+  ( <a href="?view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=<#TAB#>&delete_meth=<#METHOD_ID#>" onClick="return confirm('Are you sure?')">Delete</a> )
+  </td>
+ </tr>
+ <input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+ <input type="hidden" name="id" value="<#ID#>">
+ <input type="hidden" name="tab" value="<#TAB#>">
+ <input type="hidden" name="overwrite" value="1">
+ <input type="hidden" name="method_id" value="<#METHOD_ID#>">
+ <input type="hidden" name="mode" value="update">
+ </form>
+</table>
+
+<hr size="1">
+<p>
+        Call method:<br>
+        by the URL:<br>
+        <input type="text" size="90" id="debugURL" value="<#BASE_URL#>/objects/?object=<#OBJECT_TITLE_URL#>&op=m&m=<#METHOD_TITLE_URL#>&">
+        <a href="#" onClick="this.href=document.getElementById('debugURL').value" target=_blank>Test</a>
+        <br>
+        Command line:<br>
+        <input type="text" size="90" value="<#DOC_ROOT#>\obj.bat <#OBJECT_TITLE#>.<#METHOD_TITLE#>">
+        </p>
+
+[#endif OVERWRITE#]

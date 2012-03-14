@@ -1,0 +1,51 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+﻿<!-- table locations search -->
+<big>In-house Locations</big>
+<p>
+<b>
+<a href="?view_mode=edit_locations">Add new Location</a>
+</b>
+</p>
+<table  border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_locations" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+[#begin RESULT#]
+<tr >
+ <td
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <b>
+   [#TITLE#]
+  </a></b>
+ </td>
+ <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <table border=0>
+  [#if "<#ACTION#>"=="admin"#]
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <b><a href="?view_mode=edit_locations&id=[#ID#]">Edit</a></b>
+   </td>
+   <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
+    <a href="?view_mode=delete_locations&id=[#ID#]" onClick="return confirm('Delete record?')">Delete</a>
+   </td>
+  [#endif ACTION#]
+  </table>
+ </td>
+</tr>
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_locations">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No data</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

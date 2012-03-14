@@ -1,0 +1,90 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+<!-- Table 'terminals' edit -->
+<p align=center>
+ <a href="?">&lt;&lt;&lt; Back</a>
+</p>
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out all required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New record</b></td>
+</tr>
+[#endif ID#]
+<!-- NAME (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_NAME#]<b><font color="red">[#endif#]
+ NAME:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="name" value="[#NAME#]">
+ </td>
+</tr>
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ TITLE:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]">
+ </td>
+</tr>
+
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_HOST#]<b><font color="red">[#endif#]
+ HOST:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="host" value="[#HOST#]">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ &nbsp;
+ </td>
+ <td>
+  <input type="checkbox" name="canplay" value="1"[#if CANPLAY="1"#] checked[#endif#]> can play media
+ </td>
+</tr>
+
+
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Submit">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?">Cancel</a>
+ </td>
+</tr>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+</form>
+</table>

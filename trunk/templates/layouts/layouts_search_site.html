@@ -1,0 +1,110 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+
+<!-- table layouts search -->
+[#if MODE="search_layouts"#]
+<!-- search form -->
+<table border=0>
+<tr>
+ <td colspan=10><b>Search</b></td>
+</tr>
+<form action="?" method="post" name="frmSearch">
+ <tr>
+  <td align=right>TITLE:</td>
+  <td><!-- varchar -->
+<input type="text" name="title" value="[#TITLE#]">
+</td>
+ </tr>
+ <tr>
+  <td align=right>URL:</td>
+  <td><!-- url -->
+<input type="text" name="url" value="[#URL#]">
+</td>
+ </tr>
+ <tr>
+  <td colspan=2>
+   <input type="submit" name="submit" value="Search">
+   //
+   <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+  </td>
+ </tr>
+<input type="hidden" name="mode" value="search_layouts">
+</form>
+</table>
+<!-- / search form -->
+[#endif MODE#]
+<p align=center>
+<b>
+[#if MODE!="search_layouts"#]<a href="?mode=search_layouts">Search</a> 
+&nbsp;&nbsp;&nbsp;
+[#endif#]
+//
+&nbsp;&nbsp;&nbsp;
+</b>
+</p>
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_layouts" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+<tr>
+ <td align=center bgcolor="#AAAAAA">
+ <a href="?sortby=TITLE&save_qry=1"><b>TITLE</b></a><nobr>
+ [#if SORTBY="TITLE"#](+)[#endif#]
+ [#if SORTBY="TITLE DESC"#](-)[#endif#]</nobr>
+ </td>
+ <td align=center bgcolor="#AAAAAA">
+ <b>PRIORITY</b>
+ </td>
+ <td align=center bgcolor="#AAAAAA">
+ <b>TYPE</b>
+ </td>
+<td bgcolor="#AAAAAA">&nbsp;</td>
+</tr>
+[#begin RESULT#]
+<tr >
+ <td
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <b>
+   [#TITLE#]
+  </a></b>
+ </td>
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if PRIORITY!=""#]
+   [#PRIORITY#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if TYPE!=""#]
+   [#TYPE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <table border=0>
+  </table>
+ </td>
+</tr>
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_layouts">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No records found.</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

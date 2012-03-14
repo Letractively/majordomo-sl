@@ -1,0 +1,59 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+<big><#LANG_MODULE_CONTROL_MENU#></big>
+<p>
+<b>
+[ <a href="?view_mode=edit_commands">Add new section</a> ]
+</b>
+</p>
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_commands" style="padding:0px">
+<table border=1 cellpadding=5 cellspacing=1 width="100%">
+[#begin RESULT#]
+<tr>
+ <td>
+  <b>
+   [#if RESULT#]
+   <a href="#" onClick="var elem=document.getElementById('sub[#ID#]');elem.style.display='block';return false;" style="text-decoration:none">[ + ]</a>
+   [#endif#]
+   [#if ICON!=""#]<img src="/cms/icons/[#ICON#]" border="0" align="absmiddle">[#endif#]
+   [#if PARENT_ID="0"#]<big>[#endif#]
+   <a href="?view_mode=edit_commands&id=[#ID#]">[#TITLE#]</a>
+   </b>
+   [#if TYPE!=""#][[#TYPE#]][#endif TYPE#]
+  ([#PRIORITY#])
+ </td>
+ <td valign="top" nowrap>
+  <b><a href="?view_mode=edit_commands&parent_id=[#ID#]">Expand</a></b>
+  [#if !RESULT#]
+    <a href="?view_mode=delete_commands&id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>
+  [#endif RESULT#]
+</tr>
+[#if RESULT#]
+ <tr><td colspan=2 style="padding-left:20px" bgcolor="#FFFFFF">
+  <div id="sub[#ID#]" style="display:none">
+  <table border=0 cellpadding=3 cellspacing=1>
+   [#tree RESULT#]
+  </table>
+  </div>
+ </td>
+ </tr>
+[#endif RESULT#]
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_commands">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No items found</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

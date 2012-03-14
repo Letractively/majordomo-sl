@@ -1,0 +1,73 @@
+<!--#
+ @version 0.2 (auto-set)
+#-->
+﻿
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out all required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New Class</b></td>
+</tr>
+[#endif ID#]
+<tr>
+ <td align=right>Parent Class:</td>
+ <td><select name="parent_id">
+ <option value="0">- no -
+ [#begin PARENTS#]
+ <option value="[#ID#]"[#if ID="<#PARENT_ID#>"#] selected[#endif#]>[#TITLE#]
+ [#end PARENTS#]
+ </select></td>
+</tr>
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ Title:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+&nbsp;
+ </td>
+ <td>
+  <input type="checkbox" name="nolog" value="1"[#if NOLOG="1"#] checked[#endif#]> do not save class activity to the log
+ </td>
+</tr>
+
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Update">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?">Cancel</a>
+ </td>
+</tr>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="tab" value="<#TAB#>">
+</form>
+</table>

@@ -1,0 +1,59 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+<big>Design Skins</big>
+
+[#if INSTALLED#]
+<p align="center">
+<font color="green"><b>New skin successfully installed!</b></font>
+</p>
+&nbsp;
+[#endif#]
+
+[#if MODE="upload"#]
+<p>
+[#if ERR_FORMAT#]<font color="red">Error: Incorrect file format!</font>[#endif ERR_FORMAT#]
+[#if ERR_MKDIR#]<font color="red">Error: Cannot create folder '<#ROOT#>skins/[#BASENAME#]'!</font>[#endif ERR_FORMAT#]
+[#if ERR_EXISTS#]<font color="red">Error: Skin '[#BASENAME#]' already exists!</font>[#endif ERR_FORMAT#]
+</p>
+[#endif MODE#]
+
+<table border=0>
+ <form action="?" method="post" enctype="multipart/form-data">
+ <tr>
+  <td>Upload new skin:</td>
+  <td><input type="file" name="file"></td>
+  <td><input type="submit" name="submit" value="Submit"></td>
+ </tr>
+ <input type="hidden" name="mode" value="upload">
+ </form>
+</table>
+
+&nbsp;
+
+[#if SKINS#]
+<table border=0 cellpadding=5>
+ [#begin SKINS#]
+ <tr>
+  <td valign=top align="center">
+   [#if PREVIEW!=""#]
+   <img src="[#PREVIEW#]" border=1>
+   [#else#]
+   No preview available
+   [#endif#]
+  </td>
+  <td valign=top>
+  <big>[#TITLE#]</big><br><br>
+  [ <b><a href="?install=[#TITLE_URL#]" onClick="return confirm('Are you sure?')">Install Skin</a></b> ]
+  &nbsp;&nbsp;&nbsp;
+  [ <a href="?delete=[#TITLE_URL#]" onClick="return confirm('Are you sure?')">Delete Skin</a> ]
+  </td>
+ </tr>
+ [#end SKINS#]
+</table>
+[#else SKINS#]
+<p align="center">
+No additional design skins installed.
+</p>
+[#endif SKINS#]
+

@@ -1,0 +1,87 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+
+<!-- table shopping_list_items search -->
+[#if MODE="search_shopping_list_items"#]
+<!-- search form -->
+<table border=0>
+<tr>
+ <td colspan=10><b>Search</b></td>
+</tr>
+<form action="?" method="post" name="frmSearch">
+ <tr>
+  <td align=right>TITLE:</td>
+  <td><!-- varchar -->
+<input type="text" name="title" value="[#TITLE#]">
+</td>
+ </tr>
+ <tr>
+  <td colspan=2>
+   <input type="submit" name="submit" value="Search">
+   //
+   <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+  </td>
+ </tr>
+<input type="hidden" name="mode" value="search_shopping_list_items">
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+</form>
+</table>
+<!-- / search form -->
+[#endif MODE#]
+<p align=center>
+<b>
+[#if MODE!="search_shopping_list_items"#]<a href="?mode=search_shopping_list_items&data_source=<#DATA_SOURCE#>">Search</a> 
+&nbsp;&nbsp;&nbsp;
+[#endif#]
+//
+&nbsp;&nbsp;&nbsp;
+</b>
+</p>
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_shopping_list_items" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 align=center>
+[#begin RESULT#]
+<tr>
+ <td
+  >
+  <b>
+   [#TITLE#]
+  </a></b>
+ </td>
+ <td
+   align=center
+  >
+  [#if PRICE!=""#]
+   [#PRICE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td>
+  <table border=0>
+  [#if "<#ACTION#>"=="admin"#]
+   <td align=center>
+    <a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_shopping_list_items&id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>
+   </td>
+  [#endif ACTION#]
+  </table>
+ </td>
+</tr>
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_shopping_list_items">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No records found.</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

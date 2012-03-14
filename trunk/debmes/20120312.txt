@@ -1,0 +1,42 @@
+12.03.2012 19:11:57
+JAVASCRIPT Error:  URL: http://localhost/menu.html - missing ) in parenthetical; line: 107
+12.03.2012 19:27:40
+setting property ThisComputer.textBoxTest to zzz
+12.03.2012 19:27:41
+setting property ThisComputer.textBoxTest to zzz
+12.03.2012 19:28:11
+setting property ThisComputer.textBoxTest to zzz2
+12.03.2012 19:28:13
+setting property ThisComputer.textBoxTest to zzz2
+12.03.2012 20:02:37
+setting property ThisComputer.textBoxTest to 7
+12.03.2012 20:02:38
+setting property ThisComputer.textBoxTest to 7
+12.03.2012 20:03:14
+setting property ThisComputer.textBoxTest to 5
+12.03.2012 20:03:23
+setting property ThisComputer.textBoxTest to 4
+12.03.2012 20:05:19
+setting property ThisComputer.textBoxTest to 5
+12.03.2012 20:05:24
+setting property ThisComputer.textBoxTest to 5
+12.03.2012 20:05:27
+setting property ThisComputer.textBoxTest to 
+12.03.2012 20:05:28
+setting property ThisComputer.textBoxTest to 7
+12.03.2012 20:05:29
+setting property ThisComputer.textBoxTest to 7
+12.03.2012 20:05:31
+setting property ThisComputer.textBoxTest to 7
+12.03.2012 20:05:48
+setting property ThisComputer.textBoxTest to 7
+12.03.2012 20:05:54
+setting property ThisComputer.textBoxTest to 8
+12.03.2012 20:05:56
+setting property ThisComputer.textBoxTest to 8
+12.03.2012 20:05:58
+setting property ThisComputer.textBoxTest to 8
+12.03.2012 20:05:59
+setting property ThisComputer.textBoxTest to 4
+12.03.2012 20:11:29
+JAVASCRIPT Error:  URL: http://localhost/jquerymobile/jquery-1.7.1.min.js - missing ) in parenthetical; line: 13

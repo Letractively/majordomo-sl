@@ -1,0 +1,99 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+
+<!-- table gpsactions search -->
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_gpsactions" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+<tr>
+[#if !IS_SET_LOCATION_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>LOCATION_ID</b>
+ </td>
+[#endif IS_SET_LOCATION_ID#]
+[#if !IS_SET_USER_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>USER_ID</b>
+ </td>
+[#endif IS_SET_USER_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>ACTION_TYPE</b>
+ </td>
+[#if !IS_SET_SCRIPT_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>SCRIPT_ID</b>
+ </td>
+[#endif IS_SET_SCRIPT_ID#]
+ <td align=center bgcolor="#AAAAAA">
+ <b>EXECUTED</b>
+ </td>
+<td bgcolor="#AAAAAA">&nbsp;</td>
+</tr>
+[#begin RESULT#]
+<tr >
+[#if "<#IS_SET_LOCATION_ID#>"!="1"#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+   [#LOCATION_ID#]
+ </td>
+[#endif IS_SET_LOCATION_ID#]
+[#if "<#IS_SET_USER_ID#>"!="1"#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+   [#USER_ID#]
+ </td>
+[#endif IS_SET_USER_ID#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if ACTION_TYPE!=""#]
+   [#ACTION_TYPE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+[#if "<#IS_SET_SCRIPT_ID#>"!="1"#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if SCRIPT_ID!=""#]
+   [#SCRIPT_ID#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+[#endif IS_SET_SCRIPT_ID#]
+ <td
+   align=center
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  [#if EXECUTED!=""#]
+   [#EXECUTED#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>
+ <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <table border=0>
+  </table>
+ </td>
+</tr>
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_gpsactions">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No records found.</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

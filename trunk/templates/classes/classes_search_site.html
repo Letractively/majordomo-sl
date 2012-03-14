@@ -1,0 +1,78 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+<!-- table classes search -->
+[#if MODE="search_classes"#]
+<!-- search form -->
+<table border=0>
+<tr>
+ <td colspan=10><b>Search</b></td>
+</tr>
+<form action="?" method="post" name="frmSearch">
+ <tr>
+  <td colspan=2>
+   <input type="submit" name="submit" value="Search">
+   //
+   <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+  </td>
+ </tr>
+<input type="hidden" name="mode" value="search_classes">
+</form>
+</table>
+<!-- / search form -->
+[#endif MODE#]
+<p align=center>
+<b>
+[#if MODE!="search_classes"#]<a href="?mode=search_classes">Search</a> 
+&nbsp;&nbsp;&nbsp;
+[#endif#]
+//
+&nbsp;&nbsp;&nbsp;
+</b>
+</p>
+<table width=100% border=0><tr>
+<td valign=top>
+<!-- results -->
+[#if RESULT#]
+<!-- search results (list) -->
+<form action="?" method="post" name="frmList_classes" style="padding:0px">
+<table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+<tr>
+ <td align=center bgcolor="#AAAAAA">
+ <b>TITLE</b>
+ </td>
+<td bgcolor="#AAAAAA">&nbsp;</td>
+</tr>
+[#begin RESULT#]
+<tr >
+ <td
+   bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <b>
+   [#TITLE#]
+  </a></b>
+ </td>
+ <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
+  <table border=0>
+  </table>
+ </td>
+</tr>
+[#if RESULT#]
+ <tr><td colspan=100 style="padding-left:20px" bgcolor="#FFFFFF">
+  <table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
+   [#tree RESULT#]
+  </table>
+ </td></tr>
+[#endif RESULT#]
+[#end RESULT#]
+</table>
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="view_mode" value="multiple_classes">
+</form>
+<!-- / search results (list) -->
+[#else RESULT#]
+<p align=center>
+<font color="red">No records found</font>
+</p>
+[#endif RESULT#]
+<!-- / results -->
+</td></tr></table>

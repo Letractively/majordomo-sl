@@ -1,0 +1,87 @@
+<!--#
+ @version 0.3 (auto-set)
+#-->
+
+<!-- Table 'scripts' edit -->
+<p align=center>
+ <a href="?">&lt;&lt;&lt; Back</a>
+</p>
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New script</b></td>
+</tr>
+[#endif ID#]
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ Title:
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]" size="50">
+ </td>
+</tr>
+<!-- CODE (text) -->
+<tr>
+ <td valign=top align=right>
+ [#if ERR_CODE#]<b><font color="red">[#endif#]
+  Code (PHP)
+ :
+ </td>
+ <td valign=top>
+ [#if ERRORS!=""#]<font color='red'>[#ERRORS#]</font><br>[#endif ERRORS#]
+ <textarea name="code" rows=30 cols=100>[#CODE#]</textarea>
+ </td>
+</tr>
+<tr>
+ <td valign=top align=right>
+ &nbsp;
+ </td>
+ <td valign=top>
+ <input type="checkbox" name="edit_run" value="1"> execute script after update
+ </td>
+</tr>
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Update">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?">Cancel</a>
+ </td>
+</tr>
+[#if ID!=""#]
+<tr>
+ <td valign="top" align="right">Run by URL:</td>
+ <td valign="top"><#BASE_URL#>/objects/?script=[#TITLE#]</td>
+</tr>
+<tr>
+ <td valign="top" align="right">Command-line:</td>
+ <td valign="top"><#DOC_ROOT#>\obj.bat script:[#TITLE#]</td>
+</tr>
+
+[#endif#]
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+</form>
+</table>

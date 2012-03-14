@@ -1,0 +1,128 @@
+<!--#
+ @version 0.1 (auto-set)
+#-->
+
+<!-- Table 'watchfolders' edit -->
+<p align=center>
+ <a href="?">&lt;&lt;&lt; Back</a>
+</p>
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out all required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New Record</b></td>
+</tr>
+[#endif ID#]
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ TITLE/COMMENTS:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]" size="50">
+ </td>
+</tr>
+<!-- FOLDER (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_FOLDER#]<b><font color="red">[#endif#]
+ FOLDER PATH:
+ </td>
+ <td>
+  <input type="text" name="folder" value="[#FOLDER#]" size="50">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+  &nbsp;
+ </td>
+ <td>
+  <input type="checkbox" name="check_sub" value="1"[#if CHECK_SUB="1"#] checked[#endif#]> include sub-folders
+ </td>
+</tr>
+
+<!-- CHECK_MASK (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_CHECK_MASK#]<b><font color="red">[#endif#]
+ CHECK_MASK:
+ </td>
+ <td>
+  <input type="text" name="check_mask" value="[#CHECK_MASK#]" size="10"> ex.: *.html
+ </td>
+</tr>
+<!-- CHECK_INTERVAL (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_CHECK_INTERVAL#]<b><font color="red">[#endif#]
+ CHECK_INTERVAL:
+ </td>
+ <td>
+  <input type="text" name="check_interval" value="[#CHECK_INTERVAL#]" size="10"> (minutes)
+ </td>
+</tr>
+<!-- SCRIPT_ID (int) -->
+[#if !IS_SET_SCRIPT_ID#]
+<tr>
+ <td align=right>
+ [#if ERR_SCRIPT_ID#]<b><font color="red">[#endif#]
+ SCRIPT_ID:
+ </td>
+ <td>
+    <select name="script_id">
+   <option value="0">
+   [#begin SCRIPTS#]
+   <option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
+   [#end SCRIPTS#]
+  </select>
+
+ </td>
+</tr>
+[#endif IS_SET_SCRIPT_ID#]
+<!-- SCRIPT_TYPE (select) -->
+<tr>
+ <td align=right valign=top>
+ [#if ERR_SCRIPT_TYPE#]<b><font color="red">[#endif#]
+ RUN SCRIPT: 
+ </td>
+ <td>                                           
+ <select name="script_type">
+  [#begin SCRIPT_TYPE_OPTIONS#]<option value="[#VALUE#]"[#if SELECTED#] selected[#endif#]>[#TITLE#]
+  [#end SCRIPT_TYPE_OPTIONS#]
+ </select>
+ </td>
+</tr>
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Submit">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?">Cancel</a>
+ </td>
+</tr>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+</form>
+</table>
