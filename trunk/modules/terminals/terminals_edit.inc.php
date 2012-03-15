@@ -24,6 +24,16 @@
    global $canplay;
    $rec['CANPLAY']=(int)$canplay;
 
+   global $player_type;
+   $rec['PLAYER_TYPE']=$player_type;
+
+   global $player_port;
+   $rec['PLAYER_PORT']=$player_port;
+   global $player_username;
+   $rec['PLAYER_USERNAME']=$player_username;
+   global $player_password;
+   $rec['PLAYER_PASSWORD']=$player_password;
+
    if ($rec['TITLE']=='') {
     $out['ERR_TITLE']=1;
     $ok=0;

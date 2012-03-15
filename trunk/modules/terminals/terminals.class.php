@@ -6,7 +6,7 @@
 *
 * @package MajorDoMo
 * @author Serge Dzheigalo <jey@tut.by> http://smartliving.ru/
-* @version 0.2 (wizard, 15:03:36 [Mar 27, 2009])
+* @version 0.3
 */
 //
 //
@@ -207,6 +207,10 @@ terminals - Terminals
  terminals: HOST varchar(255) NOT NULL DEFAULT ''
  terminals: TITLE varchar(255) NOT NULL DEFAULT ''
  terminals: CANPLAY int(3) NOT NULL DEFAULT '0'
+ terminals: PLAYER_TYPE char(10) NOT NULL DEFAULT ''
+ terminals: PLAYER_PORT varchar(255) NOT NULL DEFAULT ''
+ terminals: PLAYER_USERNAME varchar(255) NOT NULL DEFAULT ''
+ terminals: PLAYER_PASSWORD varchar(255) NOT NULL DEFAULT ''
 EOD;
   parent::dbInstall($data);
  }

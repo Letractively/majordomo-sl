@@ -72,7 +72,7 @@
   <b>
    [#TITLE#]
   </a></b>
-  [#if CANPLAY="1"#](+media)[#endif#]
+  [#if CANPLAY="1"#](+media[#if PLAYER_TYPE!=""#]: [#PLAYER_TYPE#][#endif#])[#endif#]
  </td>
  <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
   <table border=0>
