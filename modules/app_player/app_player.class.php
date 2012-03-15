@@ -202,40 +202,54 @@ function usual(&$out) {
    echo $command.' ';
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-   if ($command=='refresh') {
-    $out['PLAY']=preg_replace('/\\\\$/is', '', $out['PLAY']);
-    curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST']."/rc/?command=vlc_play&param=".urlencode(''.str_replace('/', "\\", utf2win($out['PLAY'])).''));
-    //echo "http://".$terminal['HOST']."/rc/?command=vlc_play&param=".urlencode(''.str_replace('/', "\\", utf2win($out['PLAY'])).'');
-    $res=curl_exec($ch);
+
+   if ($terminal['PLAYER_USERNAME'] && $terminal['PLAYER_PASSWORD']) {
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC ) ;
+    curl_setopt($ch, CURLOPT_USERPWD, $terminal['PLAYER_USERNAME'].':'.$terminal['PLAYER_PASSWORD']);
    }
 
-   if ($command=='fullscreen') {
-    curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST']."/rc/?command=vlc_fullscreen");
-    $res=curl_exec($ch);
-   }
-
-
-   if ($command=='pause') {
-    curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST']."/rc/?command=vlc_pause");
-    $res=curl_exec($ch);
-   }
-
-   if ($command=='next') {
-    curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST']."/rc/?command=vlc_next");
-    $res=curl_exec($ch);
-   }
-
-   if ($command=='prev') {
-    curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST']."/rc/?command=vlc_prev");
-    $res=curl_exec($ch);
-   }
-
-   if ($command=='close') {
-    curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST']."/rc/?command=vlc_close");
-    $res=curl_exec($ch);
+   if (!$terminal['PLAYER_PORT']) {
+    $terminal['PLAYER_PORT']='80';
    }
 
 
+    if ($terminal['PLAYER_TYPE']=='vlc' || $terminal['PLAYER_TYPE']=='') {
+
+      if ($command=='refresh') {
+       $out['PLAY']=preg_replace('/\\\\$/is', '', $out['PLAY']);
+       curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST'].":".$terminal['PLAYER_PORT']."/rc/?command=vlc_play&param=".urlencode(''.str_replace('/', "\\", utf2win($out['PLAY'])).''));
+       //echo "http://".$terminal['HOST']."/rc/?command=vlc_play&param=".urlencode(''.str_replace('/', "\\", utf2win($out['PLAY'])).'');
+       $res=curl_exec($ch);
+      }
+
+      if ($command=='fullscreen') {
+       curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST'].":".$terminal['PLAYER_PORT']."/rc/?command=vlc_fullscreen");
+       $res=curl_exec($ch);
+      }
+
+
+      if ($command=='pause') {
+       curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST'].":".$terminal['PLAYER_PORT']."/rc/?command=vlc_pause");
+       $res=curl_exec($ch);
+      }
+
+      if ($command=='next') {
+       curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST'].":".$terminal['PLAYER_PORT']."/rc/?command=vlc_next");
+       $res=curl_exec($ch);
+      }
+
+      if ($command=='prev') {
+       curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST'].":".$terminal['PLAYER_PORT']."/rc/?command=vlc_prev");
+       $res=curl_exec($ch);
+      }
+
+      if ($command=='close') {
+       curl_setopt($ch, CURLOPT_URL, "http://".$terminal['HOST'].":".$terminal['PLAYER_PORT']."/rc/?command=vlc_close");
+       $res=curl_exec($ch);
+      }
+   } elseif ($terminal['PLAYER_TYPE']=='xbmc') {
+    include(DIR_MODULES.'app_player/xbmc.php');
+   }
 
    // close cURL resource, and free up system resources
    curl_close($ch);    

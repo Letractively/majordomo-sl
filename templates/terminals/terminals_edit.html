@@ -70,6 +70,48 @@
  </td>
 </tr>
 
+<tr>
+ <td align=right>
+ Player type:
+ </td>
+ <td>
+  <select name="player_type">
+   <option value="">default
+   <option value="vlc"[#if PLAYER_TYPE=="vlc"#] selected[#endif#]>VLC
+   <option value="xbmc"[#if PLAYER_TYPE=="xbmc"#] selected[#endif#]>XBMC
+  </select>
+  (make sure you have control-over-http enabled)
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ Player port:
+ </td>
+ <td>
+ <input type="text" name="player_port" value="[#PLAYER_PORT#]">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ Player username:
+ </td>
+ <td>
+ <input type="text" name="player_username" value="[#PLAYER_USERNAME#]">
+ </td>
+</tr>
+
+<tr>
+ <td align=right>
+ Player password:
+ </td>
+ <td>
+ <input type="text" name="player_password" value="[#PLAYER_PASSWORD#]">
+ </td>
+</tr>
+
+
 
 <tr>
  <td colspan=2 align=center>
