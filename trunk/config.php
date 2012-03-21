@@ -31,7 +31,7 @@
  if ($_ENV["S2G_SERVER_DOCROOT"]) {
   Define('DOC_ROOT', $_ENV['S2G_SERVER_DOCROOT']);
  } else {
-  Define('DOC_ROOT', 'C:\homenetserver\htdocs');              // Your htdocs location (!!!)
+  Define('DOC_ROOT', 'C:\_majordomo\htdocs');              // Your htdocs location (!!!)
  }
  
 
@@ -45,6 +45,8 @@
  Define('ROOT', DOC_ROOT."/");
  Define('ROOTHTML', "/");
  Define('PROJECT_DOMAIN', $_SERVER['SERVER_NAME']);
+
+ //Define('ONEWIRE_SERVER', 'tcp://home:8234');    // 1-wire OWFS server
 
  /*
  Define('HOME_NETWORK', '192.168.0.*');                  // home network (optional)
