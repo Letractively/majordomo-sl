@@ -122,6 +122,23 @@ include_once (ROOT . 'languages/default.php');
  }
  // END: filter output
 
+ // GLOBALS
+   $result=preg_replace('/%rand%/is', rand(), $result);
+   if (preg_match_all('/%(\w+?)\.(\w+?)%/is', $result, $m)) {
+    $total=count($m[0]);
+    for($i=0;$i<$total;$i++) {
+     $result=str_replace($m[0][$i], getGlobal($m[1][$i].'.'.$m[2][$i]), $result);
+    }
+   } elseif (preg_match_all('/%(\w+?)%/is', $result, $m)) {
+    $total=count($m[0]);
+    for($i=0;$i<$total;$i++) {
+     $result=str_replace($m[0][$i], getGlobal($m[1][$i]), $result);
+    }
+   }
+  // END GLOBALS
+
+
+
  // BEGIN: language constants
  if (preg_match_all('/&\#060\#LANG_(.+?)\#&\#062/is', $result, $matches)) {
   $total=count($matches[0]);

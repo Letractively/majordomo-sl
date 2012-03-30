@@ -546,4 +546,35 @@
     }
 } 
 
+ function getFilesTree($destination) {
+
+  if (substr($destination, -1)=='/' || substr($destination, -1)=='\\') {
+   $destination=substr($destination, 0, strlen($destination)-1);
+  }
+
+  $res=array();
+
+  if (!Is_Dir($destination)) {
+    return $res;
+  }
+
+ if ($dir = @opendir($destination)) { 
+  while (($file = readdir($dir)) !== false) { 
+    if (Is_Dir($destination."/".$file) && ($file!='.') && ($file!='..')) {
+     $tmp=getFilesTree($destination."/".$file);
+     if (is_array($tmp)) {
+      foreach($tmp as $elem) {
+       $res[]=$elem;
+      }
+     }
+    } elseif (Is_File($destination."/".$file)) {
+     $res[]=($destination."/".$file);
+    }
+  }     
+  closedir($dir); 
+ }
+ return $res;
+ }
+
+
 ?>

@@ -66,6 +66,12 @@ include_once (ROOT . 'languages/default.php');
  include_once(DIR_MODULES.'watchfolders/watchfolders.class.php');
  $watchfolders=new watchfolders();
 
+ if (defined('ONEWIRE_SERVER')) {
+  include_once(DIR_MODULES.'onewire/onewire.class.php');
+  $onw=new onewire();
+ }
+
+
 
  while (1) {
   if ((time()-$tm)>$long_delay_limit) {
@@ -135,6 +141,11 @@ include_once (ROOT . 'languages/default.php');
   $webvars->checkAllVars(); // check all web vars
 
   $watchfolders->checkAllFolders(); // checking all watching folders
+
+  if (defined('ONEWIRE_SERVER')) {
+   $onw->updateDevices(); // check all 1wire devices
+  }
+
 
   sleep(1); // 1 second sleep
   if (file_exists('./reboot')) {
