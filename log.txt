@@ -1,0 +1,1396 @@
+����� �뢮�� ������ �� ��࠭ (ECHO) ����祭.
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MajorDoMo</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<link href="/stl.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/css/ui-darkness/jquery-ui-1.8.6.custom.css"/>
+<link type="text/css" rel="stylesheet" href="/js/jquery.windows-engine.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.gritter.css" />
+<script type="text/javascript" src="/jquerymobile/jquery-1.6.2.min.js"></script>
+
+
+<script language="javascript" src="/js/scripts.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery.windows-engine.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery.gritter.js"></script>
+<style>
+#container {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+}  
+.ui-tabs .ui-tabs-panel {
+    padding: 0;
+}
+</style>
+
+</head>
+<body style="background-color:black">
+
+<script language="javascript">
+
+ var eventState='';
+ var eventLatest='';
+ var eventTimer;
+ var noteTimer;
+ var noteLatest='';
+
+ // ----------------------------------------------------------------------
+ function processCommand(event_id, event_type, event_window, event_details) {
+
+     if (event_type=='newwindow') {
+      openTWindow(event_window, 'Event '+event_id, event_details, 500, 500);
+     }
+
+     if (event_type=='maximize') {
+      if ($(event_window)!=null) {
+       Windows.focus(event_window);
+       var win=Windows.getFocusedWindow();
+       win.maximize();
+      }
+     }
+
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function getNextEventReceived(id, data) {
+  if (eventLatest!=data) {
+     eventLatest=data;
+     eventState='processing';
+     var elem=document.getElementById('debugInfo');
+     elem.innerHTML=elem.innerHTML+'<br>'+data;
+     // processing
+     var d=data.split('|');
+     var event_id=d[0];
+     var event_type=d[1];
+     var event_window=d[2];
+     var event_details=d[3];
+     processCommand(event_id, event_type, event_window, event_details);
+  }
+  eventState='';
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function getNextEvent() {
+  if (eventState!='') return;
+  clearTimeout(eventTimer);
+  eventTimer=window.setTimeout ('getNextEvent();', 5000);
+  eventState='requesting';
+  AJAXRequest('/getnextevent.html', 'getNextEventReceived', '');
+  return false;
+ }
+
+ /*
+ function getLatestNoteMP3Received(id, data) {
+    document.getElementById("sound").innerHTML="<embed src='"+data+"' hidden=true autostart=true loop=false>";
+ }
+ */
+
+ function getLatestNoteReceived(id, data) {
+  if (noteLatest!=data) {
+   if (noteLatest!='') {
+    $.gritter.add({
+        title: 'Alice',
+        text: data, 
+        sticky: false, 
+        time: 8000
+     });
+     //AJAXRequest('/getlatestmp3.html', 'getLatestNoteMP3Received', '');
+   }
+   noteLatest=data;
+  }
+ }
+
+ function getLatestNote() {
+  clearTimeout(noteTimer);
+  noteTimer=window.setTimeout ('getLatestNote();', 5000);
+  AJAXRequest('/getlatestnote.html', 'getLatestNoteReceived', '');
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function addEventProcessed(id, data) {
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function addEvent(type, win, details, terminal_to, user_to) {
+  var url='/popup/addevent.html?mode=update&type='+URLencode(type)+'&window='+URLencode(win)+'&details='+URLencode(details)+'&terminal_to='+URLencode(terminal_to)+'&user_to='+URLencode(user_to);
+  AJAXRequest(url, 'addEventProcessed', '');
+  return false;
+ }
+
+ var totalLayouts=2;
+
+ function openNewTab(winTitle, pageURL) {
+  //alert(winTitle+' '+pageURL);
+  //$("#tabs").tabs("add", pageURL, winTitle);
+  iFrameHeight=$(window).height()-110;
+  $("#tablast_title").html(winTitle);
+  $("#tabs-last").html('<iframe src="'+pageURL+'" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+  $("#tabs").tabs("select", totalLayouts);
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function openTWindow(winId, winTitle, pageURL, wdth, hdth) {
+ /*
+  if ($(winId)!=null) {
+   Windows.focus(winId);
+   var win=Windows.getFocusedWindow();
+   win.toFront();
+   if (win.isMinimized()) {
+    win.minimize();
+   }
+   var url=win.getURL();
+   win.setURL(pageURL);
+   //win.refresh();
+  } else {
+   var win = new Window({id: winId, className: "darkX", title: winTitle, top:10, left:10, width:wdth, height:hdth, url: pageURL, parent:$('container'), showEffectOptions: {duration:0.2}}) 
+   win.setDestroyOnClose(); 
+   win.showCenter();
+   win.setConstraint(true, {left:0, right:0, top: 40, bottom:0});
+   win.toFront();
+  }
+  */
+  $.newWindow({id:winId,posx:100,posy:50,width:wdth,height:hdth,title:winTitle, type:"iframe"});
+  $.updateWindowContent(winId,'<iframe src="'+pageURL+'" width="'+wdth+'" height="'+hdth+'" />');
+
+
+  return false;
+ }
+
+ function playMedia(path, rnd, terminal_name) {
+  //alert(path);
+  //alert(terminal_id);
+  //alert('zz');
+  //alert($("#frmPlayerControl"));
+  $("#hidPlayPath").val(path);
+  $("#selPlayTerminal").val(terminal_name);
+  playerCommand("refresh");
+  /*
+  if (terminal_id>0) {
+   openTWindow('mediaPlayer', 'Player', '/popup/player.html?rnd='+rnd+'&terminal_id='+terminal_id+'&play='+URLencode(path), 500, 80);
+  } else {
+   openTWindow('mediaPlayer', 'Player', '/popup/player.html?rnd='+rnd+'&play='+URLencode(path), 500, 80);
+  }
+  */
+  return true;
+ }
+
+</script>
+
+<body>
+
+<div id="container">
+
+
+
+
+
+
+
+
+
+
+ 
+<table width="100%" border="0">
+ <tr>
+  <td valign="top" colspan=2>
+  
+<table border="0" align="right">
+ 
+ <tr>
+        <td>
+                <a href="/"><img src="/img/icons/home.png" border="0"></a>
+                </td>
+                                <td width="90%" align="right">
+                                
+                                
+
+<!-- Frontend -->
+ 
+<script language="javascript">
+ function playerCommandProcessed(id, data) {
+  var elem=document.getElementById('playerStatus');
+  elem.innerHTML=data;  
+  return false;
+ }
+ function playerCommand(pcmd) {
+  if ($("#selPlayTerminal").val()=='') return false;
+  if ($("#hidPlayPath").val()=='' && pcmd=='refresh') return false;
+  var elem=document.getElementById('playerStatus');
+  elem.innerHTML=pcmd+'...';
+  var url="index.php?pd=pz_pz_&md=app_player&inst=&ajax=1";
+  url+='&command='+pcmd;
+  url+='&play_terminal='+$("#selPlayTerminal").val();
+  url+='&play='+URLencode($("#hidPlayPath").val());
+  url+='&rnd='+URLencode($("#hidPlayerRnd").val());
+  //prompt(url, url);
+  AJAXRequest(url, 'playerCommandProcessed', '');
+  return false;
+ }
+</script>
+<table border="0" cellpadding="0" cellspacing="0">
+ <tr>
+  <form action="index.php?pd=pz_pz_&md=app_player&inst=&" method="get" name="frmPlayerControl" id="frmPlayerControl">
+  <td align="right" style="vertical-align:middle">
+  <div style="display:none">
+   <select name="play_terminal" id="selPlayTerminal">
+    <option value="">
+    
+    <option value="asusjey" selected>Ноутбук
+    
+   </select>
+  </div>
+   <div id='playerStatus'></div>
+
+  </td>
+  
+  <td valign="top">
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("pause");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_pause.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("prev");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_prev.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("refresh");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_play.png" border="0"></a></div> 
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("next");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_next.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("fullscreen");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/eye.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("close");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/delete.png" border="0"></a></div>
+  </td>
+ </tr>
+ <input type="hidden" name="play" value="" id="hidPlayPath">
+ <input type="hidden" name="rnd" value="" id="hidPlayerRnd">
+ <input type="hidden" name="pd" value="pz_pz_">
+<input type="hidden" name="md" value="app_player">
+<input type="hidden" name="inst" value="">
+</FORM><!-- modified -->
+</table>
+
+
+
+                                
+  
+                                </td>
+  
+  <td valign="top" nowrap>
+
+  <table border="0" align="right">
+   <tr>
+    <td valign="top" nowrap>[ <a href="/admin.php">Control Panel</a> ]</td>
+  <form action="/" method="get" name="frmSettings">
+  
+  <td valign="top" nowrap>
+   Terminal:
+   <select name="terminal" onChange="document.frmSettings.submit();">
+    <option value="">select
+    
+    <option value="MAIN">Компьютер
+    
+    <option value="asusjey">Ноутбук
+    
+    <option value="FRAME">Фото-рамка
+    
+   </select>
+  </td>
+  
+  
+  <td valign="top" nowrap>
+   User:
+   <select name="username" onChange="document.frmSettings.submit();">
+    <option value="">select
+    
+    <option value="lesoshka">Алеся
+    
+    <option value="jey">Сергей
+    
+   </select>
+  </td>
+  
+  <input type="hidden" name="pd" value="pz_">
+<input type="hidden" name="md" value="application">
+<input type="hidden" name="inst" value="">
+</FORM><!-- modified -->
+   </tr>
+   <tr>
+    <td valign="top" colspan="3" align="right">
+    <a href="http://smartliving.ru/" target=_blank style="font:12px Arial,Helvetica,sans-serif">MajorDoMo Project</a>
+    </td>
+   </tr>
+  </table>
+
+
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" colspan="3">
+   <div id="debugInfo"></div>
+  </td>
+ </tr>
+</table>
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" width="350">
+  <iframe src="/menu.html" width="350" height="450" id="navFrame" border="0" frameborder=0 framespacing=0></iframe>
+  
+  
+  </td>
+  <td valign="top" width="100%">
+
+
+
+
+<div id="tabs">
+
+<ul>
+
+<li><a href="#tabs-7">iGoogle</a></li>
+
+<li><a href="#tabs-6">Продукты</a></li>
+
+  <li><a href="#tabs-last"><span id='tablast_title'>***</span></a></li>
+</ul>
+
+
+<div id="tabs-7">...</div>
+
+<div id="tabs-6">...</div>
+
+
+<div id="tabs-last">
+  ...
+</div> 
+
+</div>
+
+  </td>
+ </tr>
+</table>
+
+<script language="javascript">
+
+var iFrameHeight=500;
+
+$(document).ready(function() {
+  // Handler for .ready() called.
+  iFrameHeight=$(window).height()-110;
+  $('#navFrame').height(iFrameHeight+57);
+  
+  $('#htmlTab0').height(iFrameHeight);
+  
+  $('#htmlTab1').height(iFrameHeight);
+  
+  //alert($('#defaultFrame').height());
+});
+
+        $( "#tabs" ).tabs({
+        show: function(event, ui) { 
+         iFrameHeight=$(window).height()-110;
+         var selected = $( "#tabs" ).tabs( "option", "selected" );
+         //alert(selected);
+         
+         if (selected == 0) {
+          
+           if ($('#tabs-7').html()=='...') {
+            $('#tabs-7').html('<iframe src="/popup/app_mediabrowser.html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          
+          
+         }
+         
+         if (selected == 1) {
+          
+           if ($('#tabs-6').html()=='...') {
+            $('#tabs-6').html('<iframe src="/popup/app_products.html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          
+          
+         }
+         
+        }});
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><div id='sound'></div>
+
+<script language="javascript">
+ getNextEvent();
+ getLatestNote();
+</script>
+
+
+</body>
+</html><!-- BEGIN PERFORMANCE REPORT
+TOTAL (1): 0.2991 100% M (s): 1509424b M (e): 1678616b
+final_echo (1): 0.001 0.34% M (s): 1678216b M (e): 1678320b
+ END PERFORMANCE REPORT -->����� �뢮�� ������ �� ��࠭ (ECHO) ����祭.
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MajorDoMo</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<link href="/stl.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/css/ui-darkness/jquery-ui-1.8.6.custom.css"/>
+<link type="text/css" rel="stylesheet" href="/js/jquery.windows-engine.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.gritter.css" />
+<script type="text/javascript" src="/jquerymobile/jquery-1.6.2.min.js"></script>
+
+
+<script language="javascript" src="/js/scripts.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery.windows-engine.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery.gritter.js"></script>
+<style>
+#container {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+}  
+.ui-tabs .ui-tabs-panel {
+    padding: 0;
+}
+</style>
+
+</head>
+<body style="background-color:black">
+
+<script language="javascript">
+
+ var eventState='';
+ var eventLatest='';
+ var eventTimer;
+ var noteTimer;
+ var noteLatest='';
+
+ // ----------------------------------------------------------------------
+ function processCommand(event_id, event_type, event_window, event_details) {
+
+     if (event_type=='newwindow') {
+      openTWindow(event_window, 'Event '+event_id, event_details, 500, 500);
+     }
+
+     if (event_type=='maximize') {
+      if ($(event_window)!=null) {
+       Windows.focus(event_window);
+       var win=Windows.getFocusedWindow();
+       win.maximize();
+      }
+     }
+
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function getNextEventReceived(id, data) {
+  if (eventLatest!=data) {
+     eventLatest=data;
+     eventState='processing';
+     var elem=document.getElementById('debugInfo');
+     elem.innerHTML=elem.innerHTML+'<br>'+data;
+     // processing
+     var d=data.split('|');
+     var event_id=d[0];
+     var event_type=d[1];
+     var event_window=d[2];
+     var event_details=d[3];
+     processCommand(event_id, event_type, event_window, event_details);
+  }
+  eventState='';
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function getNextEvent() {
+  if (eventState!='') return;
+  clearTimeout(eventTimer);
+  eventTimer=window.setTimeout ('getNextEvent();', 5000);
+  eventState='requesting';
+  AJAXRequest('/getnextevent.html', 'getNextEventReceived', '');
+  return false;
+ }
+
+ /*
+ function getLatestNoteMP3Received(id, data) {
+    document.getElementById("sound").innerHTML="<embed src='"+data+"' hidden=true autostart=true loop=false>";
+ }
+ */
+
+ function getLatestNoteReceived(id, data) {
+  if (noteLatest!=data) {
+   if (noteLatest!='') {
+    $.gritter.add({
+        title: 'Alice',
+        text: data, 
+        sticky: false, 
+        time: 8000
+     });
+     //AJAXRequest('/getlatestmp3.html', 'getLatestNoteMP3Received', '');
+   }
+   noteLatest=data;
+  }
+ }
+
+ function getLatestNote() {
+  clearTimeout(noteTimer);
+  noteTimer=window.setTimeout ('getLatestNote();', 5000);
+  AJAXRequest('/getlatestnote.html', 'getLatestNoteReceived', '');
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function addEventProcessed(id, data) {
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function addEvent(type, win, details, terminal_to, user_to) {
+  var url='/popup/addevent.html?mode=update&type='+URLencode(type)+'&window='+URLencode(win)+'&details='+URLencode(details)+'&terminal_to='+URLencode(terminal_to)+'&user_to='+URLencode(user_to);
+  AJAXRequest(url, 'addEventProcessed', '');
+  return false;
+ }
+
+ var totalLayouts=2;
+
+ function openNewTab(winTitle, pageURL) {
+  //alert(winTitle+' '+pageURL);
+  //$("#tabs").tabs("add", pageURL, winTitle);
+  iFrameHeight=$(window).height()-110;
+  $("#tablast_title").html(winTitle);
+  $("#tabs-last").html('<iframe src="'+pageURL+'" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+  $("#tabs").tabs("select", totalLayouts);
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function openTWindow(winId, winTitle, pageURL, wdth, hdth) {
+ /*
+  if ($(winId)!=null) {
+   Windows.focus(winId);
+   var win=Windows.getFocusedWindow();
+   win.toFront();
+   if (win.isMinimized()) {
+    win.minimize();
+   }
+   var url=win.getURL();
+   win.setURL(pageURL);
+   //win.refresh();
+  } else {
+   var win = new Window({id: winId, className: "darkX", title: winTitle, top:10, left:10, width:wdth, height:hdth, url: pageURL, parent:$('container'), showEffectOptions: {duration:0.2}}) 
+   win.setDestroyOnClose(); 
+   win.showCenter();
+   win.setConstraint(true, {left:0, right:0, top: 40, bottom:0});
+   win.toFront();
+  }
+  */
+  $.newWindow({id:winId,posx:100,posy:50,width:wdth,height:hdth,title:winTitle, type:"iframe"});
+  $.updateWindowContent(winId,'<iframe src="'+pageURL+'" width="'+wdth+'" height="'+hdth+'" />');
+
+
+  return false;
+ }
+
+ function playMedia(path, rnd, terminal_name) {
+  //alert(path);
+  //alert(terminal_id);
+  //alert('zz');
+  //alert($("#frmPlayerControl"));
+  $("#hidPlayPath").val(path);
+  $("#selPlayTerminal").val(terminal_name);
+  playerCommand("refresh");
+  /*
+  if (terminal_id>0) {
+   openTWindow('mediaPlayer', 'Player', '/popup/player.html?rnd='+rnd+'&terminal_id='+terminal_id+'&play='+URLencode(path), 500, 80);
+  } else {
+   openTWindow('mediaPlayer', 'Player', '/popup/player.html?rnd='+rnd+'&play='+URLencode(path), 500, 80);
+  }
+  */
+  return true;
+ }
+
+</script>
+
+<body>
+
+<div id="container">
+
+
+
+
+
+
+
+
+
+
+ 
+<table width="100%" border="0">
+ <tr>
+  <td valign="top" colspan=2>
+  
+<table border="0" align="right">
+ 
+ <tr>
+        <td>
+                <a href="/"><img src="/img/icons/home.png" border="0"></a>
+                </td>
+                                <td width="90%" align="right">
+                                
+                                
+
+<!-- Frontend -->
+ 
+<script language="javascript">
+ function playerCommandProcessed(id, data) {
+  var elem=document.getElementById('playerStatus');
+  elem.innerHTML=data;  
+  return false;
+ }
+ function playerCommand(pcmd) {
+  if ($("#selPlayTerminal").val()=='') return false;
+  if ($("#hidPlayPath").val()=='' && pcmd=='refresh') return false;
+  var elem=document.getElementById('playerStatus');
+  elem.innerHTML=pcmd+'...';
+  var url="index.php?pd=pz_pz_&md=app_player&inst=&ajax=1";
+  url+='&command='+pcmd;
+  url+='&play_terminal='+$("#selPlayTerminal").val();
+  url+='&play='+URLencode($("#hidPlayPath").val());
+  url+='&rnd='+URLencode($("#hidPlayerRnd").val());
+  //prompt(url, url);
+  AJAXRequest(url, 'playerCommandProcessed', '');
+  return false;
+ }
+</script>
+<table border="0" cellpadding="0" cellspacing="0">
+ <tr>
+  <form action="index.php?pd=pz_pz_&md=app_player&inst=&" method="get" name="frmPlayerControl" id="frmPlayerControl">
+  <td align="right" style="vertical-align:middle">
+  <div style="display:none">
+   <select name="play_terminal" id="selPlayTerminal">
+    <option value="">
+    
+    <option value="asusjey" selected>Ноутбук
+    
+   </select>
+  </div>
+   <div id='playerStatus'></div>
+
+  </td>
+  
+  <td valign="top">
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("pause");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_pause.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("prev");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_prev.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("refresh");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_play.png" border="0"></a></div> 
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("next");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_next.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("fullscreen");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/eye.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("close");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/delete.png" border="0"></a></div>
+  </td>
+ </tr>
+ <input type="hidden" name="play" value="" id="hidPlayPath">
+ <input type="hidden" name="rnd" value="" id="hidPlayerRnd">
+ <input type="hidden" name="pd" value="pz_pz_">
+<input type="hidden" name="md" value="app_player">
+<input type="hidden" name="inst" value="">
+</FORM><!-- modified -->
+</table>
+
+
+
+                                
+  
+                                </td>
+  
+  <td valign="top" nowrap>
+
+  <table border="0" align="right">
+   <tr>
+    <td valign="top" nowrap>[ <a href="/admin.php">Control Panel</a> ]</td>
+  <form action="/" method="get" name="frmSettings">
+  
+  <td valign="top" nowrap>
+   Terminal:
+   <select name="terminal" onChange="document.frmSettings.submit();">
+    <option value="">select
+    
+    <option value="MAIN">Компьютер
+    
+    <option value="asusjey">Ноутбук
+    
+    <option value="FRAME">Фото-рамка
+    
+   </select>
+  </td>
+  
+  
+  <td valign="top" nowrap>
+   User:
+   <select name="username" onChange="document.frmSettings.submit();">
+    <option value="">select
+    
+    <option value="lesoshka">Алеся
+    
+    <option value="jey">Сергей
+    
+   </select>
+  </td>
+  
+  <input type="hidden" name="pd" value="pz_">
+<input type="hidden" name="md" value="application">
+<input type="hidden" name="inst" value="">
+</FORM><!-- modified -->
+   </tr>
+   <tr>
+    <td valign="top" colspan="3" align="right">
+    <a href="http://smartliving.ru/" target=_blank style="font:12px Arial,Helvetica,sans-serif">MajorDoMo Project</a>
+    </td>
+   </tr>
+  </table>
+
+
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" colspan="3">
+   <div id="debugInfo"></div>
+  </td>
+ </tr>
+</table>
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" width="350">
+  <iframe src="/menu.html" width="350" height="450" id="navFrame" border="0" frameborder=0 framespacing=0></iframe>
+  
+  
+  </td>
+  <td valign="top" width="100%">
+
+
+
+
+<div id="tabs">
+
+<ul>
+
+<li><a href="#tabs-7">iGoogle</a></li>
+
+<li><a href="#tabs-6">Продукты</a></li>
+
+  <li><a href="#tabs-last"><span id='tablast_title'>***</span></a></li>
+</ul>
+
+
+<div id="tabs-7">...</div>
+
+<div id="tabs-6">...</div>
+
+
+<div id="tabs-last">
+  ...
+</div> 
+
+</div>
+
+  </td>
+ </tr>
+</table>
+
+<script language="javascript">
+
+var iFrameHeight=500;
+
+$(document).ready(function() {
+  // Handler for .ready() called.
+  iFrameHeight=$(window).height()-110;
+  $('#navFrame').height(iFrameHeight+57);
+  
+  $('#htmlTab0').height(iFrameHeight);
+  
+  $('#htmlTab1').height(iFrameHeight);
+  
+  //alert($('#defaultFrame').height());
+});
+
+        $( "#tabs" ).tabs({
+        show: function(event, ui) { 
+         iFrameHeight=$(window).height()-110;
+         var selected = $( "#tabs" ).tabs( "option", "selected" );
+         //alert(selected);
+         
+         if (selected == 0) {
+          
+           if ($('#tabs-7').html()=='...') {
+            $('#tabs-7').html('<iframe src="/popup/app_mediabrowser.html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          
+          
+         }
+         
+         if (selected == 1) {
+          
+           if ($('#tabs-6').html()=='...') {
+            $('#tabs-6').html('<iframe src="/popup/app_products.html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          
+          
+         }
+         
+        }});
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><div id='sound'></div>
+
+<script language="javascript">
+ getNextEvent();
+ getLatestNote();
+</script>
+
+
+</body>
+</html><!-- BEGIN PERFORMANCE REPORT
+TOTAL (1): 0.1187 100% M (s): 1509424b M (e): 1678616b
+final_echo (1): 0.0006 0.52% M (s): 1678216b M (e): 1678320b
+ END PERFORMANCE REPORT -->����� �뢮�� ������ �� ��࠭ (ECHO) ����祭.
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MajorDoMo</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<link href="/stl.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/css/ui-darkness/jquery-ui-1.8.6.custom.css"/>
+<link type="text/css" rel="stylesheet" href="/js/jquery.windows-engine.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.gritter.css" />
+<script type="text/javascript" src="/jquerymobile/jquery-1.6.2.min.js"></script>
+
+
+<script language="javascript" src="/js/scripts.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery.windows-engine.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery.gritter.js"></script>
+<style>
+#container {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+}  
+.ui-tabs .ui-tabs-panel {
+    padding: 0;
+}
+</style>
+
+</head>
+<body style="background-color:black">
+
+<script language="javascript">
+
+ var eventState='';
+ var eventLatest='';
+ var eventTimer;
+ var noteTimer;
+ var noteLatest='';
+
+ // ----------------------------------------------------------------------
+ function processCommand(event_id, event_type, event_window, event_details) {
+
+     if (event_type=='newwindow') {
+      openTWindow(event_window, 'Event '+event_id, event_details, 500, 500);
+     }
+
+     if (event_type=='maximize') {
+      if ($(event_window)!=null) {
+       Windows.focus(event_window);
+       var win=Windows.getFocusedWindow();
+       win.maximize();
+      }
+     }
+
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function getNextEventReceived(id, data) {
+  if (eventLatest!=data) {
+     eventLatest=data;
+     eventState='processing';
+     var elem=document.getElementById('debugInfo');
+     elem.innerHTML=elem.innerHTML+'<br>'+data;
+     // processing
+     var d=data.split('|');
+     var event_id=d[0];
+     var event_type=d[1];
+     var event_window=d[2];
+     var event_details=d[3];
+     processCommand(event_id, event_type, event_window, event_details);
+  }
+  eventState='';
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function getNextEvent() {
+  if (eventState!='') return;
+  clearTimeout(eventTimer);
+  eventTimer=window.setTimeout ('getNextEvent();', 5000);
+  eventState='requesting';
+  AJAXRequest('/getnextevent.html', 'getNextEventReceived', '');
+  return false;
+ }
+
+ /*
+ function getLatestNoteMP3Received(id, data) {
+    document.getElementById("sound").innerHTML="<embed src='"+data+"' hidden=true autostart=true loop=false>";
+ }
+ */
+
+ function getLatestNoteReceived(id, data) {
+  if (noteLatest!=data) {
+   if (noteLatest!='') {
+    $.gritter.add({
+        title: 'Alice',
+        text: data, 
+        sticky: false, 
+        time: 8000
+     });
+     //AJAXRequest('/getlatestmp3.html', 'getLatestNoteMP3Received', '');
+   }
+   noteLatest=data;
+  }
+ }
+
+ function getLatestNote() {
+  clearTimeout(noteTimer);
+  noteTimer=window.setTimeout ('getLatestNote();', 5000);
+  AJAXRequest('/getlatestnote.html', 'getLatestNoteReceived', '');
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function addEventProcessed(id, data) {
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function addEvent(type, win, details, terminal_to, user_to) {
+  var url='/popup/addevent.html?mode=update&type='+URLencode(type)+'&window='+URLencode(win)+'&details='+URLencode(details)+'&terminal_to='+URLencode(terminal_to)+'&user_to='+URLencode(user_to);
+  AJAXRequest(url, 'addEventProcessed', '');
+  return false;
+ }
+
+ var totalLayouts=2;
+
+ function openNewTab(winTitle, pageURL) {
+  //alert(winTitle+' '+pageURL);
+  //$("#tabs").tabs("add", pageURL, winTitle);
+  iFrameHeight=$(window).height()-110;
+  $("#tablast_title").html(winTitle);
+  $("#tabs-last").html('<iframe src="'+pageURL+'" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+  $("#tabs").tabs("select", totalLayouts);
+  return false;
+ }
+
+ // ----------------------------------------------------------------------
+ function openTWindow(winId, winTitle, pageURL, wdth, hdth) {
+ /*
+  if ($(winId)!=null) {
+   Windows.focus(winId);
+   var win=Windows.getFocusedWindow();
+   win.toFront();
+   if (win.isMinimized()) {
+    win.minimize();
+   }
+   var url=win.getURL();
+   win.setURL(pageURL);
+   //win.refresh();
+  } else {
+   var win = new Window({id: winId, className: "darkX", title: winTitle, top:10, left:10, width:wdth, height:hdth, url: pageURL, parent:$('container'), showEffectOptions: {duration:0.2}}) 
+   win.setDestroyOnClose(); 
+   win.showCenter();
+   win.setConstraint(true, {left:0, right:0, top: 40, bottom:0});
+   win.toFront();
+  }
+  */
+  $.newWindow({id:winId,posx:100,posy:50,width:wdth,height:hdth,title:winTitle, type:"iframe"});
+  $.updateWindowContent(winId,'<iframe src="'+pageURL+'" width="'+wdth+'" height="'+hdth+'" />');
+
+
+  return false;
+ }
+
+ function playMedia(path, rnd, terminal_name) {
+  //alert(path);
+  //alert(terminal_id);
+  //alert('zz');
+  //alert($("#frmPlayerControl"));
+  $("#hidPlayPath").val(path);
+  $("#selPlayTerminal").val(terminal_name);
+  playerCommand("refresh");
+  /*
+  if (terminal_id>0) {
+   openTWindow('mediaPlayer', 'Player', '/popup/player.html?rnd='+rnd+'&terminal_id='+terminal_id+'&play='+URLencode(path), 500, 80);
+  } else {
+   openTWindow('mediaPlayer', 'Player', '/popup/player.html?rnd='+rnd+'&play='+URLencode(path), 500, 80);
+  }
+  */
+  return true;
+ }
+
+</script>
+
+<body>
+
+<div id="container">
+
+
+
+
+
+
+
+
+
+
+ 
+<table width="100%" border="0">
+ <tr>
+  <td valign="top" colspan=2>
+  
+<table border="0" align="right">
+ 
+ <tr>
+        <td>
+                <a href="/"><img src="/img/icons/home.png" border="0"></a>
+                </td>
+                                <td width="90%" align="right">
+                                
+                                
+
+<!-- Frontend -->
+ 
+<script language="javascript">
+ function playerCommandProcessed(id, data) {
+  var elem=document.getElementById('playerStatus');
+  elem.innerHTML=data;  
+  return false;
+ }
+ function playerCommand(pcmd) {
+  if ($("#selPlayTerminal").val()=='') return false;
+  if ($("#hidPlayPath").val()=='' && pcmd=='refresh') return false;
+  var elem=document.getElementById('playerStatus');
+  elem.innerHTML=pcmd+'...';
+  var url="index.php?pd=pz_pz_&md=app_player&inst=&ajax=1";
+  url+='&command='+pcmd;
+  url+='&play_terminal='+$("#selPlayTerminal").val();
+  url+='&play='+URLencode($("#hidPlayPath").val());
+  url+='&rnd='+URLencode($("#hidPlayerRnd").val());
+  //prompt(url, url);
+  AJAXRequest(url, 'playerCommandProcessed', '');
+  return false;
+ }
+</script>
+<table border="0" cellpadding="0" cellspacing="0">
+ <tr>
+  <form action="index.php?pd=pz_pz_&md=app_player&inst=&" method="get" name="frmPlayerControl" id="frmPlayerControl">
+  <td align="right" style="vertical-align:middle">
+  <div style="display:none">
+   <select name="play_terminal" id="selPlayTerminal">
+    <option value="">
+    
+    <option value="asusjey" selected>Ноутбук
+    
+   </select>
+  </div>
+   <div id='playerStatus'></div>
+
+  </td>
+  
+  <td valign="top">
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("pause");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_pause.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("prev");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_prev.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("refresh");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_play.png" border="0"></a></div> 
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("next");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/playback_next.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("fullscreen");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/eye.png" border="0"></a></div>
+   <div style="float:left;width:48px;height:48px;text-align:center"><a href="#" onClick='return playerCommand("close");' style="padding:0;margin:0;display:inline;"><img src="/img/icons/delete.png" border="0"></a></div>
+  </td>
+ </tr>
+ <input type="hidden" name="play" value="" id="hidPlayPath">
+ <input type="hidden" name="rnd" value="" id="hidPlayerRnd">
+ <input type="hidden" name="pd" value="pz_pz_">
+<input type="hidden" name="md" value="app_player">
+<input type="hidden" name="inst" value="">
+</FORM><!-- modified -->
+</table>
+
+
+
+                                
+  
+                                </td>
+  
+  <td valign="top" nowrap>
+
+  <table border="0" align="right">
+   <tr>
+    <td valign="top" nowrap>[ <a href="/admin.php">Control Panel</a> ]</td>
+  <form action="/" method="get" name="frmSettings">
+  
+  <td valign="top" nowrap>
+   Terminal:
+   <select name="terminal" onChange="document.frmSettings.submit();">
+    <option value="">select
+    
+    <option value="MAIN">Компьютер
+    
+    <option value="asusjey">Ноутбук
+    
+    <option value="FRAME">Фото-рамка
+    
+   </select>
+  </td>
+  
+  
+  <td valign="top" nowrap>
+   User:
+   <select name="username" onChange="document.frmSettings.submit();">
+    <option value="">select
+    
+    <option value="lesoshka">Алеся
+    
+    <option value="jey">Сергей
+    
+   </select>
+  </td>
+  
+  <input type="hidden" name="pd" value="pz_">
+<input type="hidden" name="md" value="application">
+<input type="hidden" name="inst" value="">
+</FORM><!-- modified -->
+   </tr>
+   <tr>
+    <td valign="top" colspan="3" align="right">
+    <a href="http://smartliving.ru/" target=_blank style="font:12px Arial,Helvetica,sans-serif">MajorDoMo Project</a>
+    </td>
+   </tr>
+  </table>
+
+
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" colspan="3">
+   <div id="debugInfo"></div>
+  </td>
+ </tr>
+</table>
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" width="350">
+  <iframe src="/menu.html" width="350" height="450" id="navFrame" border="0" frameborder=0 framespacing=0></iframe>
+  
+  
+  </td>
+  <td valign="top" width="100%">
+
+
+
+
+<div id="tabs">
+
+<ul>
+
+<li><a href="#tabs-7">iGoogle</a></li>
+
+<li><a href="#tabs-6">Продукты</a></li>
+
+  <li><a href="#tabs-last"><span id='tablast_title'>***</span></a></li>
+</ul>
+
+
+<div id="tabs-7">...</div>
+
+<div id="tabs-6">...</div>
+
+
+<div id="tabs-last">
+  ...
+</div> 
+
+</div>
+
+  </td>
+ </tr>
+</table>
+
+<script language="javascript">
+
+var iFrameHeight=500;
+
+$(document).ready(function() {
+  // Handler for .ready() called.
+  iFrameHeight=$(window).height()-110;
+  $('#navFrame').height(iFrameHeight+57);
+  
+  $('#htmlTab0').height(iFrameHeight);
+  
+  $('#htmlTab1').height(iFrameHeight);
+  
+  //alert($('#defaultFrame').height());
+});
+
+        $( "#tabs" ).tabs({
+        show: function(event, ui) { 
+         iFrameHeight=$(window).height()-110;
+         var selected = $( "#tabs" ).tabs( "option", "selected" );
+         //alert(selected);
+         
+         if (selected == 0) {
+          
+           if ($('#tabs-7').html()=='...') {
+            $('#tabs-7').html('<iframe src="/popup/app_mediabrowser.html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          
+          
+         }
+         
+         if (selected == 1) {
+          
+           if ($('#tabs-6').html()=='...') {
+            $('#tabs-6').html('<iframe src="/popup/app_products.html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          
+          
+         }
+         
+        }});
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><div id='sound'></div>
+
+<script language="javascript">
+ getNextEvent();
+ getLatestNote();
+</script>
+
+
+</body>
+</html><!-- BEGIN PERFORMANCE REPORT
+TOTAL (1): 0.0952 100% M (s): 1509424b M (e): 1678616b
+final_echo (1): 0.0006 0.65% M (s): 1678216b M (e): 1678320b
+ END PERFORMANCE REPORT -->

@@ -58,6 +58,7 @@ $dictionary=array(
 'MODULE_SAVERESTORE'=>'Сохранение/обновление',
 'MODULE_WEBVARS'=>'Веб-переменные',
 'MODULE_PATTERNS'=>'Шаблоны поведения',
+'MODULE_ONEWIRE'=>'1-Wire',
 /* end module names */
 
 );

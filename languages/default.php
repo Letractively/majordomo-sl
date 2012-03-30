@@ -70,6 +70,7 @@ $dictionary=array(
 'MODULE_THUMB'=>'Thumbnailer',
 'MODULE_USERLOG'=>'Users Log',
 'MODULE_PATTERNS'=>'Patterns',
+'MODULE_ONEWIRE'=>'1-Wire',
 
 /* end module names */
 
