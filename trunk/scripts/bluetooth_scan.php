@@ -18,13 +18,13 @@
  echo "CONNECTED TO DB\n";
 
  $bt_devices=array();
- $devices_file=DOC_ROOT."/../apps/bluetoothview/devices.txt";
+ $devices_file=SERVER_ROOT."/apps/bluetoothview/devices.txt";
 
  $first_run=1;
  while(1) {
   @unlink($devices_file);
   echo "Running bluetoothview\n";
-  exec(DOC_ROOT.'/../apps/bluetoothview/bluetoothview.exe /stab '.$devices_file);
+  exec(SERVER_ROOT.'/apps/bluetoothview/bluetoothview.exe /stab '.$devices_file);
   sleep(30);
   $last_scan=time();
   if (file_exists($devices_file)) {

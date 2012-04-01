@@ -32,6 +32,9 @@ include_once (ROOT . 'languages/default.php');
 
  echo "CONNECTED TO DB\n";
 
+ echo "Running startup maintenance\n";
+ include("./scripts/startup_maintenance.php");
+
  $old_minute=date('i');
  $old_hour=date('h');
  $old_date=date('Y-m-d');

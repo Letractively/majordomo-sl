@@ -2,6 +2,15 @@
 /*
 * @version 0.2 (wizard)
 */
+
+  if ($this->mode=='setvalue') {
+   global $prop_id;
+   global $new_value;
+   global $id;
+   $this->setProperty($prop_id, $new_value);
+   $this->redirect("?id=".$id."&view_mode=".$this->view_mode."&edit_mode=".$this->edit_mode);
+  }
+
   if ($this->owner->name=='panel') {
    $out['CONTROLPANEL']=1;
   }
