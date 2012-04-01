@@ -43,6 +43,7 @@
   //updating 'SCRIPT_ID_ONLINE' (int)
   //updating 'CODE_ONLINE' (text)
    global $code;
+   $rec['CODE']=$code;
 
    global $run_type_online;
 
