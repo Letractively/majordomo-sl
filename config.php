@@ -31,8 +31,9 @@
  if ($_ENV["S2G_SERVER_DOCROOT"]) {
   Define('DOC_ROOT', $_ENV['S2G_SERVER_DOCROOT']);
  } else {
-  Define('DOC_ROOT', 'C:\_majordomo\htdocs');              // Your htdocs location (!!!)
+  Define('DOC_ROOT', dirname(__FILE__));              // Your htdocs location (should be detected automatically)
  }
+ Define('SERVER_ROOT', preg_replace('/[\/\\\\]\w+?$/', '', DOC_ROOT));
  
 
  if ($_ENV["S2G_BASE_URL"]) {

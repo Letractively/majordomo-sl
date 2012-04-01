@@ -597,5 +597,34 @@ function UTF_Encode( $str, $type )
        return $str;
 }
 
+ function copyTree($source, $destination, $over=0) {
+
+  $res=1;
+
+  if (!Is_Dir($source)) {
+   return 0; // incorrect source path
+  }
+
+  if (!Is_Dir($destination)) {
+   if (!mkdir($destination, 0777)) {
+    return 0; // cannot create destination path
+   }
+  }
+
+
+ if ($dir = @opendir($source)) { 
+  while (($file = readdir($dir)) !== false) { 
+    if (Is_Dir($source."/".$file) && ($file!='.') && ($file!='..')) {
+     $res=copyTree($source."/".$file, $destination."/".$file, $over);
+    } elseif (Is_File($source."/".$file) && (!file_exists($destination."/".$file) || $over)) {
+     $res=copy($source."/".$file, $destination."/".$file);
+    }
+  }   
+  closedir($dir); 
+ }
+ return $res;
+ }
+
+
 
 ?>

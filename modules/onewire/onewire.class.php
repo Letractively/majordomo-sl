@@ -292,6 +292,32 @@ function usual(&$out) {
   }
  }
 
+
+/**
+* Title
+*
+* Description
+*
+* @access public
+*/
+ function setProperty($prop_id, $value, $update_device=1) {
+  if (!defined('ONEWIRE_SERVER')) {
+   return 0;
+  }
+  $property=SQLSelectOne("SELECT * FROM owproperties WHERE ID='".$prop_id."'");
+  if ($property['ID']) {
+   return 0;
+  }
+
+  $ow=new OWNet(ONEWIRE_SERVER);
+  $ow->set($property['PATH'],$value);
+
+  if ($update_device) {
+   $this->updateDevice($property['DEVICE_ID']);
+  }
+
+ }
+
 /**
 * Title
 *

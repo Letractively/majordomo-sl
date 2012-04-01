@@ -4,7 +4,6 @@
 */
 
 
- chdir('../');
  include_once("./config.php");
  include_once("./lib/loader.php");
 

@@ -427,6 +427,19 @@ curl_close($ch);
    SQLUpdate('commands', $commands[$i]);
   }
 
+  if (file_exists(DIR_MODULES.'/onewire/onewire.class.php')) {
+   $owp=SQLSelect("SELECT ID FROM owproperties WHERE LINKED_OBJECT LIKE '".DBSafe($this->object_title)."' AND LINKED_PROPERTY LIKE '".DBSafe($property)."'");
+   $total=count($owp);
+   if ($total) {
+    include_once(DIR_MODULES.'/onewire/onewire.class.php');
+    $on_wire=new onewire();
+    for($i=0;$i<$total;$i++) {
+     $on_wire->setProperty($owp[$i]['ID'], $value);
+    }
+   }
+  }
+
+
   if ($prop['KEEP_HISTORY']>0) {
    SQLExec("DELETE FROM phistory WHERE VALUE_ID='".$v['ID']."' AND TO_DAYS(NOW())-TO_DAYS(ADDED)>".(int)$prop['KEEP_HISTORY']);
    $h=array();
