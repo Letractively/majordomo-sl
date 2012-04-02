@@ -26,6 +26,7 @@
  umask($old_mask);
 
  // CHECK/REPAIR/OPTIMIZE TABLES                
+ /*
  $tables=SQLSelect("SHOW TABLES FROM db_terminal");
  $total=count($tables);
  for($i=0;$i<$total;$i++) {
@@ -40,6 +41,7 @@
   SQLExec("OPTIMIZE TABLE ".$table);
   echo "OK\n";
  }
+ */
 
 
 ?>
