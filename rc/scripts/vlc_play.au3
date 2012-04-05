@@ -1,2 +1,2 @@
 Opt("WinTitleMatchMode", 2)
-ShellExecute ("c:\homenetserver\apps\vlc\vlc.exe",'"' & $CmdLine[1] & '"')
+ShellExecute ("c:\_majordomo\apps\vlc\vlc.exe",'"' & $CmdLine[1] & '"')
