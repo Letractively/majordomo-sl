@@ -41,10 +41,10 @@
    $google_file=GoogleTTS($ph);
    if ($google_file) {
     @touch($google_file);
-    playSound($google_file);
+    playSound($google_file, 1);
    } else {
     //getObject("alice")->raiseEvent("say", array("say"=>$ph));
-    safe_exec('cscript '.DOC_ROOT.'/rc/sapi.js '.$ph);
+    safe_exec('cscript '.DOC_ROOT.'/rc/sapi.js '.$ph, 1);
    }
    
    /*
@@ -440,16 +440,16 @@
 *
 * @access public
 */
- function playSound($filename) {
+ function playSound($filename, $exclusive=0) {
   if (file_exists(ROOT.'sounds/'.$filename.'.mp3')) {
    $filename=ROOT.'sounds/'.$filename.'.mp3';
   }
   if (file_exists($filename)) {
    if (substr(php_uname(), 0, 7) == "Windows") {
     //safe_exec('cscript '.ROOT.'rc/playfile.vbs '.$filename);
-    safe_exec(DOC_ROOT.'/rc/madplay.exe '.$filename);
+    safe_exec(DOC_ROOT.'/rc/madplay.exe '.$filename, $exclusive);
    } else {
-    exec('mpg321 '.$filename);
+    safe_exec('mpg321 '.$filename);
    }
   }
  }
@@ -520,10 +520,11 @@
 *
 * @access public
 */
- function safe_exec($command) {
+ function safe_exec($command, $exclusive=0) {
   $rec=array();
   $rec['ADDED']=date('Y-m-d H:i:s');
   $rec['COMMAND']=$command;
+  $rec['EXCLUSIVE']=$exclusive;
   $rec['ID']=SQLInsert('safe_execs', $rec);
   return $rec['ID'];
  }

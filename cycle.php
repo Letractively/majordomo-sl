@@ -92,7 +92,8 @@ include_once (ROOT . 'languages/default.php');
   echo date('Y-m-d H:i:s')."\n";
 
   SQLExec("DELETE FROM safe_execs WHERE ADDED<'".date('Y-m-d H:i:s', time()-60)."'");
-  $safe_execs=SQLSelect("SELECT * FROM safe_execs");
+
+  $safe_execs=SQLSelect("SELECT * FROM safe_execs WHERE EXCLUSIVE=0");
   $total=count($safe_execs);
   for($i=0;$i<$total;$i++) {
    $command=utf2win($safe_execs[$i]['COMMAND']);
@@ -101,6 +102,17 @@ include_once (ROOT . 'languages/default.php');
    DebMes("Executing: ".$command);
    execInBackground($command);
   }
+
+  $safe_execs=SQLSelect("SELECT * FROM safe_execs WHERE EXCLUSIVE=1 LIMIT 1");
+  $total=count($safe_execs);
+  for($i=0;$i<$total;$i++) {
+   $command=utf2win($safe_execs[$i]['COMMAND']);
+   SQLExec("DELETE FROM safe_execs WHERE ID='".$safe_execs[$i]['ID']."'");
+   echo "Executing (exclusive): ".$command."\n";
+   DebMes("Executing (exclusive): ".$command);
+   exec($command);
+  }
+
 
   runScheduledJobs();
 
