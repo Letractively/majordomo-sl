@@ -109,7 +109,11 @@
   $DataSet->SetSerieName("24 hours","Serie1");  
 
   $DataSet->SetYAxisName($p);  
-  $DataSet->SetYAxisUnit("°C");  
+  if ($unit) {
+   $DataSet->SetYAxisUnit($unit);
+  } else {
+   $DataSet->SetYAxisUnit("°C");  
+  }
   $DataSet->SetXAxisUnit("");  
    
   // Initialise the graph  
