@@ -39,13 +39,14 @@
   if (!$sortby) $sortby="ADDED DESC";
   $out['SORTBY']=$sortby;
   // SEARCH RESULTS
-  $res=SQLSelect("SELECT * FROM rss_items WHERE $qry ORDER BY $sortby");
+  $res=SQLSelect("SELECT ID FROM rss_items WHERE $qry ORDER BY $sortby LIMIT 1000");
   if ($res[0]['ID']) {
    paging($res, 50, $out); // search result paging
    colorizeArray($res);
    $total=count($res);
    for($i=0;$i<$total;$i++) {
     // some action for every record if required
+    $res[$i]=SQLSelectOne("SELECT * FROM rss_items WHERE ID='".$res[$i]['ID']."'");
    }
    $out['RESULT']=$res;
   }

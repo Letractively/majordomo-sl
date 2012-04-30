@@ -66,16 +66,17 @@
    }
    $session->data['history_sort']=$sortby;
   }
-  if (!$sortby) $sortby="ADDED DESC, ID DESC";
+  $sortby="ADDED DESC, ID DESC";
   $out['SORTBY']=$sortby;
   // SEARCH RESULTS
-  $res=SQLSelect("SELECT history.*, objects.TITLE as OBJECT_TITLE, methods.TITLE as METHOD_TITLE, properties.TITLE as VALUE_TITLE FROM history LEFT JOIN objects ON objects.ID=history.OBJECT_ID LEFT JOIN methods ON methods.ID=history.METHOD_ID LEFT JOIN pvalues ON history.VALUE_ID=pvalues.ID LEFT JOIN properties ON pvalues.PROPERTY_ID=properties.ID WHERE $qry ORDER BY $sortby LIMIT 100");
+  $res=SQLSelect("SELECT history.ID FROM history LEFT JOIN objects ON objects.ID=history.OBJECT_ID LEFT JOIN methods ON methods.ID=history.METHOD_ID LEFT JOIN pvalues ON history.VALUE_ID=pvalues.ID LEFT JOIN properties ON pvalues.PROPERTY_ID=properties.ID WHERE $qry ORDER BY $sortby LIMIT 100");
   if ($res[0]['ID']) {
    paging($res, 50, $out); // search result paging
    colorizeArray($res);
    $total=count($res);
    for($i=0;$i<$total;$i++) {
     // some action for every record if required
+    $res[$i]=SQLSelectOne("SELECT history.*, objects.TITLE as OBJECT_TITLE, methods.TITLE as METHOD_TITLE, properties.TITLE as VALUE_TITLE FROM history LEFT JOIN objects ON objects.ID=history.OBJECT_ID LEFT JOIN methods ON methods.ID=history.METHOD_ID LEFT JOIN pvalues ON history.VALUE_ID=pvalues.ID LEFT JOIN properties ON pvalues.PROPERTY_ID=properties.ID WHERE history.ID='".$res[$i]['ID']."' ORDER BY $sortby LIMIT 100");
     $tmp=explode(' ', $res[$i]['ADDED']);
     $res[$i]['ADDED']=fromDBDate($tmp[0])." ".$tmp[1];
    }
