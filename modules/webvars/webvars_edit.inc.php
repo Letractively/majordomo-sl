@@ -32,6 +32,15 @@
    global $encoding;
    $rec['ENCODING']=trim($encoding);
 
+   global $auth;
+   $rec['AUTH']=(int)$auth;
+
+   global $username;
+   $rec['USERNAME']=$username;
+
+   global $password;
+   $rec['PASSWORD']=$password;
+
 
     global $linked_object;
     $rec['LINKED_OBJECT']=trim($linked_object);
