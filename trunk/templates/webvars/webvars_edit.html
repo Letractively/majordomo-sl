@@ -51,6 +51,37 @@
 </tr>
 
 <tr>
+ <td align="right">&nbsp;</td>
+ <td><input type="checkbox" name="auth" id="chkAuth" value="1" [#if AUTH="1"#] checked[#endif#]> authorization required
+ <div [#if AUTH!="1"#]style="display:none"[#endif#] id="authCredentials">
+  <table border="0">
+   <tr>
+    <td>Username:</td>
+    <td><input type="text" name="username" value="[#USERNAME#]"></td>
+   </tr>
+   <tr>
+    <td>Password:</td>
+    <td><input type="text" name="password" value="[#PASSWORD#]"></td>
+   </tr>
+  </table>
+ </div>
+ </td>
+</tr>
+
+<script language="javascript">
+ $('#chkAuth').click (function ()
+ {
+  var thisCheck = $(this);
+  if (thisCheck.is (':checked'))
+  {
+   $('#authCredentials').show();
+  } else {
+  $('#authCredentials').hide();
+  }
+ });
+</script>
+
+<tr>
  <td align=right>
  Source page encoding:
  </td>
@@ -145,17 +176,8 @@
 
 
 <tr>
- <td align=right valign="top">
-  Log:
- </td>
- <td valign="top">
-  [#LOG#]
- </td>
-</tr>
-
-
-<tr>
- <td colspan=2 align=center>
+ <td valign="top">&nbsp;</td>
+ <td>
  [#if ID!=""#]
  <input type="submit" name="subm" value="Submit">
  [#else ID#]
@@ -170,4 +192,15 @@
 <input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
 <input type="hidden" name="mode" value="update">
 </form>
+
+<tr>
+ <td align=right valign="top">
+  Log:
+ </td>
+ <td valign="top">
+  [#LOG#]
+ </td>
+</tr>
+
+
 </table>

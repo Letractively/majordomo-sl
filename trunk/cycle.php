@@ -32,6 +32,10 @@ include_once (ROOT . 'languages/default.php');
 
  echo "CONNECTED TO DB\n";
 
+ include_once(DIR_MODULES."control_modules/control_modules.class.php");
+ $ctl=new control_modules();
+
+
  echo "Running startup maintenance\n";
  include("./scripts/startup_maintenance.php");
 

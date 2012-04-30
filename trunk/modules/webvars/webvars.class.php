@@ -215,7 +215,12 @@ function usual(&$out) {
 
    //web host
    $old_status=$host['LATEST_VALUE'];
-   $content=getURL($host['HOSTNAME'], $host['ONLINE_INTERVAL']);
+   if ($host['AUTH'] && $host['USERNAME']) {
+    $content=getURL($host['HOSTNAME'], $host['ONLINE_INTERVAL'], $host['USERNAME'], $host['PASSWORD']);
+   } else {
+    $content=getURL($host['HOSTNAME'], $host['ONLINE_INTERVAL']);
+   }
+   
    if ($host['ENCODING']!='') {
     $content=iconv($host['ENCODING'], "UTF-8", $content);
    }
@@ -331,6 +336,9 @@ webvars - webvars
  webvars: LINKED_OBJECT varchar(255) NOT NULL DEFAULT ''
  webvars: LINKED_PROPERTY varchar(255) NOT NULL DEFAULT ''
  webvars: ENCODING varchar(50) NOT NULL DEFAULT ''
+ webvars: AUTH int(3) NOT NULL DEFAULT '0'
+ webvars: USERNAME varchar(100) NOT NULL DEFAULT ''
+ webvars: PASSWORD varchar(100) NOT NULL DEFAULT ''
  webvars: CODE text
  webvars: LOG text
 EOD;

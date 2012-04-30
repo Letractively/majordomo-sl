@@ -492,7 +492,7 @@
 *
 * @access public
 */
- function getURL($url, $cache=600) {
+ function getURL($url, $cache=600, $username='', $password='') {
   $cache_file=ROOT.'cached/urls/'.preg_replace('/\W/is', '_', str_replace('http://', '', $url)).'.html';
   if (!$cache || !is_file($cache_file) || ((time()-filemtime($cache_file))>$cache)) {
    //download
@@ -500,6 +500,10 @@
    curl_setopt($ch, CURLOPT_URL, $url);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+   if ($username!='') {
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC ) ;
+    curl_setopt($ch, CURLOPT_USERPWD, $username.":".$password); 
+   }
    $result = curl_exec($ch);
    if ($cache>0) {
     if (!is_dir(ROOT.'cached/urls')) {
