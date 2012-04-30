@@ -241,9 +241,11 @@ function usual(&$out) {
   global $folder;
 
   if ($this->folder) {
-   $folder=$this->folder;
+   $folder=base64_decode($this->folder);
+  } else {
+   $this->folder=base64_encode($folder);
   }
-  $this->folder=$folder;
+  
 
   $favorites=SQLSelect("SELECT * FROM media_favorites WHERE 1 ORDER BY ID DESC");
   if ($favorites) {

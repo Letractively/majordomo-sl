@@ -8,6 +8,7 @@
 */
 
 
+
  include_once("./config.php");
  include_once("./lib/loader.php");
 
@@ -124,16 +125,18 @@ include_once (ROOT . 'languages/default.php');
 
  // GLOBALS
    $result=preg_replace('/%rand%/is', rand(), $result);
-   if (preg_match_all('/%(\w+?)\.(\w+?)%/is', $result, $m)) {
+   if (preg_match_all('/%(\w{3,}?)\.(\w{2,}?)%/is', $result, $m)) {
     $total=count($m[0]);
     for($i=0;$i<$total;$i++) {
      $result=str_replace($m[0][$i], getGlobal($m[1][$i].'.'.$m[2][$i]), $result);
     }
-   } elseif (preg_match_all('/%(\w+?)%/is', $result, $m)) {
+   /*
+   } elseif (preg_match_all('/%(\w{3,}?)%/is', $result, $m)) {
     $total=count($m[0]);
     for($i=0;$i<$total;$i++) {
      $result=str_replace($m[0][$i], getGlobal($m[1][$i]), $result);
     }
+   */
    }
   // END GLOBALS
 
