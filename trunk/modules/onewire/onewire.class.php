@@ -305,7 +305,7 @@ function usual(&$out) {
    return 0;
   }
   $property=SQLSelectOne("SELECT * FROM owproperties WHERE ID='".$prop_id."'");
-  if ($property['ID']) {
+  if (!$property['ID']) {
    return 0;
   }
 
