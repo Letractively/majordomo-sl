@@ -29,6 +29,11 @@ if (SETTINGS_SITE_LANGUAGE && file_exists(ROOT . 'languages/' . SETTINGS_SITE_LA
 include_once (ROOT . 'languages/default.php');
 
 $qry="1";
+
+if ($_GET['level']) {
+ $qry.=" AND shouts.IMPORTANCE>=".(int)$_GET['level'];
+}
+
 $res=SQLSelect("SELECT shouts.*, UNIX_TIMESTAMP(shouts.ADDED) as TM, users.NAME FROM shouts LEFT JOIN users ON shouts.MEMBER_ID=users.ID WHERE $qry ORDER BY shouts.ADDED DESC, ID DESC LIMIT 20");
 
 $res=array_reverse($res);
