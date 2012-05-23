@@ -365,6 +365,7 @@ commands - Commands
   $data = <<<EOD
  commands: ID int(10) unsigned NOT NULL auto_increment
  commands: TITLE varchar(255) NOT NULL DEFAULT ''
+ commands: SYSTEM varchar(255) NOT NULL DEFAULT ''
  commands: COMMAND varchar(255) NOT NULL DEFAULT ''
  commands: URL varchar(255) NOT NULL DEFAULT ''
  commands: TYPE char(50) NOT NULL DEFAULT ''

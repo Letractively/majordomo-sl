@@ -1,0 +1,237 @@
+
+<!-- Table 'calendar_events' edit -->
+<p align=center>
+ <a href="?data_source=<#DATA_SOURCE#>">&lt;&lt;&lt; Back</a>
+</p>
+<table border=0 align=center cellpadding=3>
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
+[#if OK#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="green">Data has been saved</font>
+ </td>
+</tr>
+[#endif OK#]
+[#if ERR#]
+<tr>
+ <td colspan=2 align=center>
+  <font color="red">Please fill out all required fields</font>
+ </td>
+</tr>
+[#endif ERR#]
+[#if ID=""#]
+<tr>
+ <td colspan=2 align=center><b>New Record</b></td>
+</tr>
+[#endif ID#]
+<!-- TITLE (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_TITLE#]<b><font color="red">[#endif#]
+ TITLE:
+ (*)
+ </td>
+ <td>
+  <input type="text" name="title" value="[#TITLE#]">
+ </td>
+</tr>
+<!-- NOTES (text) -->
+<tr>
+ <td valign=top align=right>
+ [#if ERR_NOTES#]<b><font color="red">[#endif#]
+ NOTES
+ :
+ </td>
+ <td valign=top>
+ <textarea name="notes" rows=12 cols=100>[#NOTES#]</textarea>
+ </td>
+</tr>
+<!-- DUE (date) -->
+<tr>
+ <td align=right>
+ [#if ERR_DUE#]<b><font color="red">[#endif#]
+ DUE:
+ </td>
+ <td>
+  <input type="text" name="due" value="[#DUE#]" maxlength=10 size=12>
+  [#module name="dateselect" field="due" form="frmEdit"#]
+ </td>
+</tr>
+<!-- ADDED (datetime) -->
+<tr>
+ <td align=right>
+ [#if ERR_ADDED#]<b><font color="red">[#endif#]
+ ADDED:
+ </td>
+ <td>
+ <input type="text" name="added_date" value="[#ADDED_DATE#]" maxlength=10 size=12>
+ [#module name="dateselect" field="added_date" form="frmEdit"#]
+ &nbsp;&nbsp;&nbsp;
+ <select name="added_hours">
+ [#begin ADDED_HOURS#]
+ <option[#if SELECTED#] selected[#endif SELECTED#]>[#TITLE#]
+ [#end ADDED_HOURS#]
+ </select>
+ :
+ <select name="added_minutes">
+ [#begin ADDED_MINUTES#]
+ <option[#if SELECTED#] selected[#endif SELECTED#]>[#TITLE#]
+ [#end ADDED_MINUTES#]
+ </select>
+ </td>
+</tr>
+<!-- IS_TASK (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_IS_TASK#]<b><font color="red">[#endif#]
+ IS_TASK:
+ </td>
+ <td>
+  <input type="text" name="is_task" value="[#IS_TASK#]">
+ </td>
+</tr>
+<!-- IS_NODATE (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_IS_NODATE#]<b><font color="red">[#endif#]
+ IS_NODATE:
+ </td>
+ <td>
+  <input type="text" name="is_nodate" value="[#IS_NODATE#]">
+ </td>
+</tr>
+<!-- IS_REPEATING (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_IS_REPEATING#]<b><font color="red">[#endif#]
+ IS_REPEATING:
+ </td>
+ <td>
+  <input type="text" name="is_repeating" value="[#IS_REPEATING#]">
+ </td>
+</tr>
+<!-- REPEAT_TYPE (select) -->
+<tr>
+ <td align=right valign=top>
+ [#if ERR_REPEAT_TYPE#]<b><font color="red">[#endif#]
+ REPEAT_TYPE: 
+ </td>
+ <td>                                           
+ <select name="repeat_type">
+  <option value="">select
+  [#begin REPEAT_TYPE_OPTIONS#]<option value="[#VALUE#]"[#if SELECTED#] selected[#endif#]>[#TITLE#]
+  [#end REPEAT_TYPE_OPTIONS#]
+ </select>
+ </td>
+</tr>
+<!-- WEEK_DAYS (varchar) -->
+<tr>
+ <td align=right>
+ [#if ERR_WEEK_DAYS#]<b><font color="red">[#endif#]
+ WEEK_DAYS:
+ </td>
+ <td>
+  <input type="text" name="week_days" value="[#WEEK_DAYS#]">
+ </td>
+</tr>
+<!-- IS_REPEATING_AFTER (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_IS_REPEATING_AFTER#]<b><font color="red">[#endif#]
+ IS_REPEATING_AFTER:
+ </td>
+ <td>
+  <input type="text" name="is_repeating_after" value="[#IS_REPEATING_AFTER#]">
+ </td>
+</tr>
+<!-- REPEAT_IN (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_REPEAT_IN#]<b><font color="red">[#endif#]
+ REPEAT_IN:
+ </td>
+ <td>
+  <input type="text" name="repeat_in" value="[#REPEAT_IN#]">
+ </td>
+</tr>
+<!-- USER_ID (select) -->
+<tr>
+ <td align=right valign=top>
+ [#if ERR_USER_ID#]<b><font color="red">[#endif#]
+ USER_ID: 
+ </td>
+ <td>                                           
+ <select name="user_id">
+  <option value="">select
+  [#begin USER_ID_OPTIONS#]<option value="[#ID#]"[#if SELECTED#] selected[#endif#]>[#NAME#]
+  [#end USER_ID_OPTIONS#]
+ </select>
+ </td>
+</tr>
+<!-- LOCATION_ID (select) -->
+<tr>
+ <td align=right valign=top>
+ [#if ERR_LOCATION_ID#]<b><font color="red">[#endif#]
+ LOCATION_ID: 
+ </td>
+ <td>                                           
+ <select name="location_id">
+  <option value="">select
+  [#begin LOCATION_ID_OPTIONS#]<option value="[#ID#]"[#if SELECTED#] selected[#endif#]>[#TITLE#]
+  [#end LOCATION_ID_OPTIONS#]
+ </select>
+ </td>
+</tr>
+<!-- CALENDAR_CATEGORY_ID (select) -->
+<tr>
+ <td align=right valign=top>
+ [#if ERR_CALENDAR_CATEGORY_ID#]<b><font color="red">[#endif#]
+ CALENDAR_CATEGORY_ID: 
+ </td>
+ <td>                                           
+ <select name="calendar_category_id">
+  <option value="">select
+  [#begin CALENDAR_CATEGORY_ID_OPTIONS#]<option value="[#ID#]"[#if SELECTED#] selected[#endif#]>[#TITLE#]
+  [#end CALENDAR_CATEGORY_ID_OPTIONS#]
+ </select>
+ </td>
+</tr>
+<!-- DONE_SCRIPT_ID (int) -->
+<tr>
+ <td align=right>
+ [#if ERR_DONE_SCRIPT_ID#]<b><font color="red">[#endif#]
+ DONE_SCRIPT_ID:
+ </td>
+ <td>
+  <input type="text" name="done_script_id" value="[#DONE_SCRIPT_ID#]">
+ </td>
+</tr>
+<!-- DONE_CODE (text) -->
+<tr>
+ <td valign=top align=right>
+ [#if ERR_DONE_CODE#]<b><font color="red">[#endif#]
+ DONE_CODE
+ :
+ </td>
+ <td valign=top>
+ <textarea name="done_code" rows=12 cols=100>[#DONE_CODE#]</textarea>
+ </td>
+</tr>
+<tr>
+ <td colspan=2 align=center>
+ [#if ID!=""#]
+ <input type="submit" name="subm" value="Submit">
+ [#else ID#]
+ <input type="submit" name="subm" value="Add">
+ [#endif ID#]
+ &nbsp;
+ <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+ </td>
+</tr>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+</form>
+</table>

@@ -3,12 +3,12 @@
 */
 /*main styles*/
 body{
-        font:18px Arial, Helvetica, sans-serif;
+        font:12px Arial, Helvetica, sans-serif;
         color:white;
         background-color:black;
 }
 table,div{
-        font:18px Arial, Helvetica, sans-serif;
+        font:12px Arial, Helvetica, sans-serif;
         color:white;
 }
 img{
@@ -40,7 +40,6 @@ p{
 }
 /*default styles*/
 a{
-        font:18px Arial, Helvetica, sans-serif;
         color:white;
         text-decoration:underline;
 }
