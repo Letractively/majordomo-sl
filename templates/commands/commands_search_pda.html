@@ -78,7 +78,7 @@
 </script>
 
 
-        <label for="menu[#ID#]_v"><span id="label_[#ID#]">[#TITLE#]</span></label>
+        <label for="menu[#ID#]_v"><span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span></label>
         <select name="menu[#ID#]_v" id="menu[#ID#]_v" data-role="slider"  onChange="changedValue[#ID#]();">
                 <option value="0"[#if CUR_VALUE!="1"#] selected[#endif#]>Off</option>
                 <option value="1"[#if CUR_VALUE="1"#] selected[#endif#]>On</option>
@@ -110,7 +110,7 @@
  }
 </script>
 <li data-role="fieldcontain">
-<label for="menu[#ID#]_v" class="select"><span id="label_[#ID#]">[#TITLE#]</span></label>
+<label for="menu[#ID#]_v" class="select"><span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span></label>
 
 <select name="menu[#ID#]_v" id="menu[#ID#]_v" onChange="changedValue[#ID#]();">
  [#begin OPTIONS#]
@@ -133,7 +133,7 @@
  }
 </script>
 <li data-role="fieldcontain">
-<label for="menu[#ID#]_v" class="select"><span id="label_[#ID#]">[#TITLE#]</span></label>
+<label for="menu[#ID#]_v" class="select"><span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span></label>
 <fieldset data-role="controlgroup" data-type="horizontal"> 
 <select name="menu[#ID#]_v1" id="menu[#ID#]_v1" onChange="changedValue[#ID#]();">
  [#begin OPTIONS1#]
@@ -176,7 +176,7 @@
  }
 </script>
 <li data-role="fieldcontain">
-<span id="label_[#ID#]">[#TITLE#]</span>
+<span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span>
 
 <div data-inline="true" data-role="fieldcontain">
  <a href="#" data-role="button" onClick="return decreaseValue[#ID#]();" data-inline="true">-</a>
@@ -197,7 +197,7 @@
  }
 </script>
 <li data-role="fieldcontain">
-<span id="label_[#ID#]">[#TITLE#]</span>
+<span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span>
 
 <div data-inline="true" data-role="fieldcontain">
  <input type="range" id="menu[#ID#]_v" data-inline="true" name="menu[#ID#]_value" value="[#CUR_VALUE#]" min="[#MIN_VALUE#]" max="[#MAX_VALUE#]" step="[#STEP_VALUE#]"  onChange="changedValue[#ID#]();"/>
@@ -217,7 +217,7 @@
  }
 </script>
 <li data-role="fieldcontain">
-<span id="label_[#ID#]">[#TITLE#]</span>
+<span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span>
 
 <div data-inline="true" data-role="fieldcontain">
  <input type="text" id="menu[#ID#]_v" name="menu[#ID#]_value" value="[#CUR_VALUE#]" data-inline="true" onChange="changedValue[#ID#]_delay()" onKeyUp="changedValue[#ID#]_delay();">
@@ -237,7 +237,7 @@
 [#endif TYPE#]
 
 [#if TYPE="button"#]
-<a href="#" onClick="return itemValueChanged('[#ID#]', 'clicked');" data-role="button" id="label_[#ID#]">[#TITLE#]</a>
+<a href="#" onClick="return itemValueChanged('[#ID#]', 'clicked');" data-role="button"><span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span></a>
 <!--#
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
  <tr>
