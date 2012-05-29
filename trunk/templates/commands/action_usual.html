@@ -55,13 +55,20 @@
  }
 
  function itemValueChangedProcessed(data, v) {
+  //alert(data);
+  if ($('#processing_'+data).length) {
+   $('#processing_'+data).html(' - OK');
+  }
   return false;
  }
 
  function itemValueChanged(id, new_value) {
   //alert(id+': '+new_value);
   var url="?ajax=1&op=value_changed";
-  AJAXRequest(url+'&item_id='+id+'&new_value='+new_value, 'itemValueChangedProcessed', '');
+  if ($('#processing_'+id).length) {
+   $('#processing_'+id).html(' - ...');
+  }
+  AJAXRequest(url+'&item_id='+id+'&new_value='+new_value, 'itemValueChangedProcessed', id);
   return false;
  }
 
