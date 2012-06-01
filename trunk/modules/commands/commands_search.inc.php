@@ -30,7 +30,7 @@
   if ($this->parent_item!='') {
    $qry.=" AND PARENT_ID='".$this->parent_item."'";
    $parent_rec=SQLSelectOne("SELECT * FROM commands WHERE ID='".$this->parent_item."'");
-   $parent_rec['TITLE']=processTitle($parent_rec['TITLE']);
+   $parent_rec['TITLE']=processTitle($parent_rec['TITLE'], $this);
    foreach($parent_rec as $k=>$v) {
     $out['PARENT_'.$k]=$v;
    }
@@ -151,9 +151,9 @@
    }
 
    if ($this->owner->name!='panel') {
-    $res[$i]['TITLE']=processTitle($res[$i]['TITLE']);
+    $res[$i]['TITLE']=processTitle($res[$i]['TITLE'], $this);
     if ($res[$i]['TYPE']=='custom') {
-     $res[$i]['DATA']=processTitle($res[$i]['DATA']);
+     $res[$i]['DATA']=processTitle($res[$i]['DATA'], $this);
     }
    }
 

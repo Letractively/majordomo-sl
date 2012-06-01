@@ -206,7 +206,7 @@ function usual(&$out) {
      for($i=0;$i<$total;$i++) {
       $states[$i]['STATE']=$this->checkState($states[$i]['ID']);
       if ($states[$i]['TYPE']=='html') {
-       $states[$i]['HTML']=processTitle($states[$i]['HTML']);
+       $states[$i]['HTML']=processTitle($states[$i]['HTML'], $this);
       }
      }
      echo json_encode($states);

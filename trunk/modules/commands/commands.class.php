@@ -133,9 +133,9 @@ function admin(&$out) {
    $item=SQLSelectOne("SELECT * FROM commands WHERE ID='".(int)$item_id."'");
    if ($item['ID']) {
     if ($item['TYPE']=='custom') {
-     echo processTitle($item['DATA']);
+     echo processTitle($item['DATA'], $this);
     } else {
-     echo processTitle($item['TITLE']);
+     echo processTitle($item['TITLE'], $this);
     }
     exit;
    }
