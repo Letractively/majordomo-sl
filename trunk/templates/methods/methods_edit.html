@@ -61,15 +61,24 @@
    <select name="script_id">
     <option value="0">
     [#begin SCRIPTS#]
-	<option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
-	[#end SCRIPTS#]
+        <option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
+        [#end SCRIPTS#]
    </select>    
    <br>
    <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#]> код:<br>
  [#if ERRORS!=""#]
  <font color='red'>[#ERRORS#]</font><br>
  [#endif ERRORS#]   
- <textarea name="code" rows=12 cols=100>[#CODE#]</textarea>
+ <script language="javascript" type="text/javascript" src="/js/edit_area/edit_area_full.js"></script>
+<script language="javascript" type="text/javascript">
+editAreaLoader.init({
+        id : "code"               // textarea id
+        ,syntax: "php"                  // syntax to be uses for highgliting
+        ,start_highlight: true          // to display with highlight mode on start-up
+});
+</script>
+
+ <textarea name="code" id="code" rows=12 cols=100>[#CODE#]</textarea>
  </td>
 </tr>
 <!--#

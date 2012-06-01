@@ -40,13 +40,23 @@
 <!-- CODE (text) -->
 <tr>
  <td valign=top align=right>
+
+ <script language="javascript" type="text/javascript" src="/js/edit_area/edit_area_full.js"></script>
+<script language="javascript" type="text/javascript">
+editAreaLoader.init({
+        id : "code"               // textarea id
+        ,syntax: "php"                  // syntax to be uses for highgliting
+        ,start_highlight: true          // to display with highlight mode on start-up
+});
+</script>
+
  [#if ERR_CODE#]<b><font color="red">[#endif#]
   Code (PHP)
  :
  </td>
  <td valign=top>
  [#if ERRORS!=""#]<font color='red'>[#ERRORS#]</font><br>[#endif ERRORS#]
- <textarea name="code" rows=30 cols=100>[#CODE#]</textarea>
+ <textarea name="code" id="code" rows=30 cols=100>[#CODE#]</textarea>
  </td>
 </tr>
 <tr>

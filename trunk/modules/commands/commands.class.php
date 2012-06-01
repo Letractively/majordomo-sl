@@ -133,9 +133,9 @@ function admin(&$out) {
    $item=SQLSelectOne("SELECT * FROM commands WHERE ID='".(int)$item_id."'");
    if ($item['ID']) {
     if ($item['TYPE']=='custom') {
-     echo $this->processTitle($item['DATA']);
+     echo processTitle($item['DATA']);
     } else {
-     echo $this->processTitle($item['TITLE']);
+     echo processTitle($item['TITLE']);
     }
     exit;
    }
@@ -232,37 +232,6 @@ function usual(&$out) {
   require(DIR_MODULES.$this->name.'/commands_edit.inc.php');
  }
 
- /**
- * Title
- *
- * Description
- *
- * @access public
- */
-  function processTitle($title) {
-
-   $title=preg_replace('/%rand%/is', rand(), $title);
-   if (preg_match_all('/%(.+?)\.(.+?)%/is', $title, $m)) {
-    $total=count($m[0]);
-    for($i=0;$i<$total;$i++) {
-     $title=str_replace($m[0][$i], getObject($m[1][$i])->getProperty($m[2][$i]), $title);
-    }
-   } elseif (preg_match_all('/%(.+?)%/is', $title, $m)) {
-    $total=count($m[0]);
-    for($i=0;$i<$total;$i++) {
-     $title=str_replace($m[0][$i], getGlobal($m[1][$i]), $title);
-    }
-   }
-
-   if (preg_match('/\[#.+?#\]/is', $title)) {
-    //$title='have module';
-    $jTempl=new jTemplate($title, $this->data, $this);
-    $result=$jTempl->result;
-    $title=$jTempl->result;
-   }
-
-   return $title;
-  }
 
 /**
 * commands delete record
@@ -330,6 +299,37 @@ function usual(&$out) {
   }
   return $sub_list;
  }
+
+
+ /**
+ * Title
+ *
+ * Description
+ *
+ * @access public
+ */
+  function getParents($parent_id) {
+
+   if (!$parent_id) {
+    return array();
+   }
+
+   $res=array();
+
+   $rec=SQLSelectOne("SELECT * FROM commands WHERE ID='".$parent_id."'");
+
+   if ($rec['PARENT_ID']) {
+    $parents=$this->getParents($rec['PARENT_ID']);
+    foreach($parents as $v) {
+     $res[]=$v;
+    }
+   }
+
+   $res[]=$rec;
+
+   return $res;
+  }
+
 /**
 * Install
 *

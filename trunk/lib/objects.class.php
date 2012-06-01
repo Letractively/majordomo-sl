@@ -94,6 +94,35 @@
  
  }
 
+/**
+* processTitle
+*
+* Description
+*
+* @access public
+*/
+  function processTitle($title) {
+
+   $title=preg_replace('/%rand%/is', rand(), $title);
+   if (preg_match_all('/%(.+?)\.(.+?)%/is', $title, $m)) {
+    $total=count($m[0]);
+    for($i=0;$i<$total;$i++) {
+     $title=str_replace($m[0][$i], getGlobal($m[1][$i].'.'.$m[2][$i]), $title);
+    }
+   } elseif (preg_match_all('/%(.+?)%/is', $title, $m)) {
+    $total=count($m[0]);
+    for($i=0;$i<$total;$i++) {
+     $title=str_replace($m[0][$i], getGlobal($m[1][$i]), $title);
+    }
+   }
+   if (preg_match('/\[#.+?#\]/is', $title)) {
+    $jTempl=new jTemplate($title, $this->data, $this);
+    $result=$jTempl->result;
+    $title=$jTempl->result;
+   }
+   return $title;
+  }
+
 
 // SHORT ALIAS *****************************
 
@@ -108,6 +137,11 @@
  function cm($method_name, $params=0) {
   return callMethod($method_name, $params);
  }
+
+ function rs($script_id, $params=0) {
+  return runScript($script_id, $params);
+ }
+
 
 
 ?>
