@@ -13,6 +13,7 @@
                 #-->
             </div>
 
+[#if PARENT_ID!=""#]
 [#if PARENT_AUTO_UPDATE!="0"#]
 <script language="javascript">
  var label[#PARENT_ID#]_timer;
@@ -31,6 +32,7 @@
  label[#PARENT_ID#]_timer=setTimeout('updateLabel[#PARENT_ID#]()', ([#PARENT_AUTO_UPDATE#]*1000));
 </script>
 [#endif AUTO_UPDATE#]
+[#endif PARENT_ID#]
 
 [#endif ONE_ITEM_MODE#]
 

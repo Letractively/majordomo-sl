@@ -101,7 +101,7 @@
 *
 * @access public
 */
-  function processTitle($title) {
+  function processTitle($title, $object=0) {
 
    $title=preg_replace('/%rand%/is', rand(), $title);
    if (preg_match_all('/%(.+?)\.(.+?)%/is', $title, $m)) {
@@ -116,7 +116,11 @@
     }
    }
    if (preg_match('/\[#.+?#\]/is', $title)) {
-    $jTempl=new jTemplate($title, $data, $this);
+    if ($object) {
+     $jTempl=new jTemplate($title, $object->data, $object);
+    } else {
+     $jTempl=new jTemplate($title, $data, $this);
+    }
     $result=$jTempl->result;
     $title=$jTempl->result;
    }
