@@ -2,9 +2,19 @@
  @version 0.2 (auto-set)
 #-->
 <!-- Table 'commands' edit -->
-<p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+
+<p>
+ <a href="?">Home</a>
+[#if HISTORY#]
+[#begin HISTORY#]
+&gt; <a href="?view_mode=edit_commands&id=[#ID#]">[#TITLE#]</a> 
+[#end HISTORY#]
+[#endif HISTORY#]
+[#if ID!=""#]
+&gt; [#TITLE#]
+[#endif#]
 </p>
+
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
@@ -49,7 +59,7 @@
  (*)
  </td>
  <td>
-  <input type="text" name="title" value="[#TITLE#]" size="70">
+  <input type="text" name="title" value="[#TITLE#]" size="50">
  </td>
 </tr>
 
@@ -292,10 +302,53 @@
 <input type="hidden" name="mode" value="update">
 </form>
 </table>
-[#if ID!=""#]
 
+[#if ID!=""#]
+&nbsp;<br>
+<hr size="1">
+&nbsp;<br>
+
+<table width="100%" border="0">
+ <tr>
+  <td valign="top">
+   <b>On the same level:</b>
+   <ul>
+   [#begin SAME_LEVEL#]
+    <li>
+    [#if ID!="<#ID#>"#]
+    [#TITLE#] ([#if TYPE!=""#][#TYPE#],[#endif#] [#PRIORITY#]) [ <a href="?view_mode=edit_commands&id=[#ID#]">Edit</a> ]
+    [#else#]
+    <b>[#TITLE#] ([#if TYPE!=""#][#TYPE#],[#endif#] [#PRIORITY#])</b>
+    [#endif#]
+    </li>
+   [#end SAME_LEVEL#]
+   </ul>
+   [ <a href="?view_mode=edit_commands&parent_id=<#PARENT_ID#>&id=">Add new</a> ]
+  </td>
+  <td valign="top">
+   <b>Child items:</b>
+   [#if CHILDREN#]
+   <ul>
+   [#begin CHILDREN#]
+    <li>
+    [#TITLE#] ([#if TYPE!=""#][#TYPE#],[#endif#] [#PRIORITY#]) [ <a href="?view_mode=edit_commands&id=[#ID#]">Edit</a> ]
+    </li>
+   [#end CHILDREN#]
+   </ul>
+   [#else CHILDREN#]
+   <br>n/a
+   <br>
+   [#endif CHILDREN#]
+   [ <a href="?view_mode=edit_commands&parent_id=<#ID#>&id=">Add new</a> ]
+  </td>
+ </tr>
+</table>
+
+<!--#
+&nbsp;<br>
 HTML code for templates:<br>
 <b>[<span></span>#module name="commands" id="[#ID#]" action=""#<span></span>]</b>
+#-->
 
 
 

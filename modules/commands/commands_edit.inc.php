@@ -11,7 +11,11 @@
   $rec=SQLSelectOne("SELECT * FROM $table_name WHERE ID='$id'");
   if ($parent_id) {
    $rec['PARENT_ID']=(int)$parent_id;
-  }     
+  }
+
+  if ($rec['PARENT_ID']) {
+   $out['HISTORY']=$this->getParents($rec['PARENT_ID']);
+  }
 
  
 
@@ -164,5 +168,17 @@ if ($rec['TYPE']=='plusminus'
   outHash($rec, $out);
 
   $out['SCRIPTS']=SQLSelect("SELECT ID, TITLE FROM scripts ORDER BY TITLE");
+
+  if ($out['ID']) {
+
+   $same_level=SQLSelect("SELECT * FROM commands WHERE PARENT_ID='".$out['PARENT_ID']."' ORDER BY PRIORITY DESC, TITLE");
+   $out['SAME_LEVEL']=$same_level;
+
+   $children=SQLSelect("SELECT * FROM commands WHERE PARENT_ID='".$out['ID']."' ORDER BY PRIORITY DESC, TITLE");
+   if ($children) {
+    $out['CHILDREN']=$children;
+   }
+
+  }
 
 ?>

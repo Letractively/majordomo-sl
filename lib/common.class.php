@@ -267,7 +267,7 @@
 * @access public
 */
  function clearScheduledJob($title) {
-  SQLExec("DELETE FROM jobs WHERE TITLE LIKE '".$title."' AND RUNTIME>='".date('Y-m-d H:i:s')."'");
+  SQLExec("DELETE FROM jobs WHERE TITLE LIKE '".DBSafe($title)."'"); // AND RUNTIME>='".date('Y-m-d H:i:s')."'
  }
 
  function deleteScheduledJob($id) {
