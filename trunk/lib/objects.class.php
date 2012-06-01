@@ -116,7 +116,7 @@
     }
    }
    if (preg_match('/\[#.+?#\]/is', $title)) {
-    $jTempl=new jTemplate($title, $this->data, $this);
+    $jTempl=new jTemplate($title, $data, $this);
     $result=$jTempl->result;
     $title=$jTempl->result;
    }
