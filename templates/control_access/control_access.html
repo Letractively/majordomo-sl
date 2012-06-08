@@ -122,7 +122,7 @@ This section allows you to set up subordinate users to the control panel and sel
    [#if ID!="1"#]
    <tr>
     <td>[#if ID="<#ID#>"#]<b>[#NAME#]</b>[#else ID#]<a href="?action=<#ACTION#>&mode=edit&id=[#ID#]">[#NAME#]</a>[#endif ID#]</td>
-    <td>[<a href="?action=<#ACTION#>&mode=delete&id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>]</td>
+    <td>[<a href="?action=<#ACTION#>&mode=delete&id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a>]</td>
    </tr>
    [#endif ID#]
    [#end USERS#]
@@ -137,7 +137,7 @@ This section allows you to set up subordinate users to the control panel and sel
   [#if MODE="edit"#]
   [#if OK#]
   <p class="ok">
-  Data has been saved
+  <#LANG_DATA_SAVED#>
   </p>
   [#endif OK#]
   [#if ID!=""#]<b>[#NAME#]</b>[#endif ID#]
@@ -196,7 +196,7 @@ This section allows you to set up subordinate users to the control panel and sel
    </tr>
    <tr>
     <td colspan=2 align=center>
-    <input type="submit" name="submit" value="Submit" class=form2>
+    <input type="submit" name="submit" value="<#LANG_SUBMIT#>" class=form2>
     <input type="reset" name="reset" value="Reset" class=form2>
     </td>
    </tr>
@@ -213,7 +213,7 @@ This section allows you to set up subordinate users to the control panel and sel
    [#endif#]
 
    <p align=center>
-   <a href="?action=<#ACTION#>">&lt;&lt;&lt; Back</a>
+   <a href="?action=<#ACTION#>">&lt;&lt;&lt; <#LANG_BACK#></a>
    </p>
   [#else#]
 

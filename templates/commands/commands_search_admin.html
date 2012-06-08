@@ -4,7 +4,7 @@
 <big><#LANG_MODULE_CONTROL_MENU#></big>
 <p>
 <b>
-[ <a href="?view_mode=edit_commands">Add new section</a> ]
+[ <a href="?view_mode=edit_commands"><#LANG_ADD_NEW_SECTION#></a> ]
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -29,9 +29,9 @@
   ([#PRIORITY#])
  </td>
  <td valign="top" nowrap>
-  <b><a href="?view_mode=edit_commands&parent_id=[#ID#]">Expand</a></b>
+  <b><a href="?view_mode=edit_commands&parent_id=[#ID#]"><#LANG_EXPAND#></a></b>
   [#if !RESULT#]
-    <a href="?view_mode=delete_commands&id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>
+    <a href="?view_mode=delete_commands&id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a>
   [#endif RESULT#]
 </tr>
 [#if RESULT#]
@@ -52,7 +52,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No items found</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

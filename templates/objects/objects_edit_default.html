@@ -7,27 +7,27 @@
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New object</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_OBJECT#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- Title:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -38,7 +38,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_CLASS_ID#]<b><font color="red">[#endif#]
- Class: 
+ <#LANG_CLASS#>: 
  (*)</td>
  <td>                                           
  <select name="class_id">
@@ -52,7 +52,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_DESCRIPTION#]<b><font color="red">[#endif#]
- Description
+ <#LANG_DESCRIPTION#>
  :
  </td>
  <td valign=top>
@@ -63,11 +63,11 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_LOCATION_ID#]<b><font color="red">[#endif#]
- Location: 
+ <#LANG_LOCATION#>: 
  </td>
  <td>                                           
  <select name="location_id">
-  <option value="">- not set -
+  <option value="">-
   [#begin LOCATION_ID_OPTIONS#]<option value="[#ID#]"[#if SELECTED#] selected[#endif#]>[#TITLE#]
   [#end LOCATION_ID_OPTIONS#]
  </select>
@@ -76,12 +76,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Update">
+ <input type="submit" name="subm" value="<#LANG_UPDATE#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

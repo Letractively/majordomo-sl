@@ -1,7 +1,7 @@
 
 <!-- Table 'elements' edit -->
 <p align=center>
- <a href="?tab=elements&id=<#ID#>&view_mode=edit_scenes">&lt;&lt;&lt; Back</a>
+ <a href="?tab=elements&id=<#ID#>&view_mode=edit_scenes">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
@@ -16,27 +16,27 @@
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ELEMENT_ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ELEMENT_ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -47,12 +47,12 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_TYPE#]<b><font color="red">[#endif#]
- TYPE: 
+ <#LANG_TYPE#>: 
  </td>
  <td>                                           
  <select name="type">
   <option value="">select
-  <option value="img"[#if ELEMENT_TYPE=="img"#] selected[#endif#]>Image
+  <option value="img"[#if ELEMENT_TYPE=="img"#] selected[#endif#]><#LANG_IMAGE#>
   <option value="html"[#if ELEMENT_TYPE=="html"#] selected[#endif#]>HTML
  </select>
  </td>
@@ -61,7 +61,7 @@
 <tr>
  <td align=right>
  [#if ERR_TOP#]<b><font color="red">[#endif#]
- TOP:
+ <#LANG_TOP#>:
  </td>
  <td>
   <input type="text" name="top" value="[#ELEMENT_TOP#]">
@@ -71,7 +71,7 @@
 <tr>
  <td align=right>
  [#if ERR_LEFT#]<b><font color="red">[#endif#]
- LEFT:
+ <#LANG_LEFT#>:
  </td>
  <td>
   <input type="text" name="left" value="[#ELEMENT_LEFT#]">
@@ -82,7 +82,7 @@
 <tr>
  <td align=right>
  [#if ERR_WIDTH#]<b><font color="red">[#endif#]
- WIDTH:
+ <#LANG_WIDTH#>:
  </td>
  <td>
   <input type="text" name="width" value="[#ELEMENT_WIDTH#]">
@@ -92,7 +92,7 @@
 <tr>
  <td align=right>
  [#if ERR_HEIGHT#]<b><font color="red">[#endif#]
- HEIGHT:
+ <#LANG_HEIGHT#>:
  </td>
  <td>
   <input type="text" name="height" value="[#ELEMENT_HEIGHT#]">
@@ -117,7 +117,7 @@
 [#if ELEMENT_ID!=""#]
 <td valign="top">
 
-<p><big>States</big></p>
+<p><big><#LANG_STATES#></big></p>
 
 <p>
 [#begin STATES#]
@@ -126,31 +126,31 @@
 </p>
 
 [#if STATE_ID=""#]
-<p><b>Add new state:</b></p>
+<p><b><#LANG_ADD_NEW_STATE#>:</b></p>
 [#else STATE_ID#]
 <p>
-<a href="?id=<#ID#>&view_mode=<#VIEW_MODE#>&tab=<#TAB#>&view_mode2=<#VIEW_MODE2#>&element_id=<#ELEMENT_ID#>&state_id=new">Add new state</a>
+<a href="?id=<#ID#>&view_mode=<#VIEW_MODE#>&tab=<#TAB#>&view_mode2=<#VIEW_MODE2#>&element_id=<#ELEMENT_ID#>&state_id=new"><#LANG_ADD_NEW_STATE#></a>
 </p>
 [#endif STATE_ID#]
 
 <table width="100%" border="0">
  <tr>
-  <td width="15%" align="right">State Title:</td>
+  <td width="15%" align="right">State <#LANG_TITLE#>:</td>
   <td width="85%"><input type="text" name="state_title_new" value="[#STATE_TITLE#]">
   [#if STATE_ID!=""#]
-  <label><input type="checkbox" name="state_delete" value="1"> delete</label>
+  <label><input type="checkbox" name="state_delete" value="1"> <#LANG_DELETE#></label>
   [#endif#]
   </td>
  </tr>
  [#if "<#ELEMENT_TYPE#>"=="html"#]
  <tr>
-  <td align="right" valign="top">Code:</td>
+  <td align="right" valign="top"><#LANG_CODE#>:</td>
   <td><textarea name="html_new" rows="5" cols="41">[#STATE_HTML#]</textarea></td>
  </tr>
  [#endif#]
  [#if "<#ELEMENT_TYPE#>"=="img"#]
  <tr>
-  <td align="right" valign="top">Image:</td>
+  <td align="right" valign="top"><#LANG_IMAGE#>:</td>
   <td>
 <script type="text/javascript">
      function openFileBrowser(id){
@@ -167,10 +167,10 @@
  [#endif#]
 
  <tr>
-  <td align="right">Run script on click:</td>
+  <td align="right"><#LANG_RUN_SCCRIPT_ON_CLICK#>:</td>
   <td>
   <select name="script_id_new">
-   <option value="0">n/a
+   <option value="0">
    [#begin SCRIPTS#]
    <option value="[#ID#]"[#if ID="<#STATE_SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
    [#end SCRIPTS#]
@@ -180,11 +180,11 @@
 
 
  <tr>
-  <td valign="top">Display condition:</td>
+  <td valign="top"><#LANG_DISPLAY_CONDITION#>:</td>
   <td valign="top">
-  <label><input type="radio" name="is_dynamic_new" class="is_dynamic_new" value="0"[#if STATE_IS_DYNAMIC="0" || STATE_IS_DYNAMIC=""#] checked[#endif#]> n/a (always visible)</label><br>
-  <label><input type="radio" name="is_dynamic_new" class="is_dynamic_new" value="1"[#if STATE_IS_DYNAMIC="1"#] checked[#endif#]> simple</label><br>
-  <label><input type="radio" name="is_dynamic_new" class="is_dynamic_new" value="2"[#if STATE_IS_DYNAMIC="2"#] checked[#endif#]> advanced</label><br>
+  <label><input type="radio" name="is_dynamic_new" class="is_dynamic_new" value="0"[#if STATE_IS_DYNAMIC="0" || STATE_IS_DYNAMIC=""#] checked[#endif#]> n/a (<#LANG_ALWAYS_VISIBLE#>)</label><br>
+  <label><input type="radio" name="is_dynamic_new" class="is_dynamic_new" value="1"[#if STATE_IS_DYNAMIC="1"#] checked[#endif#]> <#LANG_SIMPLE#></label><br>
+  <label><input type="radio" name="is_dynamic_new" class="is_dynamic_new" value="2"[#if STATE_IS_DYNAMIC="2"#] checked[#endif#]> <#LANG_ADVANCED#></label><br>
   <script language="javascript">
 
  $('.is_dynamic_new').click (function ()
@@ -231,7 +231,7 @@
   </div>
   <div id="condition_advanced_block_new"[#if STATE_IS_DYNAMIC!="2"#] style="display:none"[#endif#]>
    <textarea name="condition_advanced_new" rows="5" cols="40">[#STATE_CONDITION_ADVANCED#]</textarea>
-   <br>Example:<pre>
+   <br><#LANG_EXAMPLE#>:<pre>
     if ($a>$b) {
      $display=1;
     } else {
@@ -240,7 +240,7 @@
    </pre>
   </div>
   <div id="switch_scene_block" [#if STATE_IS_DYNAMIC="0"#] style="display:none"[#endif#]>
-   <input type="checkbox" name="switch_scene_new" value="1"[#if STATE_SWITCH_SCENE="1"#] checked[#endif#]> switch scene when activated
+   <input type="checkbox" name="switch_scene_new" value="1"[#if STATE_SWITCH_SCENE="1"#] checked[#endif#]> <#LANG_SWITCH_SCENE_WHEN_ACTIVATED#>
   </div>
   </td>
  </tr>
@@ -254,12 +254,12 @@
  <td colspan=2 align=center>
  &nbsp;<br>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?tab=elements&id=<#ID#>&view_mode=edit_scenes">Cancel</a>
+ <a href="?tab=elements&id=<#ID#>&view_mode=edit_scenes"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="element_id" value="<#ELEMENT_ID#>">

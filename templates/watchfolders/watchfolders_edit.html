@@ -4,34 +4,34 @@
 
 <!-- Table 'watchfolders' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE/COMMENTS:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -42,7 +42,7 @@
 <tr>
  <td align=right>
  [#if ERR_FOLDER#]<b><font color="red">[#endif#]
- FOLDER PATH:
+ <#LANG_PATH#>:
  </td>
  <td>
   <input type="text" name="folder" value="[#FOLDER#]" size="50">
@@ -54,7 +54,7 @@
   &nbsp;
  </td>
  <td>
-  <input type="checkbox" name="check_sub" value="1"[#if CHECK_SUB="1"#] checked[#endif#]> include sub-folders
+  <input type="checkbox" name="check_sub" value="1"[#if CHECK_SUB="1"#] checked[#endif#]> <#LANG_INCLUDE_SUBFOLDERS#>
  </td>
 </tr>
 
@@ -62,20 +62,20 @@
 <tr>
  <td align=right>
  [#if ERR_CHECK_MASK#]<b><font color="red">[#endif#]
- CHECK_MASK:
+ <#LANG_CHECK_MASK#>:
  </td>
  <td>
-  <input type="text" name="check_mask" value="[#CHECK_MASK#]" size="10"> ex.: *.html
+  <input type="text" name="check_mask" value="[#CHECK_MASK#]" size="10"> <#LANG_EXAMPLE#>: *.html
  </td>
 </tr>
 <!-- CHECK_INTERVAL (int) -->
 <tr>
  <td align=right>
  [#if ERR_CHECK_INTERVAL#]<b><font color="red">[#endif#]
- CHECK_INTERVAL:
+ <#LANG_CHECK_INTERVAL#>:
  </td>
  <td>
-  <input type="text" name="check_interval" value="[#CHECK_INTERVAL#]" size="10"> (minutes)
+  <input type="text" name="check_interval" value="[#CHECK_INTERVAL#]" size="10"> (<#LANG_MINUTES#>)
  </td>
 </tr>
 <!-- SCRIPT_ID (int) -->
@@ -83,7 +83,7 @@
 <tr>
  <td align=right>
  [#if ERR_SCRIPT_ID#]<b><font color="red">[#endif#]
- SCRIPT_ID:
+ <#LANG_SCRIPT#>:
  </td>
  <td>
     <select name="script_id">
@@ -100,7 +100,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_SCRIPT_TYPE#]<b><font color="red">[#endif#]
- RUN SCRIPT: 
+ <#LANG_TYPE#>: 
  </td>
  <td>                                           
  <select name="script_type">
@@ -112,12 +112,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

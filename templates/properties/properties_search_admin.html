@@ -4,7 +4,7 @@
 ﻿<!-- table properties search -->
 <p align=center>
 <b>
-[ <a href="?view_mode=edit_properties">Добавить новое свойство</a> ]
+[ <a href="?view_mode=edit_properties"><#LANG_ADD_NEW_PROPERTY#></a> ]
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -17,14 +17,14 @@
 <tr>
 [#if !IS_SET_CLASS_ID#]
  <td align=center bgcolor="#AAAAAA">
- <b>Class ID</b>
+ <b><#LANG_CLASS#></b>
  </td>
 [#endif IS_SET_CLASS_ID#]
  <td align=center bgcolor="#AAAAAA">
- <b>Название</b>
+ <b><#LANG_TITLE#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>Описание</b>
+ <b><#LANG_DESCRIPTION#></b>
  </td>
 <td bgcolor="#AAAAAA">&nbsp;</td>
 </tr>
@@ -55,10 +55,10 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_properties&id=[#ID#]">Редактировать</a></b>
+    <b><a href="?view_mode=edit_properties&id=[#ID#]"><#LANG_EDIT#></a></b>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?view_mode=delete_properties&id=[#ID#]" onClick="return confirm('Delete record?')">Удалить</a>
+    <a href="?view_mode=delete_properties&id=[#ID#]" onClick="return confirm('<#ARE_YOU_SURE#>')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -72,20 +72,20 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">Нет данных</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->
 </td></tr></table>
 
 [#if PARENT_PROPERTIES#]
-<big>Наследуемые свойства:</big>
+<big><#LANG_PARENT_PROPERTIES#>:</big>
 <table border="0">
  [#begin PARENT_PROPERTIES#]
  <tr>
   <td valign="top"><b><a href="?(panel:{action=classes})&md=classes&view_mode=edit_classes&id=[#CLASS_ID#]&tab=properties">[#CLASS_TITLE#]</a>.[#TITLE#]</b></td>
   <td valign="top">[#DESCRIPTION#]</td>
-  <td valign="top">[ <a href="?view_mode=edit_properties&overwrite=[#ID#]">Переписать</a> ]</td>
+  <td valign="top">[ <a href="?view_mode=edit_properties&overwrite=[#ID#]"><#LANG_OVERWRITE#></a> ]</td>
  </tr>
  [#end PARENT_PROPERTIES#]
 </table>

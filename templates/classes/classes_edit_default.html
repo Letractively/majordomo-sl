@@ -7,24 +7,24 @@
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Class</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_CLASS#></b></td>
 </tr>
 [#endif ID#]
 <tr>
- <td align=right>Parent Class:</td>
+ <td align=right><#LANG_PARENT_CLASS#>:</td>
  <td><select name="parent_id">
  <option value="0">- no -
  [#begin PARENTS#]
@@ -36,7 +36,7 @@
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- Title:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -49,19 +49,19 @@
 &nbsp;
  </td>
  <td>
-  <input type="checkbox" name="nolog" value="1"[#if NOLOG="1"#] checked[#endif#]> do not save class activity to the log
+  <input type="checkbox" name="nolog" value="1"[#if NOLOG="1"#] checked[#endif#]> <#LANG_DO_NOT_SAVE_CLASS_ACTIVITY#>
  </td>
 </tr>
 
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Update">
+ <input type="submit" name="subm" value="<#LANG_UPDATE#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

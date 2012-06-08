@@ -3,34 +3,34 @@
 #-->
 <!-- Table 'history' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New record</b></td>
+ <td colspan=2 align=center><b></b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- ADDED (datetime) -->
 <tr>
  <td align=right>
  [#if ERR_ADDED#]<b><font color="red">[#endif#]
- Added:
+ <#LANG_ADDED#>:
  </td>
  <td>
  <input type="text" name="added_date" value="[#ADDED_DATE#]" maxlength=10 size=12>
@@ -54,7 +54,7 @@
 <tr>
  <td align=right>
  [#if ERR_OBJECT_ID#]<b><font color="red">[#endif#]
- Object ID:
+ <#LANG_OBJECT#>:
  </td>
  <td>
   <input type="text" name="object_id" value="[#OBJECT_ID#]">
@@ -66,7 +66,7 @@
 <tr>
  <td align=right>
  [#if ERR_METHOD_ID#]<b><font color="red">[#endif#]
- Method ID:
+ <#LANG_METHOD#>:
  </td>
  <td>
   <input type="text" name="method_id" value="[#METHOD_ID#]">
@@ -78,7 +78,7 @@
 <tr>
  <td align=right>
  [#if ERR_VALUE_ID#]<b><font color="red">[#endif#]
- Value ID:
+ <#LANG_VALUE#>:
  </td>
  <td>
   <input type="text" name="value_id" value="[#VALUE_ID#]">
@@ -89,7 +89,7 @@
 <tr>
  <td align=right>
  [#if ERR_OLD_VALUE#]<b><font color="red">[#endif#]
- Old Value:
+ <#LANG_OLD_VALUE#>:
  </td>
  <td>
   <input type="text" name="old_value" value="[#OLD_VALUE#]">
@@ -99,7 +99,7 @@
 <tr>
  <td align=right>
  [#if ERR_NEW_VALUE#]<b><font color="red">[#endif#]
- New Value:
+ <#LANG_NEW_VALUE#>:
  </td>
  <td>
   <input type="text" name="new_value" value="[#NEW_VALUE#]">
@@ -109,7 +109,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_DETAILS#]<b><font color="red">[#endif#]
- Details
+ <#LANG_DETAILS#>
  :
  </td>
  <td valign=top>
@@ -119,12 +119,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

@@ -5,7 +5,7 @@
 <!-- table classes search -->
 <p align=center>
 <b>
-[ <a href="?view_mode=edit_classes">Add new Class</a> ]
+[ <a href="?view_mode=edit_classes"><#LANG_ADD_NEW_CLASS#></a> ]
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -27,33 +27,33 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_classes&id=[#ID#]">Edit</a></b>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]"><#LANG_EDIT#></a></b>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=properties">Properties</a></b>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=properties"><#LANG_PROPERTIES#></a></b>
    </td>   
 <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=methods">Methods</a></b>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=methods"><#LANG_METHODS#></a></b>
    </td>      
 <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=objects">Objects</a></b>
+    <b><a href="?view_mode=edit_classes&id=[#ID#]&tab=objects"><#LANG_OBJECTS#></a></b>
    </td>      
    
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_classes&parent_id=[#ID#]">Expand</a>
+    <b><a href="?view_mode=edit_classes&parent_id=[#ID#]"><#LANG_EXPAND#></a>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=export_classes&id=[#ID#]">Export</a>
+    <b><a href="?view_mode=export_classes&id=[#ID#]"><#LANG_EXPORT#></a>
    </td>   
   [#if !OBJECTS#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?view_mode=delete_classes&id=[#ID#]" onClick="return confirm('Delete record?')">X</a>
+    <a href="?view_mode=delete_classes&id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')">X</a>
    </td>
   [#endif OBJECTS#]
   [#endif ACTION#]
   </table>
   [#if OBJECTS#]
-  Objects:
+  <#LANG_OBJECTS#>:
    <table border=0>
          [#begin OBJECTS#]
          <tr>
@@ -93,7 +93,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No data</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->
@@ -103,10 +103,10 @@
 <form action="?" enctype="multipart/form-data" method="post">
 <table border="0">
  <tr>
-  <td valign="top">Import Class from the file:</td>
+  <td valign="top"><#LANG_IMPORT_CLASS_FROM_FILE#>:</td>
   <td valign="top"><input type="file" name="file" enctype="multipart/form-data"></td>
-  <td valign="top"><label><input type="checkbox" name="overwrite" value="1"> overwrite</label></td>
-  <td valign="top"><input type="submit" name="submit" value="Import"></td>
+  <td valign="top"><label><input type="checkbox" name="overwrite" value="1"> <#LANG_OVERWRITE#></label></td>
+  <td valign="top"><input type="submit" name="submit" value="<#LANG_IMPORT#>"></td>
  </tr>
 </table>
 <input type="hidden" name="view_mode" value="import_classes">

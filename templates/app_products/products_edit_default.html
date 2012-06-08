@@ -8,27 +8,27 @@
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Fill in required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- Title:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -40,11 +40,11 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_CATEGORY_ID#]<b><font color="red">[#endif#]
- Category: 
+ <#LANG_CATEGORY#>: 
  </td>
  <td>                                           
  <select name="category_id">
-  <option value="">select
+  <option value=""><#LANG_SELECT#>
   [#begin CATEGORY_ID_OPTIONS#]<option value="[#ID#]"[#if SELECTED#] selected[#endif#]>[#TITLE#]
   [#end CATEGORY_ID_OPTIONS#]
  </select>
@@ -54,7 +54,7 @@
 <!-- IMAGE (image) -->
 <tr>
 <td colspan=2 align=center>
-Image
+<#LANG_IMAGE#>
 <br>
 [#if IMAGE!=""#]
 [#module name="thumb" src="./cms/products/<#IMAGE#>" width="300" height="300" enlarge="1" close="Close window"#]<br>
@@ -67,7 +67,7 @@ Upload: <input type="file" name="image">
 <tr>
  <td align=right>
  [#if ERR_EXPIRE_DATE#]<b><font color="red">[#endif#]
- Expiration date:
+ <#LANG_EXPIRATION_DATE#>:
  </td>
  <td>
   <input type="text" name="expire_date" value="[#EXPIRE_DATE#]" maxlength=10 size=12>
@@ -78,17 +78,17 @@ Upload: <input type="file" name="image">
 <tr>
  <td align=right>
  [#if ERR_EXPIRE_DEFAULT#]<b><font color="red">[#endif#]
- Default "expire in":
+ <#LANG_DEFAULT_EXPIRE_IN#>:
  </td>
  <td>
-  <input type="text" name="expire_default" value="[#EXPIRE_DEFAULT#]"> (days)
+  <input type="text" name="expire_default" value="[#EXPIRE_DEFAULT#]"> (<#LANG_DAYS#>)
  </td>
 </tr>
 <!-- UPDATED (datetime) -->
 <tr>
  <td align=right>
  [#if ERR_UPDATED#]<b><font color="red">[#endif#]
- Updated:
+ <#LANG_UPDATED#>:
  </td>
  <td>
  [#UPDATED#]
@@ -98,7 +98,7 @@ Upload: <input type="file" name="image">
 <tr>
  <td align=right>
  [#if ERR_QTY#]<b><font color="red">[#endif#]
- Quantity:
+ <#LANG_QUANTITY#>:
  </td>
  <td>
   <input type="text" name="qty" value="[#QTY#]">
@@ -108,7 +108,7 @@ Upload: <input type="file" name="image">
 <tr>
  <td align=right>
  [#if ERR_MIN_QTY#]<b><font color="red">[#endif#]
- Recommened quantity:
+ <#LANG_RECOMENDED_QUANTITY#>:
  </td>
  <td>
   <input type="text" name="min_qty" value="[#MIN_QTY#]">
@@ -118,7 +118,7 @@ Upload: <input type="file" name="image">
 <tr>
  <td valign=top align=right>
  [#if ERR_DETAILS#]<b><font color="red">[#endif#]
- Details
+ <#LANG_DETAILS#>
  :
  </td>
  <td valign=top>
@@ -127,17 +127,17 @@ Upload: <input type="file" name="image">
 </tr>
 <tr>
  <td valign="top">&nbsp;</td>
- <td valign="top"><label><input type="checkbox" name="delete" value="1"> delete from database</label></td>
+ <td valign="top"><label><input type="checkbox" name="delete" value="1"> <#LANG_DELETE_FROM_DATABASE#></label></td>
 </tr>
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Update">
+ <input type="submit" name="subm" value="<#LANG_UPDATE#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+ <a href="?data_source=<#DATA_SOURCE#>"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

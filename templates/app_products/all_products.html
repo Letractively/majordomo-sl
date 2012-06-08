@@ -108,10 +108,10 @@
  <table border="0">
   <form action="?" method="post">
   <tr>
-   <td>Category:</td>
+   <td><#LANG_CATEGORY#>:</td>
    <td><input type="text" name="title" value="" size="50"></td>
-   <td><input type="submit" name="submit" value="Add">
-   <a href="#" onClick="return showHideAddCategory(0);">Cancel</a>
+   <td><input type="submit" name="submit" value="<#LANG_ADD#>">
+   <a href="#" onClick="return showHideAddCategory(0);"><#LANG_CANCEL#></a>
    </td>
   </tr>
   <input type="hidden" name="mode" value="update_category">
@@ -129,9 +129,9 @@
 
 
 </td>
-<td align="right"><span id="addCategoryLink[#ID#]">[ <a href="#" onClick="return showHideAddCategory([#ID#]);">Edit</a> ]</span>
-<span id="addProductLink[#ID#]">[ <a href="#" onClick="return showHideAddProduct([#ID#]);">+ product</a> ]</span>
-<span id="deleteCategoryLink[#ID#]">[ <a href="?mode=delete_category&id=[#ID#]" onClick="return confirm('Delete category?')">X</a> ]</span>
+<td align="right"><span id="addCategoryLink[#ID#]">[ <a href="#" onClick="return showHideAddCategory([#ID#]);"><#LANG_EDIT#></a> ]</span>
+<span id="addProductLink[#ID#]">[ <a href="#" onClick="return showHideAddProduct([#ID#]);">+ <#LANG_PRODUCT#></a> ]</span>
+<span id="deleteCategoryLink[#ID#]">[ <a href="?mode=delete_category&id=[#ID#]" onClick="return confirm('<#LANG_DELETE_CATEGORY#>')">X</a> ]</span>
 </td>
 </tr></table>
 
@@ -139,10 +139,10 @@
  <table border="0">
   <form action="?" method="post">
   <tr>
-   <td>Category:</td>
+   <td><#LANG_CATEGORY#>:</td>
    <td><input type="text" name="title" value="[#TITLE#]" size="50"></td>
    <td><input type="submit" name="submit" value="Сохранить">
-   <a href="#" onClick="return showHideAddCategory([#ID#]);">Cancel</a>
+   <a href="#" onClick="return showHideAddCategory([#ID#]);"><#LANG_CANCEL#></a>
    </td>
   </tr>
   <input type="hidden" name="mode" value="update_category">
@@ -157,10 +157,10 @@
  <table border="0" cellpadding="3" width="550">
   [#begin PRODUCTS#]
   <tr>
-   <td valign="top" width="50"><a href="#" onClick="return switchInStock([#ID#])"><span id="instock[#ID#]" [#if INSTOCK!="1"#]style="color:red">Missing[#else#]style="color:green">In storage[#endif#]</span></a></td>
+   <td valign="top" width="50"><a href="#" onClick="return switchInStock([#ID#])"><span id="instock[#ID#]" [#if INSTOCK!="1"#]style="color:red"><#LANG_MISSING#>[#else#]style="color:green"><#LANG_IN_STORAGE#>[#endif#]</span></a></td>
    <td>&nbsp;</td>
    <td valign="top" width="330">[#TITLE#]</td>
-   <td valign="top" width="80"><a href="#" onClick="return switchInCart([#ID#])"><span id="incart[#ID#]" [#if INCART!="1"#] style="color:blue">Buy[#else#] style="color:black">Added[#endif#]</span></a></td>   
+   <td valign="top" width="80"><a href="#" onClick="return switchInCart([#ID#])"><span id="incart[#ID#]" [#if INCART!="1"#] style="color:blue"><#LANG_BUY#>[#else#] style="color:black"><#LANG_ADDED#>[#endif#]</span></a></td>   
    <td valign="top" width="40">[ <a href="#" onClick="return deleteProduct([#ID#]);">X</a> ]</td>
   </tr>
   [#end PRODUCTS#]
@@ -175,8 +175,8 @@
    <td>
          <textarea name="title" rows="3" cols="60"></textarea>
    </td>
-   <td><input type="submit" name="submit" value="Add"><br>
-        <a href="#" onClick="return showHideAddProduct(<#CATEGORIES.ID#>);">Cancel</a>
+   <td><input type="submit" name="submit" value="<#LANG_ADD#>"><br>
+        <a href="#" onClick="return showHideAddProduct(<#CATEGORIES.ID#>);"><#LANG_CANCEL#></a>
    </td>
   </tr>
   <input type="hidden" name="mode" value="add_product">

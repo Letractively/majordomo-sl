@@ -4,34 +4,34 @@
 
 <!-- Table 'layouts' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Page</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -42,7 +42,7 @@
 <tr>
  <td align=right>
  [#if ERR_PRIORITY#]<b><font color="red">[#endif#]
- PRIORITY:
+ <#LANG_PRIORITY#>:
  </td>
  <td>
   <input type="text" name="priority" value="[#PRIORITY#]">
@@ -52,7 +52,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_TYPE#]<b><font color="red">[#endif#]
- TYPE: 
+ <#LANG_TYPE#>: 
  </td>
  <td>                                           
  <select name="type">
@@ -67,7 +67,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_CODE#]<b><font color="red">[#endif#]
- CODE
+ <#LANG_CODE#>
  :
  </td>
  <td valign=top>
@@ -80,7 +80,7 @@
 <tr>
  <td align=right>
  [#if ERR_APP#]<b><font color="red">[#endif#]
- APP:
+ <#LANG_APP#>:
  </td>
  <td>
   <input type="text" name="appname" value="[#APP#]">
@@ -92,7 +92,7 @@
 <tr>
  <td align=right>
  [#if ERR_URL#]<b><font color="red">[#endif#]
- URL:
+ <#LANG_URL#>:
  </td>
  <td>
   <input type="text" name="url" value="[#URL#][#if URL=""#]http://[#endif#]">
@@ -102,12 +102,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

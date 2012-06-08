@@ -4,34 +4,34 @@
 
 <!-- Table 'webvars' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  </td>
  <td>
   <input type="text" name="title" value="[#TITLE#]" size="80">
@@ -43,7 +43,7 @@
 <tr>
  <td align=right>
  [#if ERR_HOSTNAME#]<b><font color="red">[#endif#]
- URL:
+ <#LANG_URL#>:
  </td>
  <td>
   <input type="text" name="hostname" value="[#HOSTNAME#]" size="80">
@@ -52,15 +52,15 @@
 
 <tr>
  <td align="right">&nbsp;</td>
- <td><input type="checkbox" name="auth" id="chkAuth" value="1" [#if AUTH="1"#] checked[#endif#]> authorization required
+ <td><input type="checkbox" name="auth" id="chkAuth" value="1" [#if AUTH="1"#] checked[#endif#]> <#LANG_AUTHORIZATION_REQUIRED#>
  <div [#if AUTH!="1"#]style="display:none"[#endif#] id="authCredentials">
   <table border="0">
    <tr>
-    <td>Username:</td>
+    <td><#LANG_USERNAME#>:</td>
     <td><input type="text" name="username" value="[#USERNAME#]"></td>
    </tr>
    <tr>
-    <td>Password:</td>
+    <td><#LANG_PASSWORD#>:</td>
     <td><input type="text" name="password" value="[#PASSWORD#]"></td>
    </tr>
   </table>
@@ -83,10 +83,10 @@
 
 <tr>
  <td align=right>
- Source page encoding:
+ <#LANG_SOURCE_PAGE_ENCODING#>:
  </td>
  <td>
-  <input type="text" name="encoding" value="[#ENCODING#]" size="30"> (optional, utf-8 by default)
+  <input type="text" name="encoding" value="[#ENCODING#]" size="30"> (<#LANG_OPTIONAL#>, utf-8 <#LANG_BY_DEFAULT#>)
  </td>
 </tr>
 
@@ -95,7 +95,7 @@
 <tr>
  <td align=right>
  [#if ERR_SEARCH_PATTERN#]<b><font color="red">[#endif#]
- SEARCH_PATTERN:
+ <#LANG_SEARCH_PATTERN#>:
  </td>
  <td>
   <input type="text" name="search_pattern" value="[#SEARCH_PATTERN#]" size="80">
@@ -119,11 +119,11 @@
 <tr>
  <td align=right valign="top">
  [#if ERR_SCRIPT_ID#]<b><font color="red">[#endif#]
- On change action:
+ <#LANG_ONCHANGE_ACTION#>:
  </td>
  <td>
 
- <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> Run Script:
+ <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> <#LANG_SCRIPT#>:
    <select name="script_id">
     <option value="0">
     [#begin SCRIPTS#]
@@ -131,7 +131,7 @@
         [#end SCRIPTS#]
    </select>    
    <br>
-   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID_OFFLINE="0"#] checked[#endif#]> Exec Code:<br>
+   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID_OFFLINE="0"#] checked[#endif#]> <#LANG_CODE#>:<br>
  [#if ERRORS!=""#]
  <font color='red'>[#ERRORS#]</font><br>
  [#endif ERRORS#]   
@@ -142,7 +142,7 @@
 
 <tr>
  <td align=right>
- LINKED OBJECT.PROPERTY:
+ <#LANG_LINKED_OBJECT#>.<#LANG_PROPERTY#>:
  </td>
  <td>
   <input type="text" name="linked_object" value="[#LINKED_OBJECT#]" size="20">
@@ -158,16 +158,16 @@
 <tr>
  <td align=right>
  [#if ERR_ONLINE_INTERVAL#]<b><font color="red">[#endif#]
- CHECK INTERVAL:
+ <#LANG_CHECK_INTERVAL#>:
  </td>
  <td>
-  <input type="text" name="online_interval" value="[#ONLINE_INTERVAL#]" size="10"> seconds (0 to use default)
+  <input type="text" name="online_interval" value="[#ONLINE_INTERVAL#]" size="10"> <#LANG_SECONDS#> (0 to use default)
  </td>
 </tr>
 
 <tr>
  <td align=right valign="top">
-  Latest value:
+  <#LANG_LATEST_VALUE#>:
  </td>
  <td valign="top">
   [#LATEST_VALUE#]
@@ -179,12 +179,12 @@
  <td valign="top">&nbsp;</td>
  <td>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">
@@ -195,7 +195,7 @@
 
 <tr>
  <td align=right valign="top">
-  Log:
+  <#LANG_LOG#>:
  </td>
  <td valign="top">
   [#LOG#]

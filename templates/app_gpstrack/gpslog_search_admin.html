@@ -3,9 +3,9 @@
 #-->
 
 <p align="center">
-<a href="?clear_log=1" onClick="return confirm('Are you sure?')">Clear Log</a>
+<a href="?clear_log=1" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_CLEAR_LOG#></a>
 |
-<a href="?optimize_log=1" onClick="return confirm('Are you sure?')">Optimize Log</a>
+<a href="?optimize_log=1" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_OPTIMIZE_LOG#></a>
 </p>
 
 <table width=100% border=0><tr>
@@ -15,7 +15,7 @@
 <!-- paging -->
 [#if PAGES#]
 <table border=0 align=center>
-<td align=right><b>Pages:</b>&nbsp;</td>
+<td align=right><b><#LANG_PAGES#>:</b>&nbsp;</td>
 [#begin PREVPAGE#]<td><a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
 <td>
 [#begin PAGES#]
@@ -31,37 +31,37 @@
 <table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
 <tr>
  <td align=center bgcolor="#AAAAAA">
- <b>ADDED</b>
+ <b><#LANG_ADDED#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>LAT</b>
+ <b><#LANG_LATITUDE#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>LON</b>
+ <b><#LANG_LONGITUDE#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>SPEED</b>
+ <b><#LANG_SPEED#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>ACCURACY</b>
+ <b><#LANG_ACCURACY#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>BATTLEVEL</b>
+ <b><#LANG_BATTERY_LEVEL#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>CHARGING</b>
+ <b><#LANG_CHARGING#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>DEVICEID</b>
+ <b><#LANG_DEVICE#></b>
  </td>
 [#if !IS_SET_DEVICE_ID#]
  <td align=center bgcolor="#AAAAAA">
- <b>DEVICE_ID</b>
+ <b><#LANG_DEVICE#></b>
  </td>
 [#endif IS_SET_DEVICE_ID#]
 [#if !IS_SET_LOCATION_ID#]
  <td align=center bgcolor="#AAAAAA">
- <b>LOCATION_ID</b>
+ <b><#LANG_LOCATION#></b>
  </td>
 [#endif IS_SET_LOCATION_ID#]
 <td bgcolor="#AAAAAA">&nbsp;</td>
@@ -161,14 +161,14 @@
   [#else#]
    &nbsp;
   [#endif#]
-  <a href="http://maps.googleapis.com/maps/api/staticmap?center=[#LAT#],[#LON#]&size=512x512&maptype=hybrid&sensor=false&zoom=16&markers=[#LAT#],[#LON#]" target=_blank>Map</a>
+  <a href="http://maps.googleapis.com/maps/api/staticmap?center=[#LAT#],[#LON#]&size=512x512&maptype=hybrid&sensor=false&zoom=16&markers=[#LAT#],[#LON#]" target=_blank><#LANG_MAP#></a>
  </td>
 [#endif IS_SET_LOCATION_ID#]
  <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]">
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_gpslog&id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>
+    <a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_gpslog&id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -183,7 +183,7 @@
 <!-- paging -->
 [#if PAGES#]
 <table border=0 align=center>
-<td align=right><b>Pages:</b>&nbsp;</td>
+<td align=right><b><#LANG_PAGES#>:</b>&nbsp;</td>
 [#begin PREVPAGE#]<td><a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
 <td>
 [#begin PAGES#]
@@ -196,7 +196,7 @@
 <!-- / paging -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No records found.</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

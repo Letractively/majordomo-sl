@@ -12,12 +12,12 @@
 <!-- results -->
 [#if RESULT#]
 
-<p align="center">[<a href="?data_source=<#DATA_SOURCE#>&view_mode=clear_rss_items">Clear all</a>]</p>
+<p align="center">[<a href="?data_source=<#DATA_SOURCE#>&view_mode=clear_rss_items"><#LANG_CLEAR_ALL#></a>]</p>
 
 <!-- paging -->
 [#if PAGES#]
 <table border=0 align=center>
-<td align=right><b>Pages:</b>&nbsp;</td>
+<td align=right><b><#LANG_PAGES#>:</b>&nbsp;</td>
 [#begin PREVPAGE#]<td><a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
 <td>
 [#begin PAGES#]
@@ -42,7 +42,7 @@
   
    <b>[#ADDED#] <a href="[#URL#]" target=_blank>[#TITLE#]</a></b>
   <p>[#BODY#]</p>
-  <div align="right">[<a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_rss_items&id=[#ID#]">Delete</a>]</div>
+  <div align="right">[<a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_rss_items&id=[#ID#]"><#LANG_DELETE#></a>]</div>
  </td>
 </tr>
 [#end RESULT#]
@@ -54,7 +54,7 @@
 <!-- paging -->
 [#if PAGES#]
 <table border=0 align=center>
-<td align=right><b>Pages:</b>&nbsp;</td>
+<td align=right><b><#LANG_PAGES#>:</b>&nbsp;</td>
 [#begin PREVPAGE#]<td><a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
 <td>
 [#begin PAGES#]
@@ -67,7 +67,7 @@
 <!-- / paging -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No data.</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

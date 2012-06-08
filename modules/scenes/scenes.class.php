@@ -23,7 +23,7 @@ class scenes extends module {
 */
 function scenes() {
   $this->name="scenes";
-  $this->title="Scenes";
+  $this->title="<#LANG_MODULE_SCENES#>";
   $this->module_category="<#LANG_SECTION_OBJECTS#>";
   $this->checkInstalled();
 }

@@ -2,7 +2,7 @@
  @version 0.1 (auto-set)
 #-->
 [#if FILTER_NAME=""#]
-<p align="center"><big>General Settings</big></p>
+<p align="center"><big><#LANG_GENERAL_SETTINGS#></big></p>
 [#endif#]
 [#if SECTION_TITLE!=""#]
 <p align="center"><big>[#SECTION_TITLE#]</big></p>
@@ -11,7 +11,7 @@
 [#if UPDATED#]
 <p align=center>
 <b>
- <font color="green">Settings Updated!</font>
+ <font color="green"><#LANG_SETTINGS_UPDATED#></font>
 </b>
 </p>
 [#endif UPDATED#]
@@ -78,21 +78,21 @@
   [#if TYPE="text"#]
   <input type="text" name="value_[#ID#]" value="[#VALUE#]" size=50>
   [#if DEFAULTVALUE!=""#]
-  <br><small>Default: [#DEFAULTVALUE#]</small>
+  <br><small><#LANG_DEFAULT_VALUE#>: [#DEFAULTVALUE#]</small>
   [#endif#]
   [#endif TYPE#]
 
   [#if TYPE="onoff"#]
   <label><input type="radio" name="value_[#ID#]" value="1"[#if VALUE="1"#] checked[#endif#]>On</label>
   <label><input type="radio" name="value_[#ID#]" value="0"[#if VALUE!="1"#] checked[#endif#]>Off</label>
-   <br><small>Default: [#if DEFAULTVALUE="1"#]On[#else#]Off[#endif#]</small>
+   <br><small><#LANG_DEFAULT_VALUE#>: [#if DEFAULTVALUE="1"#]On[#else#]Off[#endif#]</small>
   [#endif TYPE#]
 
   [#if TYPE="yesno"#]
   <label><input type="radio" name="value_[#ID#]" value="1"[#if VALUE="1"#] checked[#endif#]>Yes</label>
   <label><input type="radio" name="value_[#ID#]" value="0"[#if VALUE!="1"#] checked[#endif#]>No</label>
   [#if DEFAULTVALUE!=""#]
-   <br><small>Default: [#if DEFAULTVALUE="1"#]Yes[#else#]No[#endif#]</small>
+   <br><small><#LANG_DEFAULT_VALUE#>: [#if DEFAULTVALUE="1"#]Yes[#else#]No[#endif#]</small>
   [#endif#]
   [#endif TYPE#]
 
@@ -101,7 +101,7 @@
   <label><input type="radio" name="value_[#ID#]" value="1"[#if VALUE="1"#] checked[#endif#]>Enable</label>
   <label><input type="radio" name="value_[#ID#]" value="0"[#if VALUE!="1"#] checked[#endif#]>Disable</label>
   [#if DEFAULTVALUE!=""#]
-   <br><small>Default: [#if DEFAULTVALUE="1"#]Enable[#else#]Disable[#endif#]</small>
+   <br><small><#LANG_DEFAULT_VALUE#>: [#if DEFAULTVALUE="1"#]Enable[#else#]Disable[#endif#]</small>
   [#endif#]
   [#endif TYPE#]
 
@@ -121,9 +121,9 @@
 [#end RESULT#]
 <tr>
 <td colspan="10" align="center">
-<input type="submit" name="submit" value="Submit Changes">
+<input type="submit" name="submit" value="<#LANG_SUBMIT#>">
 <p>&nbsp;</p>
-[ <a href="?mode=reset" onClick="return confirm('Continue with Reset to Default operation?')">Reset to Default</a> ]
+[ <a href="?mode=reset" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_RESET_TO_DEFAULT#></a> ]
 </tr>
 </table>
 <input type="hidden" name="mode" value="update">
@@ -131,7 +131,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No settings found</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->
