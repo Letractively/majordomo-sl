@@ -59,6 +59,7 @@ include_once (ROOT . 'languages/default.php');
  if (!$tm) {
   $tm=time();
  }
+ $start_time=time();
 
  include_once(DIR_MODULES.'rss_channels/rss_channels.class.php');
  $rss_ch=new rss_channels();
@@ -166,12 +167,14 @@ include_once (ROOT . 'languages/default.php');
   }
 
 
-  sleep(1); // 1 second sleep
-  if (file_exists('./reboot')) {
-   unlink('./reboot');
+  if (file_exists('./reboot') || ((time()-$start_time)>7*24*60*60)) {
+   $db->Disconnect();
+   @unlink('./reboot');
    sleep(5);
    exit;
   }
+
+  sleep(1); // 1 second sleep
 
  }
 

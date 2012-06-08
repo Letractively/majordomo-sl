@@ -42,6 +42,10 @@
   echo "OK\n";
  }
  */
+ SQLExec("DELETE FROM events WHERE ADDED>NOW()");
+ SQLExec("DELETE FROM phistory WHERE ADDED>NOW()");
+ SQLExec("DELETE FROM history WHERE ADDED>NOW()");
+ SQLExec("DELETE FROM shouts WHERE ADDED>NOW()");
 
 
 ?>
