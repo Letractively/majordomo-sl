@@ -26,7 +26,7 @@ var config = {
                 },
         // Hashmap of notification functions to be called when certain tiddlers are changed or deleted
         notifyNamedTiddlers: {
-                SiteTitle: refreshTitle,
+                Site<#LANG_TITLE#>: refreshTitle,
                 SiteSubtitle: refreshSubtitle,
                 SideBarOptions: refreshSidebar,
                 StyleSheet: refreshStyles

@@ -4,34 +4,34 @@
 
 <!-- Table 'pinghosts' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  </td>
  <td>
   <input type="text" name="title" value="[#TITLE#]" size="50">
@@ -42,7 +42,7 @@
 <!-- HOSTNAME (varchar) -->
 <tr>
  <td align=right>
- ID:
+ <#LANG_ID#>:
  </td>
  <td>
   [#UDID#]
@@ -55,10 +55,10 @@
 <tr>
  <td align=right>
  [#if ERR_ONLINE_INTERVAL#]<b><font color="red">[#endif#]
- CHECK INTERVAL:
+ <#LANG_CHECK_INTERVAL#>:
  </td>
  <td>
-  <input type="text" name="online_interval" value="[#ONLINE_INTERVAL#]" size="10"> seconds
+  <input type="text" name="online_interval" value="[#ONLINE_INTERVAL#]" size="10"> <#LANG_SECONDS#>
  </td>
 </tr>
 
@@ -76,22 +76,22 @@
 </script>
 
 <tr>
- <td valign="top" align="right"><b>Properties:</b></td>
+ <td valign="top" align="right"><b><#LANG_PROPERTIES#>:</b></td>
  <td valign="top">
   <table width="100%" border="1" cellpadding="2">
    <tr>
-    <td valign="top"><b>Name</b></td>
-    <td valign="top"><b>Value</b></td>
+    <td valign="top"><b><#LANG_TITLE#></b></td>
+    <td valign="top"><b><#LANG_VALUE#></b></td>
     <td valign="top">&nbsp;</td>
-    <td valign="top"><b>Updated</b></td>
-    <td valign="top"><b>Linked object</b></td>
-    <td valign="top"><b>Linked property</b></td>
+    <td valign="top"><b><#LANG_UPDATED#></b></td>
+    <td valign="top"><b><#LANG_LINKED_OBJECT#></b></td>
+    <td valign="top"><b><#LANG_LINKED_PROPERTY#></b></td>
    </tr>
    [#begin PROPERTIES#]
    <tr>
     <td valign="top">[#SYSNAME#]</td>
     <td valign="top">[#VALUE#]&nbsp;</td>
-    <td valign="top"><a href="#" onClick="return setProperty('[#ID#]', '[#VALUE#]')">Set</a></td>
+    <td valign="top"><a href="#" onClick="return setProperty('[#ID#]', '[#VALUE#]')"><#LANG_SET#></a></td>
     <td valign="top">[#UPDATED#]</td>
     <td valign="top"><input type="text" name="linked_object[#ID#]" value="[#LINKED_OBJECT#]"></td>
     <td valign="top"><input type="text" name="linked_property[#ID#]" value="[#LINKED_PROPERTY#]"></td>
@@ -106,11 +106,11 @@
 <tr>
  <td align=right valign="top">
  [#if ERR_SCRIPT_ID#]<b><font color="red">[#endif#]
- Onchange action:
+ <#LANG_ONCHANGE_ACTION#>:
  </td>
  <td>
 
- <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> Run Script:
+ <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> <#LANG_ONCHANGE_SCRIPT#>:
    <select name="script_id">
     <option value="0">
     [#begin SCRIPTS#]
@@ -118,7 +118,7 @@
         [#end SCRIPTS#]
    </select>    
    <br>
-   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#]> Exec Code:<br>
+   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#]> <#LANG_ONCHANGE_SCRIPT#>:<br>
  [#if ERRORS!=""#]
  <font color='red'>[#ERRORS#]</font><br>
  [#endif ERRORS#]   
@@ -131,12 +131,12 @@
  <td valign="top">&nbsp;</td>
  <td>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">
@@ -149,7 +149,7 @@
 </tr>
 <tr>
  <td align=right valign="top">
-  Log:
+  <#LANG_LOG#>:
  </td>
  <td valign="top">
   [#LOG#]

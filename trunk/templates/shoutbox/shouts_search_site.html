@@ -8,7 +8,7 @@
 
 <!-- search results (list) -->
 <div id="shoutboxContent">
-Loading...
+<#LANG_LOADING#>...
 </div>
 <!-- / search results (list) -->
 <!-- / results -->
@@ -16,15 +16,15 @@ Loading...
 [#if NOT_LOGGED#]
 [#if MOBILE!="1"#]
 <p>
-You have to be logged in to post messages.
+<#LANG_PLEASE_LOGIN#>
 </p>
 [#endif MOBILE#]
 [#else#]
 <form action="?" name="frmShoutBoxMsg" method="get" style="margin:0px" onSubmit='return sendShoutMessage()'>
 <table border=0>
-<td valign="bottom">Команда:</td>
+<td valign="bottom"><#LANG_COMMAND#>:</td>
 <td valign="bottom"><input type="text" name="message" size=35></td>
-<td valign="bottom"><input type="submit" name="submit" value="Отправить" class="btn"></td>
+<td valign="bottom"><input type="submit" name="submit" value="<#LANG_SEND#>" class="btn"></td>
 </table>
 </form>
 [#endif#]

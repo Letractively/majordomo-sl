@@ -5,7 +5,7 @@
 <big>In-house Locations</big>
 <p>
 <b>
-<a href="?view_mode=edit_locations">Add new Location</a>
+<a href="?view_mode=edit_locations"><#LANG_ADD_NEW_LOCATION#></a>
 </b>
 </p>
 <table  border=0><tr>
@@ -27,10 +27,10 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_locations&id=[#ID#]">Edit</a></b>
+    <b><a href="?view_mode=edit_locations&id=[#ID#]"><#LANG_EDIT#></a></b>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?view_mode=delete_locations&id=[#ID#]" onClick="return confirm('Delete record?')">Delete</a>
+    <a href="?view_mode=delete_locations&id=[#ID#]" onClick="return confirm('Delete record?')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -44,7 +44,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No data</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

@@ -3,27 +3,27 @@
 #-->
 ﻿<!-- Table 'properties' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Назад</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Данные сохранены</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>Новое свойство</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_PROPERTY#></b></td>
 </tr>
 [#endif ID#]
 <!-- CLASS_ID (int) -->
@@ -31,7 +31,7 @@
 <tr>
  <td align=right>
  [#if ERR_CLASS_ID#]<b><font color="red">[#endif#]
- Class ID:
+ <#LANG_CLASS#>:
  (*)
  </td>
  <td>
@@ -43,7 +43,7 @@
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- Название:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -54,7 +54,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_DESCRIPTION#]<b><font color="red">[#endif#]
- Описание
+ <#LANG_DESCRIPTION#>
  :
  </td>
  <td valign=top>
@@ -63,21 +63,21 @@
 </tr>
 <tr>
  <td align=right>
-  Хранить историю значений (дней):
+  <#LANG_KEEP_HISTORY_DAYS#>:
  </td>
  <td>
-  <input type="text" name="keep_history" value="[#KEEP_HISTORY#]" size="10"> (0 = не хранить)
+  <input type="text" name="keep_history" value="[#KEEP_HISTORY#]" size="10"> (0 = <#LANG_DO_NOT_KEEP#>)
  </td>
 </tr>
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Сохранить">
+ <input type="submit" name="subm" value="<#LANG_UPDATE#>">
  [#else ID#]
- <input type="submit" name="subm" value="Добавить">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Отмена</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

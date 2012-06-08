@@ -3,34 +3,34 @@
 #-->
 <!-- Table 'events' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- EVENT_TYPE (char) -->
 <tr>
  <td align=right>
  [#if ERR_EVENT_TYPE#]<b><font color="red">[#endif#]
- Event Type:
+ <#LANG_TYPE#>:
  (*)
  </td>
  <td>
@@ -41,7 +41,7 @@
 <tr>
  <td align=right>
  [#if ERR_TERMINAL_FROM#]<b><font color="red">[#endif#]
- TERMINAL_FROM:
+ <#LANG_TERMINAL_FROM#>:
  </td>
  <td>
   <input type="text" name="terminal_from" value="[#TERMINAL_FROM#]">
@@ -51,7 +51,7 @@
 <tr>
  <td align=right>
  [#if ERR_TERMINAL_TO#]<b><font color="red">[#endif#]
- TERMINAL_TO:
+ <#LANG_TERMINAL_TO#>:
  </td>
  <td>
   <input type="text" name="terminal_to" value="[#TERMINAL_TO#]">
@@ -61,7 +61,7 @@
 <tr>
  <td align=right>
  [#if ERR_USER_FROM#]<b><font color="red">[#endif#]
- USER_FROM:
+ <#LANG_USER_FROM#>:
  </td>
  <td>
   <input type="text" name="user_from" value="[#USER_FROM#]">
@@ -71,7 +71,7 @@
 <tr>
  <td align=right>
  [#if ERR_USER_TO#]<b><font color="red">[#endif#]
- USER_TO:
+ <#LANG_USER_TO#>:
  </td>
  <td>
   <input type="text" name="user_to" value="[#USER_TO#]">
@@ -81,7 +81,7 @@
 <tr>
  <td align=right>
  [#if ERR_WINDOW#]<b><font color="red">[#endif#]
- WINDOW:
+ <#LANG_WINDOW#>:
  </td>
  <td>
   <input type="text" name="window" value="[#WINDOW#]">
@@ -91,7 +91,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_DETAILS#]<b><font color="red">[#endif#]
- DETAILS
+ <#LANG_DETAILS#>
  :
  </td>
  <td valign=top>
@@ -102,7 +102,7 @@
 <tr>
  <td align=right>
  [#if ERR_ADDED#]<b><font color="red">[#endif#]
- ADDED:
+ <#LANG_ADDED#>:
  </td>
  <td>
  <input type="text" name="added_date" value="[#ADDED_DATE#]" maxlength=10 size=12>
@@ -125,7 +125,7 @@
 <tr>
  <td align=right>
  [#if ERR_EXPIRE#]<b><font color="red">[#endif#]
- EXPIRE:
+ <#LANG_EXPIRE#>:
  </td>
  <td>
  <input type="text" name="expire_date" value="[#EXPIRE_DATE#]" maxlength=10 size=12>
@@ -148,7 +148,7 @@
 <tr>
  <td align=right>
  [#if ERR_PROCESSED#]<b><font color="red">[#endif#]
- PROCESSED:
+ <#LANG_PROCESSED#>:
  </td>
  <td>
   <input type="text" name="processed" value="[#PROCESSED#]">
@@ -157,12 +157,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

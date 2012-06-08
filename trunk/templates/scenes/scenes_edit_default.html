@@ -6,27 +6,27 @@
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -38,7 +38,7 @@
 <tr>
  <td align=right>
  [#if ERR_PRIORITY#]<b><font color="red">[#endif#]
- PRIORITY:
+ <#LANG_PRIORITY#>:
  </td>
  <td>
   <input type="text" name="priority" value="[#PRIORITY#]">
@@ -50,7 +50,7 @@
 <tr>
  <td align=right>
  [#if ERR_BACKGROUND#]<b><font color="red">[#endif#]
- BACKGROUND:
+ <#LANG_BACKGROUND#>:
  </td>
  <td>
 <script type="text/javascript">
@@ -78,12 +78,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+ <a href="?data_source=<#DATA_SOURCE#>"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

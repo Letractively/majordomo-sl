@@ -4,7 +4,7 @@
 <!-- table tdwiki search -->
 <p align=center>
 <b>
-<a href="?view_mode=edit_tdwiki">Add new record</a>
+<a href="?view_mode=edit_tdwiki">><#LANG_ADD_NEW_RECORD#><</a>
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -28,14 +28,14 @@
  <td>
   <table border=0>
    <td align=center>
-    <b><a href="?view_mode=view_tdwiki&id=[#ID#]">More info...</a></b>
+    <b><a href="?view_mode=view_tdwiki&id=[#ID#]"><#LANG_MORE_INFO#></a></b>
    </td>
   [#if "<#ACTION#>"=="admin"#]
    <td align=center>
-    <b><a href="?view_mode=edit_tdwiki&id=[#ID#]">Edit</a></b>
+    <b><a href="?view_mode=edit_tdwiki&id=[#ID#]"><#LANG_EDIT#></a></b>
    </td>
    <td align=center>
-    <a href="?view_mode=delete_tdwiki&id=[#ID#]" onClick="return confirm('Delete record?')">Delete</a>
+    <a href="?view_mode=delete_tdwiki&id=[#ID#]" onClick="return confirm('Delete record?')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -49,7 +49,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No records found</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

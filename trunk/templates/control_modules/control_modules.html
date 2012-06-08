@@ -31,7 +31,7 @@
 <br><br>
 <iframe src="http://installer<#REP_EXT#>/installer.php?host=<#HOST#>&doc_root=<#DOCUMENT_ROOT#>" width=100% height=450 align=center></iframe>
 <p align=center>
-<a href="?">&lt;&lt;&lt; Back</a>
+<a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 [#endif MODE#]
 
@@ -46,7 +46,7 @@
  <form action="?" method="post" name="frmModule">
  <tr>
   <td>
-  Title:
+  <#LANG_TITLE#>:
   </td>
   <td>
   <input type="text" name="title" value="[#TITLE#]">
@@ -78,7 +78,7 @@
    <a href="?mode=<#MODE#>&mode2=install&name=[#NAME#]">Install Module</a>
    |
    [#endif TITLE#]
-   <a href="?">Cancel</a>
+   <a href="?"><#LANG_CANCEL#></a>
   </td>
  </tr>
 </table>

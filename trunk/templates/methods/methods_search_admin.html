@@ -5,7 +5,7 @@
 
 <p align=center>
 <b>
-[ <a href="?view_mode=edit_methods">Добавить новый метод / событие</a> ]
+[ <a href="?view_mode=edit_methods"><#LANG_ADD_METHOD#></a> ]
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -17,10 +17,10 @@
 <table border=0 cellpadding=5 cellspacing=1 bgcolor="#000000" align=center>
 <tr>
  <td align=center bgcolor="#AAAAAA">
- <b>Название</b>
+ <b><#LANG_TITLE#></b>
  </td>
  <td align=center bgcolor="#AAAAAA">
- <b>Описание</b>
+ <b><#LANG_DESCRIPTION#></b>
  </td>
 <td bgcolor="#AAAAAA">&nbsp;</td>
 </tr>
@@ -45,10 +45,10 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_methods&id=[#ID#]">Редактировать</a></b>
+    <b><a href="?view_mode=edit_methods&id=[#ID#]"><#LANG_EDIT#></a></b>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?view_mode=delete_methods&id=[#ID#]" onClick="return confirm('Delete record?')">Удалить</a>
+    <a href="?view_mode=delete_methods&id=[#ID#]" onClick="return confirm('Delete record?')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -62,20 +62,20 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">Нет данных</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->
 </td></tr></table>
 [#if PARENT_METHODS#]
-<big>Наследуемые методы:</big>
+<big><#LANG_PARENT_METHODS#>:</big>
 <table border="0">
  [#begin PARENT_METHODS#]
  <tr>
   <td valign="top"><b><a href="?(panel:{action=classes})&md=classes&view_mode=edit_classes&id=[#CLASS_ID#]&tab=methods">[#CLASS_TITLE#]</a>.
   	<a href="?(panel:{action=classes}classes:{view_mode=edit_classes,id=[#CLASS_ID#]})&md=methods&view_mode=edit_methods&id=[#ID#]&tab=methods">[#TITLE#]</a></b></td>
   <td valign="top">[#DESCRIPTION#]</td>
-  <td valign="top">[ <a href="?view_mode=edit_methods&overwrite=[#ID#]">Переписать</a> ]</td>
+  <td valign="top">[ <a href="?view_mode=edit_methods&overwrite=[#ID#]"><#LANG_OVERWRITE#></a> ]</td>
  </tr>
  [#end PARENT_METHODS#]
 </table>

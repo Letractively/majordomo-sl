@@ -16,20 +16,20 @@
 
    [#if CLEAR_FIRST!="1"#]
 
-   <big>Updates</big>
+   <big><#LANG_UPDATES#></big>
    <br>
    <form action="?" method="post" enctype="multipart/form-data">
    [#if OK_CHECK#]
 
      [#if NO_UPDATES#]
-     <p><b><font color="green">No updates available</font></b></p>
+     <p><b><font color="green"><#LANG_NO_UPDATES_AVAILABLE#></font></b></p>
      [#else#]
      <p><b>Updates available:</b>
       <table border="0" cellspacing=0>
        [#begin TO_UPDATE#]
        <tr>
         <td valign="top"><input type="checkbox" name="to_update[]" value="[#FILE#]" checked></td>
-        <td valign="top"><b>[#FILE#]</b> (new version: [#VERSION#])</td>
+        <td valign="top"><b>[#FILE#]</b> (<#LANG_NEW_VERSION#>: [#VERSION#])</td>
        </tr>
        [#end TO_UPDATE#]
       </table>
@@ -51,7 +51,7 @@
    </form>
 
    <hr size="1">
-   <big>Install new modules</big>
+   <big><#LANG_INSTALL_NEW_MODULES#></big>
    <br>
    <form action="?" method="post" enctype="multipart/form-data">
    [#if OK_BROWSE#]
@@ -82,11 +82,11 @@
     [#endif TO_INSTALL#]
 
     [#if NO_MODULES#]
-    <p>Sorry, no modules available.</p>
+    <p><#LANG_NO_MODULES_AVAILABLE#></p>
     [#endif#]
 
    [#else OK_BROWSE#]
-   <input type="submit" name="submit" value="Get list of available modules &gt;&gt;&gt;">
+   <input type="submit" name="submit" value="<#LANG_GET_LIST_OF_MODULES#> &gt;&gt;&gt;">
    <input type="hidden" name="mode" value="checkapps">
    [#endif OK_BROWSE#]
 
@@ -94,35 +94,35 @@
 
 
    <hr size="1">
-   <big>Submit Newer Files</big>
+   <big><#LANG_SUBMIT_NEWER_FILES#></big>
    <Br>
    <form action="?" method="post" enctype="multipart/form-data">
    [#if OK_CHECKSUBMIT#]
 
      [#if NO_SUBMIT#]
-     <p><b><font color="green">No files you can submit</font></b></p>
+     <p><b><font color="green"><#LANG_NO_FILES_TO_SUBMIT#></font></b></p>
      [#else#]
-     <p><b>Files you can submit:</b>
+     <p><b><#FILES_YOU_CAN_SUBMIT#>:</b>
       <table border="0" cellspacing=0>
        [#begin TO_SUBMIT#]
        <tr>
         <td valign="top"><input type="checkbox" name="to_submit[]" value="[#FILE#]"></td>
-        <td valign="top"><b>[#FILE#]</b> version <font color="green"><b>[#L_VERSION#]</b></font> is newer than <font color='red'><b>[#VERSION#]</b></font>
-        [#if PACK_FOLDER#](<input type="checkbox" name="pack_folders[]" value="[#FILE#]"> folder)[#endif#]
+        <td valign="top"><b>[#FILE#]</b> version <font color="green"><b>[#L_VERSION#]</b></font> <#IS_NEWER_THAN#> <font color='red'><b>[#VERSION#]</b></font>
+        [#if PACK_FOLDER#](<input type="checkbox" name="pack_folders[]" value="[#FILE#]"> <#LANG_FOLDER#>)[#endif#]
         </td>
        </tr>
        [#end TO_SUBMIT#]
       </table>
      </p>
 
-   Your name:
+   <#LANG_YOUR_NAME#>:
    <input type="text" name="name" value="[#NAME#]"><br>
-   Your e-mail:
+   <#LANG_YOUR_EMAIL#>:
    <input type="text" name="email" value="[#EMAIL#]"><br>
-   Your notes for submit:<br>
+   <#LANG_NOTES#>:<br>
    <textarea name="description" rows="5" cols="70"></textarea><br>
 
-   <input type="submit" name="submit" value="Submit selected files to repository &gt;&gt;&gt;">
+   <input type="submit" name="submit" value="<#LANG_SUBMIT_SELECTED_FILES#> &gt;&gt;&gt;">
    <input type="hidden" name="mode" value="uploadupdates">
 
 
@@ -132,7 +132,7 @@
 
    [#if ERROR_MESSAGE!=""#]<p><font color="red"><b>[#ERROR_MESSAGE#]</b></font></p>[#endif#]
 
-   <input type="submit" name="submit" value="Check for files to submit &gt;&gt;&gt;">
+   <input type="submit" name="submit" value="<#LANG_CHECK_FILES_FOR_SUBMIT#> &gt;&gt;&gt;">
    <input type="hidden" name="mode" value="checksubmit">
    [#endif#]
    </form>
@@ -142,10 +142,10 @@
    <big>Save backup</big>
    <br>
    <form action="?" method="post" enctype="multipart/form-data">
-   <label><input type="checkbox" name="design" value="1"> Design (templates, css, images)</label><br>
-   <label><input type="checkbox" name="code" value="1"> Code (modules)</label><br>
-   <label><input type="checkbox" name="data" value="1"> Data (database, documents)</label><br>
-   <label><input type="checkbox" name="files" value="1"> Files uploaded</label><br>
+   <label><input type="checkbox" name="design" value="1"> <#LANG_DESIGN#> (templates, css, images)</label><br>
+   <label><input type="checkbox" name="code" value="1"> <#LANG_CODE#> (modules)</label><br>
+   <label><input type="checkbox" name="data" value="1"> <#LANG_DATA#> (database, documents)</label><br>
+   <label><input type="checkbox" name="files" value="1"> <#LANG_FILES_UPLOADED#></label><br>
    <input type="submit" name="submit" value="Create Backup &gt;&gt;&gt;">
    <input type="hidden" name="mode" value="dump">
    </form>
@@ -155,7 +155,7 @@
    [#else#]
    <br>&nbsp;
    <form action="?" method="post" enctype="multipart/form-data">
-   <input type="submit" name="submit" value="Clear temporary folder">
+   <input type="submit" name="submit" value="<#LANG_CLEAR_TEMPORARY_FOLDER#>">
    <input type="hidden" name="mode" value="clear">
    </form>
    [#endif CLEAR_FIRSTS#]
@@ -226,9 +226,9 @@
      <td valign="top" nowrap>[#FILESIZE#] Mb</td>
      <td valign="top"><a href="<#ROOTHTML#>saverestore/[#FILENAME#]">Download</a></td>
      [#if "<#CLEAR_FIRST#>"!="1"#]
-     <td valign="top"><a href="?mode=upload&restore=[#FILENAME#]" onClick="return confirm('Are you sure?')">Restore</a></td>
+     <td valign="top"><a href="?mode=upload&restore=[#FILENAME#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')">Restore</a></td>
      [#endif#]
-     <td valign="top"><a href="?mode=delete&file=[#FILENAME#]" onClick="return confirm('Are you sure?')">X</a></td>
+     <td valign="top"><a href="?mode=delete&file=[#FILENAME#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')">X</a></td>
     </tr>
    [#end FILES#]
    </table>

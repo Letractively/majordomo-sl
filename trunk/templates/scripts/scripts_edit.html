@@ -4,34 +4,34 @@
 
 <!-- Table 'scripts' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New script</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_SCRIPT#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- Title:
+ <#LANG_TITLE#>:
  </td>
  <td>
   <input type="text" name="title" value="[#TITLE#]" size="50">
@@ -51,7 +51,7 @@ editAreaLoader.init({
 </script>
 
  [#if ERR_CODE#]<b><font color="red">[#endif#]
-  Code (PHP)
+  <#LANG_CODE#> (PHP)
  :
  </td>
  <td valign=top>
@@ -64,27 +64,27 @@ editAreaLoader.init({
  &nbsp;
  </td>
  <td valign=top>
- <input type="checkbox" name="edit_run" value="1"> execute script after update
+ <input type="checkbox" name="edit_run" value="1"> <#LANG_EXECUTE_SCRIPT_AFTER_UPDATE#>
  </td>
 </tr>
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Update">
+ <input type="submit" name="subm" value="<#LANG_UPDATE#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 [#if ID!=""#]
 <tr>
- <td valign="top" align="right">Run by URL:</td>
+ <td valign="top" align="right"><#LANG_RUN_BY_URL#>:</td>
  <td valign="top"><#BASE_URL#>/objects/?script=[#TITLE#]</td>
 </tr>
 <tr>
- <td valign="top" align="right">Command-line:</td>
+ <td valign="top" align="right"><#LANG_COMMAND_LINE#>:</td>
  <td valign="top"><#DOC_ROOT#>\obj.bat script:[#TITLE#]</td>
 </tr>
 

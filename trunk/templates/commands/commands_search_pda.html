@@ -4,9 +4,9 @@
         <div id="home" class="current">
 [#if ONE_ITEM_MODE!="1"#]
             <div data-role="header">
-                <h1 id="label_[#PARENT_ID#]">[#if PARENT_TITLE!=""#][#PARENT_TITLE#][#else#]Home[#endif#]</h1>
+                <h1 id="label_[#PARENT_ID#]">[#if PARENT_TITLE!=""#][#PARENT_TITLE#][#else#]<#LANG_HOME#>[#endif#]</h1>
                 [#if PARENT_ID!=""#]
-                <a class="back" href="[#if PARENT_PARENT_ID!="0"#]/menu/[#PARENT_PARENT_ID#][#else#]/menu[#endif#].html">Back</a>
+                <a class="back" href="[#if PARENT_PARENT_ID!="0"#]/menu/[#PARENT_PARENT_ID#][#else#]/menu[#endif#].html"><#LANG_BACK#></a>
                 [#endif#]
                 <!--#
                 <a class="button slideup" id="infoButton" href="#about">info</a>
@@ -82,8 +82,8 @@
 
         <label for="menu[#ID#]_v"><span id="label_[#ID#]">[#TITLE#]</span><span id="processing_[#ID#]"></span></label>
         <select name="menu[#ID#]_v" id="menu[#ID#]_v" data-role="slider"  onChange="changedValue[#ID#]();">
-                <option value="0"[#if CUR_VALUE!="1"#] selected[#endif#]>Off</option>
-                <option value="1"[#if CUR_VALUE="1"#] selected[#endif#]>On</option>
+                <option value="0"[#if CUR_VALUE!="1"#] selected[#endif#]><#LANG_OFF#></option>
+                <option value="1"[#if CUR_VALUE="1"#] selected[#endif#]><#LANG_ON#></option>
         </select> 
 
         <!--#
@@ -307,7 +307,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p>
-<font color="red">No records found</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 

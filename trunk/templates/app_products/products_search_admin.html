@@ -27,7 +27,7 @@
     <form action="?" method="get" name="frmEdit">
      <table width="100%" border="0">
       <tr>
-       <td valign="top">Title:</td>
+       <td valign="top"><#LANG_TITLE#>:</td>
        <script language="javascript">
         function titleChanged(value) {
          // var s=new string;
@@ -56,14 +56,14 @@
         <option value="[#ID#]"[#if ID="<#CATEGORY_ID#>"#] selected[#endif#]>[#TITLE#]
         [#end CATEGORIES#]
        </select>
-       <a href="#" onClick="var elem=document.getElementById('new_category');elem.style.display='block';return false;">new</a>
+       <a href="#" onClick="var elem=document.getElementById('new_category');elem.style.display='block';return false;"><#LANG_ADD#></a>
        <div id="new_category" style="display:none">
        <input type="text" name="new_category" value="">
        </div>
        </td>
       </tr>
       <tr>
-       <td valign="top">Qty:</td>
+       <td valign="top"><#LANG_QUANTITY#>:</td>
        <td valign="top">
        <script language="javascript">
        function changeInputQty(id, val) {
@@ -77,17 +77,17 @@
        <a href="#" onClick="return changeInputQty('qty', -1);">-</a>
        <input type="text" id="qty" name="qty" value="[#QTY#]" size="10">
        <a href="#" onClick="return changeInputQty('qty', 1);">+</a>
-       <input type="checkbox" name="qty_total" value="1"> total
+       <input type="checkbox" name="qty_total" value="1"> <#LANG_TOTAL#>
        (<a href="#" onClick="var elem=document.getElementById('qty');elem.value='-1';return false;">---</a>)
        </td>
       </tr>
       <tr>
-       <td valign="top">Expiration:</td>
+       <td valign="top"><#LANG_EXPIRE_IN#>:</td>
        <td valign="top">
        <a href="#" onClick="return changeInputQty('expire_days', -1);">-</a>
        <input type="text" name="expire_days" value="[#EXPIRE#]" size="10" id="expire_days"> 
        <a href="#" onClick="return changeInputQty('expire_days', 1);">+</a>
-       (days)
+       (<#LANG_DAYS#>)
        </td>
       </tr>
       <tr>
@@ -97,7 +97,7 @@
       </tr>
       <tr>
        <td valign="top">&nbsp;</td>
-       <td valign="top"><input type="submit" name="submit" value="Add"></td>
+       <td valign="top"><input type="submit" name="submit" value="<#LANG_ADD#>"></td>
       </tr>
      </table>
      <input type="hidden" name="mode" value="add_product">
@@ -127,15 +127,15 @@
  <tr>
 
   <td valign="top">
-   [#if !CATS#]<a href="?">[#endif#]Categories</a>
+   [#if !CATS#]<a href="?">[#endif#]<#LANG_CATEGORIES#></a>
    //
-   <nobr>[#if ALL!=""#][#else#]<a href="?all=1">[#endif#]All Products</a></nobr>
+   <nobr>[#if ALL!=""#][#else#]<a href="?all=1">[#endif#]<#LANG_ALL_PRODUCTS#></a></nobr>
    //
-   [#if EXPIRED!=""#][#else#]<a href="?expired=1">[#endif#]Expired</a>
+   [#if EXPIRED!=""#][#else#]<a href="?expired=1">[#endif#]<#LANG_EXPIRED#></a>
    //
-   [#if MISSING!=""#][#else#]<a href="?missing=1">[#endif#]Missing</a>
+   [#if MISSING!=""#][#else#]<a href="?missing=1">[#endif#]<#LANG_MISSING#></a>
    //
-   [#if SHOPPING!=""#][#else#]<a href="?shopping=1">[#endif#]Shopping</a>
+   [#if SHOPPING!=""#][#else#]<a href="?shopping=1">[#endif#]<#LANG_SHOPPING_LIST#></a>
   </td>
  </tr>
 </table>
@@ -258,10 +258,10 @@
  <td  width="85%">
   <a href="?data_source=<#DATA_SOURCE#>&view_mode=edit_products&id=[#ID#]"><b>[#TITLE#]</b></a>
   [#if EXPIRE_TERM!="" && QTY!="0"#]
-   <div>Will expire in [#EXPIRE_TERM#] days [#if EXPIRED#]<b style="color:red">EXPIRED</b>[#endif EXPIRED#]</div>
+   <div>Will expire in [#EXPIRE_TERM#] days [#if EXPIRED#]<b style="color:red"><#LANG_EXPIRED#></b>[#endif EXPIRED#]</div>
   [#endif#]
   [#if RECOMMENDED#]
-   <div>Recommened QTY: [#RECOMMENDED#] items</div>
+   <div><#RECOMENDED_QUANTITY#>: [#RECOMMENDED#]</div>
   [#endif#]
  </td>
  <td><a href="#" onClick='return changeQty("minus", "[#ID#]")'><img src="/img/btn/minus.png" border="0"></a></td>
@@ -299,7 +299,7 @@
 <!-- / paging -->
 [#else RESULT#]
 <p align=center>
-<font color="red">Not found.</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 

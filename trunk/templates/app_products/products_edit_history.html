@@ -6,7 +6,7 @@
 <table border=0 align=center cellpadding=3>
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 </table>
@@ -14,11 +14,11 @@
 [#if LOGS#]
  <table align="center" border="1" cellpadding="4">
   <tr>
-   <td valign="top"><b>Date</td>
-   <td valign="top"><b>Title</td>
-   <td valign="top"><b>Code</td>
-   <td valign="top"><b>Qty</td>
-   <td valign="top"><b>Action</td>
+   <td valign="top"><b><#LANG_DATE#></td>
+   <td valign="top"><b><#LANG_TITLE#></td>
+   <td valign="top"><b><#LANG_CODE#></td>
+   <td valign="top"><b><#LANG_QUANTITY#></td>
+   <td valign="top"><b><#LANG_ACTION#></td>
   </tr>
   [#begin LOGS#]
   <tr>

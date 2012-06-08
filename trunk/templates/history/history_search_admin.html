@@ -3,7 +3,7 @@
 #-->
 ﻿<big><#LANG_MODULE_OBJECTS_HISTORY#></big>
 <p align=center>
-[ <a href="?mode=clear_history" onClick="return confirm('Continue?')">Clear history</a> ]
+[ <a href="?mode=clear_history" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_CLEAR_LOG#></a> ]
 </p>
 
 [#if OBJECTS#]
@@ -29,7 +29,7 @@
 <!-- paging -->
 [#if PAGES#]
 <table border=0 align=center>
-<td align=right><b>Pages:</b>&nbsp;</td>
+<td align=right><b><#LANG_PAGES#>:</b>&nbsp;</td>
 [#begin PREVPAGE#]<td><a href="?view_mode=<#VIEW_MODE#>&object_id=<#OBJECT_ID#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
 	<td>
 [#begin PAGES#]
@@ -50,7 +50,7 @@
  </td>
 [#if !IS_SET_OBJECT_ID#]
  <td align=center bgcolor="#AAAAAA">
- <b>Object</b>
+ <b><#LANG_OBJECT#></b>
  </td>
 [#endif IS_SET_OBJECT_ID#]
 [#if !IS_SET_METHOD_ID#]
@@ -99,10 +99,10 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_history&id=[#ID#]">Details</a></b>
+    <b><a href="?view_mode=edit_history&id=[#ID#]"><#LANG_DETAILS#></a></b>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?view_mode=delete_history&id=[#ID#]" onClick="return confirm('Delete record?')">Delete</a>
+    <a href="?view_mode=delete_history&id=[#ID#]" onClick="return confirm('Delete record?')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -117,7 +117,7 @@
 <!-- paging -->
 [#if PAGES#]
 <table border=0 align=center>
-<td align=right><b>Pages:</b>&nbsp;</td>
+<td align=right><b><#LANG_PAGES#>:</b>&nbsp;</td>
 [#begin PREVPAGE#]<td><a href="?view_mode=<#VIEW_MODE#>&object_id=<#OBJECT_ID#>&mode=<#MODE#>&save_qry=1&page=[#NUM#]">&lt;&lt;&lt;</a></td>[#end PREVPAGE#]
 	<td>
 [#begin PAGES#]

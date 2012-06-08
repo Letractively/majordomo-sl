@@ -4,34 +4,34 @@
 
 <!-- Table 'patterns' edit -->
 <p align=center>
- <a href="?">&lt;&lt;&lt; Back</a>
+ <a href="?">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- TITLE (varchar) -->
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -42,7 +42,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_PATTERN#]<b><font color="red">[#endif#]
- PATTERN
+ <#LANG_PATTERN#>
  :
  </td>
  <td valign=top>
@@ -54,7 +54,7 @@
 <tr>
  <td align=right>
  [#if ERR_TIME_LIMIT#]<b><font color="red">[#endif#]
- TIME_LIMIT, seconds:
+ <#LANG_TIME_LIMIT#>, <#LANG_SECONDS#>:
  </td>
  <td>
   <input type="text" name="time_limit" value="[#TIME_LIMIT#]"> (set 0 to be used with the latest log record only)
@@ -63,9 +63,9 @@
 
 
  <tr>
-  <td valign="top" align="right">Execute on attach:</td>
+  <td valign="top" align="right"><#LANG_EXECUTE_ON_MATCH#>:</td>
   <td valign="top">
-  <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> script:
+  <input type="radio" name="run_type" value="script"[#if SCRIPT_ID!="0"#] checked[#endif#]> <#LANG_SCRIPT#>:
    <select name="script_id">
     <option value="0">
     [#begin SCRIPTS#]
@@ -73,7 +73,7 @@
         [#end SCRIPTS#]
    </select>    
    <br>
-   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#]> code:<br>
+   <input type="radio" name="run_type" value="code"[#if SCRIPT_ID="0"#] checked[#endif#]> <#LANG_CODE#>:<br>
  [#if ERRORS!=""#]
  <font color='red'>[#ERRORS#]</font><br>
  [#endif ERRORS#]  
@@ -82,12 +82,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?">Cancel</a>
+ <a href="?"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

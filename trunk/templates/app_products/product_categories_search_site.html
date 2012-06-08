@@ -7,20 +7,20 @@
 <!-- search form -->
 <table border=0>
 <tr>
- <td colspan=10><b>Search</b></td>
+ <td colspan=10><b><#LANG_SEARCH#></b></td>
 </tr>
 <form action="?" method="post" name="frmSearch">
  <tr>
-  <td align=right>TITLE:</td>
+  <td align=right><#LANG_TITLE#>:</td>
   <td><!-- varchar -->
 <input type="text" name="title" value="[#TITLE#]">
 </td>
  </tr>
  <tr>
   <td colspan=2>
-   <input type="submit" name="submit" value="Search">
+   <input type="submit" name="submit" value="<#LANG_SEARCH#>">
    //
-   <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+   <a href="?data_source=<#DATA_SOURCE#>"><#LANG_CANCEL#></a>
   </td>
  </tr>
 <input type="hidden" name="mode" value="search_product_categories">
@@ -31,7 +31,7 @@
 [#endif MODE#]
 <p align=center>
 <b>
-[#if MODE!="search_product_categories"#]<a href="?mode=search_product_categories&data_source=<#DATA_SOURCE#>">Search</a> 
+[#if MODE!="search_product_categories"#]<a href="?mode=search_product_categories&data_source=<#DATA_SOURCE#>"><#LANG_SEARCH#></a> 
 &nbsp;&nbsp;&nbsp;
 [#endif#]
 //
@@ -73,7 +73,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No records found.</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

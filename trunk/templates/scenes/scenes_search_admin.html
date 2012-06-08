@@ -2,9 +2,9 @@
 <!-- table scenes search -->
 <p align=center>
 <b>
-<a href="?view_mode=edit_scenes&data_source=<#DATA_SOURCE#>">Add new scene</a>
+<a href="?view_mode=edit_scenes&data_source=<#DATA_SOURCE#>"><#LANG_ADD_NEW_SCENE#></a>
 |
-<a href="/popup/scenes.html" target=_blank>Preview</a>
+<a href="/popup/scenes.html" target=_blank><#LANG_PREVIEW#></a>
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -29,7 +29,7 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td align=center>
-    <a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_scenes&id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>
+    <a href="?data_source=<#DATA_SOURCE#>&view_mode=delete_scenes&id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -43,7 +43,7 @@
 <!-- / search results (list) -->
 [#else RESULT#]
 <p align=center>
-<font color="red">No records found.</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif RESULT#]
 <!-- / results -->

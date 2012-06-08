@@ -4,34 +4,34 @@
 
 <!-- Table 'gpslog' edit -->
 <p align=center>
- <a href="?data_source=<#DATA_SOURCE#>">&lt;&lt;&lt; Back</a>
+ <a href="?data_source=<#DATA_SOURCE#>">&lt;&lt;&lt; <#LANG_BACK#></a>
 </p>
 <table border=0 align=center cellpadding=3>
 <form action="?" method="post" enctype="multipart/form-data" name="frmEdit">
 [#if OK#]
 <tr>
  <td colspan=2 align=center>
-  <font color="green">Data has been saved</font>
+  <font color="green"><#LANG_DATA_SAVED#></font>
  </td>
 </tr>
 [#endif OK#]
 [#if ERR#]
 <tr>
  <td colspan=2 align=center>
-  <font color="red">Please fill out all required fields</font>
+  <font color="red"><#LANG_FILLOUT_REQURED#></font>
  </td>
 </tr>
 [#endif ERR#]
 [#if ID=""#]
 <tr>
- <td colspan=2 align=center><b>New Record</b></td>
+ <td colspan=2 align=center><b><#LANG_NEW_RECORD#></b></td>
 </tr>
 [#endif ID#]
 <!-- ADDED (datetime) -->
 <tr>
  <td align=right>
  [#if ERR_ADDED#]<b><font color="red">[#endif#]
- ADDED:
+ <#LANG_ADDED#>:
  </td>
  <td>
  <input type="text" name="added_date" value="[#ADDED_DATE#]" maxlength=10 size=12>
@@ -54,7 +54,7 @@
 <tr>
  <td align=right>
  [#if ERR_LAT#]<b><font color="red">[#endif#]
- LAT:
+ <#LANG_LATITUDE#>:
  </td>
  <td>
   <input type="text" name="lat" value="[#LAT#]">
@@ -64,7 +64,7 @@
 <tr>
  <td align=right>
  [#if ERR_LON#]<b><font color="red">[#endif#]
- LON:
+ <#LANG_LONGITUDE#>:
  </td>
  <td>
   <input type="text" name="lon" value="[#LON#]">
@@ -74,7 +74,7 @@
 <tr>
  <td align=right>
  [#if ERR_ALT#]<b><font color="red">[#endif#]
- ALT:
+ <#LANG_ALTITUDE#>:
  </td>
  <td>
   <input type="text" name="alt" value="[#ALT#]">
@@ -84,7 +84,7 @@
 <tr>
  <td align=right>
  [#if ERR_PROVIDER#]<b><font color="red">[#endif#]
- PROVIDER:
+ <#LANG_PROVIDER#>:
  </td>
  <td>
   <input type="text" name="provider" value="[#PROVIDER#]">
@@ -94,7 +94,7 @@
 <tr>
  <td align=right>
  [#if ERR_SPEED#]<b><font color="red">[#endif#]
- SPEED:
+ <#LANG_SPEED#>:
  </td>
  <td>
   <input type="text" name="speed" value="[#SPEED#]">
@@ -104,7 +104,7 @@
 <tr>
  <td align=right>
  [#if ERR_BATTLEVEL#]<b><font color="red">[#endif#]
- BATTLEVEL:
+ <#LANG_BATTERY_LEVEL#>:
  </td>
  <td>
   <input type="text" name="battlevel" value="[#BATTLEVEL#]">
@@ -114,7 +114,7 @@
 <tr>
  <td align=right>
  [#if ERR_CHARGING#]<b><font color="red">[#endif#]
- CHARGING:
+ <#LANG_CHARGING#>:
  </td>
  <td>
   <input type="text" name="charging" value="[#CHARGING#]">
@@ -124,7 +124,7 @@
 <tr>
  <td align=right>
  [#if ERR_DEVICEID#]<b><font color="red">[#endif#]
- DEVICEID:
+ <#LANG_DEVICE#>:
  </td>
  <td>
   <input type="text" name="deviceid" value="[#DEVICEID#]">
@@ -135,7 +135,7 @@
 <tr>
  <td align=right>
  [#if ERR_DEVICE_ID#]<b><font color="red">[#endif#]
- DEVICE_ID:
+ <#LANG_DEVICE#>:
  </td>
  <td>
   <input type="text" name="device_id" value="[#DEVICE_ID#]">
@@ -147,7 +147,7 @@
 <tr>
  <td align=right>
  [#if ERR_LOCATION_ID#]<b><font color="red">[#endif#]
- LOCATION_ID:
+ <#LANG_LOCATION#>:
  </td>
  <td>
   <input type="text" name="location_id" value="[#LOCATION_ID#]">
@@ -157,12 +157,12 @@
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]
- <input type="submit" name="subm" value="Submit">
+ <input type="submit" name="subm" value="<#LANG_SUBMIT#>">
  [#else ID#]
- <input type="submit" name="subm" value="Add">
+ <input type="submit" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
- <a href="?data_source=<#DATA_SOURCE#>">Cancel</a>
+ <a href="?data_source=<#DATA_SOURCE#>"><#LANG_CANCEL#></a>
  </td>
 </tr>
 <input type="hidden" name="id" value="<#ID#>">

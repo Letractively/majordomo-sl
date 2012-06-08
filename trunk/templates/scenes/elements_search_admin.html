@@ -2,7 +2,7 @@
 <!-- table elements search -->
 <p align=center>
 <b>
-<a href="?view_mode=edit_scenes&id=<#ID#>&tab=<#TAB#>&view_mode2=edit_elements">Add new element</a>
+<a href="?view_mode=edit_scenes&id=<#ID#>&tab=<#TAB#>&view_mode2=edit_elements"><#LANG_ADD_NEW_ELEMENT#></a>
 </b>
 </p>
 <table width=100% border=0><tr>
@@ -24,10 +24,10 @@
   <table border=0>
   [#if "<#ACTION#>"=="admin"#]
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <b><a href="?view_mode=edit_scenes&id=<#ID#>&tab=<#TAB#>&view_mode2=edit_elements&element_id=[#ID#]">Edit</a></b>
+    <b><a href="?view_mode=edit_scenes&id=<#ID#>&tab=<#TAB#>&view_mode2=edit_elements&element_id=[#ID#]"><#LANG_EDIT#></a></b>
    </td>
    <td bgcolor="[#if NEW_COLOR#]#CCCCCC[#else#]#FFFFFF[#endif#]" align=center>
-    <a href="?view_mode=edit_scenes&id=<#ID#>&tab=<#TAB#>&view_mode2=delete_elements&element_id=[#ID#]" onClick="return confirm('Are you sure?')">Delete</a>
+    <a href="?view_mode=edit_scenes&id=<#ID#>&tab=<#TAB#>&view_mode2=delete_elements&element_id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a>
    </td>
   [#endif ACTION#]
   </table>
@@ -41,7 +41,7 @@
 <!-- / search results (list) -->
 [#else ELEMENTS#]
 <p align=center>
-<font color="red">No elements found.</font>
+<font color="red"><#LANG_NO_RECORDS_FOUND#></font>
 </p>
 [#endif ELEMENTS#]
 <!-- / results -->

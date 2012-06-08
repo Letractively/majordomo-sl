@@ -9,17 +9,17 @@
 <tr>
  <td align=center bgcolor="[#if DATA_SOURCE!="rss_channels" && DATA_SOURCE!=""#]#DDDDDD[#else#]#FFFFFF[#endif#]">
   <b>
-  [#if DATA_SOURCE!="rss_channels" && DATA_SOURCE!=""#]<a href="?data_source=rss_channels">RSS-channels</a>
+  [#if DATA_SOURCE!="rss_channels" && DATA_SOURCE!=""#]<a href="?data_source=rss_channels"><#LANG_RSS_CHANNELS#></a>
   [#else#]
-   RSS-channels
+   <#LANG_RSS_CHANNELS#>
   [#endif#]
   </b>
  </td>
  <td align=center bgcolor="[#if DATA_SOURCE!="rss_items"#]#DDDDDD[#else#]#FFFFFF[#endif#]">
   <b>
-  [#if DATA_SOURCE!="rss_items"#]<a href="?data_source=rss_items">RSS-news</a>
+  [#if DATA_SOURCE!="rss_items"#]<a href="?data_source=rss_items"><#LANG_RSS_NEWS#></a>
   [#else#]
-   RSS-news
+   <#LANG_RSS_NEWS#>
   [#endif#]
   </b>
  </td>
