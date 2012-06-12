@@ -737,6 +737,14 @@ $dictionary=array(
 'ALTITUDE'=>'Высота', // app_gpstrack/gpslog_edit.html; 
 'PROVIDER'=>'Провайдер', // app_gpstrack/gpslog_edit.html; 
 
+'LOCATIONS'=>'Места', // app_gpstrack/action_admin.html; app_gpstrack/action_admin.html; 
+'DEVICES'=>'Устройства', // app_gpstrack/action_admin.html; app_gpstrack/action_admin.html; 
+'ACTIONS'=>'Действия', // app_gpstrack/action_admin.html; app_gpstrack/action_admin.html; 
+
+
+'ACTION_TYPE'=>'Тип действия', // app_gpstrack/gpsactions_edit.html; app_gpstrack/gpsactions_search_admin.html; 
+'EXECUTED'=>'Выполнено', // app_gpstrack/gpsactions_edit.html; app_gpstrack/gpsactions_search_admin.html; 
+
 
 'VIRTUAL_USER'=>'Виртуальный пользователь', // app_gpstrack/gpslocations_edit.html; 
 'TEST'=>'test'
