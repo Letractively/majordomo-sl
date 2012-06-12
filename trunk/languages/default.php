@@ -749,6 +749,13 @@ $dictionary=array(
 'ALTITUDE'=>'Altitude', // app_gpstrack/gpslog_edit.html; 
 'PROVIDER'=>'Provider', // app_gpstrack/gpslog_edit.html; 
 
+'LOCATIONS'=>'Locations', // app_gpstrack/action_admin.html; app_gpstrack/action_admin.html; 
+'DEVICES'=>'Devices', // app_gpstrack/action_admin.html; app_gpstrack/action_admin.html; 
+'ACTIONS'=>'Actions', // app_gpstrack/action_admin.html; app_gpstrack/action_admin.html; 
+
+
+'ACTION_TYPE'=>'Action type', // app_gpstrack/gpsactions_edit.html; app_gpstrack/gpsactions_search_admin.html; 
+'EXECUTED'=>'Executed', // app_gpstrack/gpsactions_edit.html; app_gpstrack/gpsactions_search_admin.html; 
 
 'VIRTUAL_USER'=>'Virtual User', // app_gpstrack/gpslocations_edit.html; 
 'TEST'=>'test'

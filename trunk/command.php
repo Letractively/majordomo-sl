@@ -86,7 +86,12 @@ if ($qry!='') {
  <?
 
 $qry="1";
-$res=SQLSelect("SELECT shouts.*, UNIX_TIMESTAMP(shouts.ADDED) as TM, users.NAME FROM shouts LEFT JOIN users ON shouts.MEMBER_ID=users.ID WHERE $qry ORDER BY shouts.ADDED DESC, ID DESC LIMIT 20");
+
+if (!$limit) {
+ $limit=20;
+}
+
+$res=SQLSelect("SELECT shouts.*, UNIX_TIMESTAMP(shouts.ADDED) as TM, users.NAME FROM shouts LEFT JOIN users ON shouts.MEMBER_ID=users.ID WHERE $qry ORDER BY shouts.ADDED DESC, ID DESC LIMIT ".(int)$limit);
 $total=count($res);
 for($i=0;$i<$total;$i++) {
  if ($res[$i]['MEMBER_ID']==0) {
