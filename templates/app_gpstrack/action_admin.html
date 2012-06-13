@@ -9,33 +9,33 @@
 <tr>
  <td align=center bgcolor="[#if DATA_SOURCE!="gpslog" && DATA_SOURCE!=""#]#DDDDDD[#else#]#FFFFFF[#endif#]">
   <b>
-  [#if DATA_SOURCE!="gpslog" && DATA_SOURCE!=""#]<a href="?data_source=gpslog">Log</a>
+  [#if DATA_SOURCE!="gpslog" && DATA_SOURCE!=""#]<a href="?data_source=gpslog"><#LANG_LOG#></a>
   [#else#]
-   Log
+   <#LANG_LOG#>
   [#endif#]
   </b>
  </td>
  <td align=center bgcolor="[#if DATA_SOURCE!="gpslocations"#]#DDDDDD[#else#]#FFFFFF[#endif#]">
   <b>
-  [#if DATA_SOURCE!="gpslocations"#]<a href="?data_source=gpslocations">Locations</a>
+  [#if DATA_SOURCE!="gpslocations"#]<a href="?data_source=gpslocations"><#LANG_LOCATIONS#></a>
   [#else#]
-   Locations
+   <#LANG_LOCATIONS#>
   [#endif#]
   </b>
  </td>
  <td align=center bgcolor="[#if DATA_SOURCE!="gpsdevices"#]#DDDDDD[#else#]#FFFFFF[#endif#]">
   <b>
-  [#if DATA_SOURCE!="gpsdevices"#]<a href="?data_source=gpsdevices">Devices</a>
+  [#if DATA_SOURCE!="gpsdevices"#]<a href="?data_source=gpsdevices"><#LANG_DEVICES#></a>
   [#else#]
-   Devices
+   <#LANG_DEVICES#>
   [#endif#]
   </b>
  </td>
  <td align=center bgcolor="[#if DATA_SOURCE!="gpsactions"#]#DDDDDD[#else#]#FFFFFF[#endif#]">
   <b>
-  [#if DATA_SOURCE!="gpsactions"#]<a href="?data_source=gpsactions">Actions</a>
+  [#if DATA_SOURCE!="gpsactions"#]<a href="?data_source=gpsactions"><#LANG_ACTIONS#></a>
   [#else#]
-   Actions
+   <#LANG_ACTIONS#>
   [#endif#]
   </b>
  </td>

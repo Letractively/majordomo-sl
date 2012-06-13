@@ -32,7 +32,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_LOCATION_ID#]<b><font color="red">[#endif#]
- LOCATION_ID: 
+ <#LANG_LOCATION#>: 
  (*)</td>
  <td>                                           
  <select name="location_id">
@@ -48,7 +48,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_USER_ID#]<b><font color="red">[#endif#]
- USER_ID: 
+ <#LANG_USER#>: 
  (*)</td>
  <td>                                           
  <select name="user_id">
@@ -63,7 +63,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_ACTION_TYPE#]<b><font color="red">[#endif#]
- ACTION_TYPE: 
+ <#LANG_ACTION_TYPE#>: 
  </td>
  <td>                                           
  <select name="action_type">
@@ -78,7 +78,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_SCRIPT_ID#]<b><font color="red">[#endif#]
- SCRIPT_ID: 
+ <#LANG_SCRIPT#>: 
  </td>
  <td>                                           
  <select name="script_id">
@@ -93,7 +93,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_CODE#]<b><font color="red">[#endif#]
- CODE
+ <#LANG_CODE#>
  :
  </td>
  <td valign=top>
@@ -104,7 +104,7 @@
 <tr>
  <td valign=top align=right>
  [#if ERR_LOG#]<b><font color="red">[#endif#]
- LOG
+ <#LANG_LOG#>
  :
  </td>
  <td valign=top>
@@ -115,7 +115,7 @@
 <tr>
  <td align=right>
  [#if ERR_EXECUTED#]<b><font color="red">[#endif#]
- EXECUTED:
+ <#LANG_EXECUTED#>:
  </td>
  <td>
  <input type="text" name="executed_date" value="[#EXECUTED_DATE#]" maxlength=10 size=12>
