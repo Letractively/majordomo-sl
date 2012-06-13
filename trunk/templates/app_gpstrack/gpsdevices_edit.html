@@ -31,7 +31,7 @@
 <tr>
  <td align=right>
  [#if ERR_TITLE#]<b><font color="red">[#endif#]
- TITLE:
+ <#LANG_TITLE#>:
  (*)
  </td>
  <td>
@@ -43,7 +43,7 @@
 <tr>
  <td align=right valign=top>
  [#if ERR_USER_ID#]<b><font color="red">[#endif#]
- USER_ID: 
+ <#LANG_USER#>: 
  </td>
  <td>                                           
  <select name="user_id">
@@ -58,7 +58,7 @@
 <tr>
  <td align=right>
  [#if ERR_DEVICEID#]<b><font color="red">[#endif#]
- DEVICEID:
+ <#LANG_DEVICE#>:
  </td>
  <td>
   <input type="text" name="deviceid" value="[#DEVICEID#]">
