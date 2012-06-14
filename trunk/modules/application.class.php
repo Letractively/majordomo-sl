@@ -101,6 +101,14 @@ function getParams() {
     exit;
    }
 
+   if (!defined('SETTINGS_SITE_LANGUAGE')) {
+    $this->action='first_start';
+   }
+
+   if ($this->action=='first_start') {
+    include(DIR_MODULES.'first_start.php');
+   }
+
    $out["ACTION"]=$this->action;
    $out["TODAY"]=date('l, F d, Y');
    $out["DOC_NAME"]=$this->doc_name;
