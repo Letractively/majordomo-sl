@@ -54,7 +54,7 @@
 *
 * @access public
 */
- function setGlobal($varname, $value) {
+ function setGlobal($varname, $value, $no_linked=0) {
   $tmp=explode('.', $varname);
   if ($tmp[1]) {
    $object_name=$tmp[0];
@@ -64,7 +64,7 @@
   }
   $obj=getObject($object_name);
   if ($obj) {
-   return $obj->setProperty($varname, $value);
+   return $obj->setProperty($varname, $value, $no_linked);
   } else {
    return 0;
   }
@@ -130,8 +130,8 @@
 
 // SHORT ALIAS *****************************
 
- function sg($varname, $value) {
-  return setGlobal($varname, $value);
+ function sg($varname, $value, $no_linked=0) {
+  return setGlobal($varname, $value, $no_linked);
  }
 
  function gg($varname) {

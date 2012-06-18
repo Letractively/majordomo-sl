@@ -157,9 +157,9 @@ function admin(&$out) {
     $item['CUR_VALUE']=$new_value;
     SQLUpdate('commands', $item);
     if ($item['LINKED_PROPERTY']!='') {
-     $old_value=getObject($item['LINKED_OBJECT'])->getProperty($item['LINKED_PROPERTY']);
-     getObject($item['LINKED_OBJECT'])->setProperty($item['LINKED_PROPERTY'], $item['CUR_VALUE']);
-     DebMes("setting property ".$item['LINKED_OBJECT'].".".$item['LINKED_PROPERTY']." to ".$item['CUR_VALUE']);
+     $old_value=gg($item['LINKED_OBJECT'].'.'.$item['LINKED_PROPERTY']);
+     sg($item['LINKED_OBJECT'].'.'.$item['LINKED_PROPERTY'], $item['CUR_VALUE'], 1);
+     //DebMes("setting property ".$item['LINKED_OBJECT'].".".$item['LINKED_PROPERTY']." to ".$item['CUR_VALUE']);
     }
 
     $params=array('VALUE'=>$item['CUR_VALUE']);
@@ -169,15 +169,15 @@ function admin(&$out) {
 
     if ($item['ONCHANGE_METHOD']!='') {
      getObject($item['ONCHANGE_OBJECT'])->callMethod($item['ONCHANGE_METHOD'], $params);
-     DebMes("calling method ".$item['ONCHANGE_OBJECT'].".".$item['ONCHANGE_METHOD']." with ".$item['CUR_VALUE']);
+     //DebMes("calling method ".$item['ONCHANGE_OBJECT'].".".$item['ONCHANGE_METHOD']." with ".$item['CUR_VALUE']);
     }
 
     if ($item['SCRIPT_ID']) {
-     DebMes('Running on_change script #'.$item['SCRIPT_ID']);
+     //DebMes('Running on_change script #'.$item['SCRIPT_ID']);
      runScript($item['SCRIPT_ID'], $params);
     }
     if ($item['CODE']) {
-     DebMes("Running on_change code");
+     //DebMes("Running on_change code");
      eval($item['CODE']);
     }
 
