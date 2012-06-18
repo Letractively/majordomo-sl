@@ -390,7 +390,7 @@ curl_close($ch);
 *
 * @access public
 */
- function setProperty($property, $value) {
+ function setProperty($property, $value, $no_linked=0) {
   $id=$this->getPropertyByName($property, $this->class_id, $this->id);
   $old_value='';
 
@@ -419,6 +419,9 @@ curl_close($ch);
     $v['VALUE']=$value;
     $v['ID']=SQLInsert('pvalues', $v);
   }
+
+  if (!$no_linked) {
+
 
   $commands=SQLSelect("SELECT * FROM commands WHERE LINKED_OBJECT LIKE '".DBSafe($this->object_title)."' AND LINKED_PROPERTY LIKE '".DBSafe($property)."'");
   $total=count($commands);
@@ -458,6 +461,7 @@ curl_close($ch);
    $h['NEW_VALUE']=$value;
    SQLInsert('history', $h);
   */
+  }
 
  }
 

@@ -380,7 +380,7 @@ function usual(&$out) {
      $rec['LOG']=date('Y-m-d H:i:s')." ".$prec['SYSNAME'].": ".$prec['VALUE']."\n".$rec['LOG'];
      SQLUpdate('owdevices', $rec);
      if ($prec['LINKED_OBJECT'] && $prec['LINKED_PROPERTY']) {
-      sg($prec['LINKED_OBJECT'].'.'.$prec['LINKED_PROPERTY'], $prec['VALUE']);
+      sg($prec['LINKED_OBJECT'].'.'.$prec['LINKED_PROPERTY'], $prec['VALUE'], 1);
      }
     }
    }
