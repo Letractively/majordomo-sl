@@ -420,6 +420,26 @@ curl_close($ch);
     $v['ID']=SQLInsert('pvalues', $v);
   }
 
+  if ($prop['KEEP_HISTORY']>0) {
+   SQLExec("DELETE FROM phistory WHERE VALUE_ID='".$v['ID']."' AND TO_DAYS(NOW())-TO_DAYS(ADDED)>".(int)$prop['KEEP_HISTORY']);
+   $h=array();
+   $h['VALUE_ID']=$v['ID'];
+   $h['ADDED']=date('Y-m-d H:i:s');
+   $h['VALUE']=$value;
+   $h['ID']=SQLInsert('phistory', $h);
+  }
+
+  /*
+   $h=array();
+   $h['ADDED']=date('Y-m-d H:i:s');
+   $h['OBJECT_ID']=$this->id;
+   $h['VALUE_ID']=$v['ID'];
+   $h['OLD_VALUE']=$old_value;
+   $h['NEW_VALUE']=$value;
+   SQLInsert('history', $h);
+  */
+
+
   if (!$no_linked) {
 
 
@@ -443,24 +463,6 @@ curl_close($ch);
   }
 
 
-  if ($prop['KEEP_HISTORY']>0) {
-   SQLExec("DELETE FROM phistory WHERE VALUE_ID='".$v['ID']."' AND TO_DAYS(NOW())-TO_DAYS(ADDED)>".(int)$prop['KEEP_HISTORY']);
-   $h=array();
-   $h['VALUE_ID']=$v['ID'];
-   $h['ADDED']=date('Y-m-d H:i:s');
-   $h['VALUE']=$value;
-   $h['ID']=SQLInsert('phistory', $h);
-  }
-
-  /*
-   $h=array();
-   $h['ADDED']=date('Y-m-d H:i:s');
-   $h['OBJECT_ID']=$this->id;
-   $h['VALUE_ID']=$v['ID'];
-   $h['OLD_VALUE']=$old_value;
-   $h['NEW_VALUE']=$value;
-   SQLInsert('history', $h);
-  */
   }
 
  }
