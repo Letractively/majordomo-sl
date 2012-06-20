@@ -226,7 +226,10 @@ scripts - Scripts
   $data = <<<EOD
  scripts: ID int(10) unsigned NOT NULL auto_increment
  scripts: TITLE varchar(255) NOT NULL DEFAULT ''
+ scripts: DESCRIPTION text
  scripts: CODE text
+ scripts: TYPE int(3) unsigned NOT NULL DEFAULT 0
+ scripts: XML text
 
  safe_execs: ID int(10) unsigned NOT NULL auto_increment
  safe_execs: COMMAND text NOT NULL DEFAULT ''

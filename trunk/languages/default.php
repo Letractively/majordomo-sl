@@ -11,6 +11,8 @@
 $dictionary=array(
 
 /* general */
+'WELCOME_GREETING'=>'Welcome!',
+'WELCOME_TEXT'=>'MajorDoMo is an open-source home automation system.',
 'WIKI_URL'=>'http://smartliving.ru/',
 'CONTROL_PANEL'=>'Control Panel',
 'TERMINAL'=>'Terminal',

@@ -99,3 +99,9 @@
 <input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
 </form>
 </table>
+
+[#if ID!=""#]
+<p align="center">
+<img src="http://maps.googleapis.com/maps/api/staticmap?center=[#LAT#],[#LON#]&size=512x512&maptype=hybrid&sensor=false&zoom=14&markers=[#LAT#],[#LON#]" border="0">
+</p>
+[#endif ID#]
