@@ -13,7 +13,21 @@
    global $title;
    $rec['TITLE']=$title;
   //updating 'CODE' (text)
+   global $type;
+   $rec['TYPE']=$type;
+
    global $code;
+
+   if ($rec['TYPE']==1) {
+    global $xml;
+    $rec['XML']=$xml;
+    global $blockly_code;
+    $code=$blockly_code;
+   }
+
+
+   //echo $code;exit;
+
    $rec['CODE']=$code;
 
    if ($rec['CODE']!='') {

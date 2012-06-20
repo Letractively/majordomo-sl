@@ -1,7 +1,7 @@
 <!--#
  @version 0.3 (auto-set)
 #-->
-﻿&nbsp;
+&nbsp;
 [#if OVERWRITE=""#]
 <table border="0">
  [#begin METHODS#]
@@ -21,8 +21,8 @@
 <p><font color="green"><#LANG_DATA_SAVED#>!</font></p>
 [#endif#]
 
+<form action="?" method="post">
 <table border="0">
- <form action="?" method="post">
  <tr>
   <td valign="top">Method: 
         <b><a href="?view_mode=edit_objects&id=<#ID#>&tab=methods"><#LANG_ALL#></a></b>
@@ -75,6 +75,7 @@ editAreaLoader.init({
   ( <a href="?view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=<#TAB#>&delete_meth=<#METHOD_ID#>" onClick="return confirm('<#LANG_ARE_YOU_SURE#>')"><#LANG_DELETE#></a> )
   </td>
  </tr>
+</table>
  <input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
  <input type="hidden" name="id" value="<#ID#>">
  <input type="hidden" name="tab" value="<#TAB#>">
@@ -82,7 +83,7 @@ editAreaLoader.init({
  <input type="hidden" name="method_id" value="<#METHOD_ID#>">
  <input type="hidden" name="mode" value="update">
  </form>
-</table>
+
 
 <hr size="1">
 <p>
