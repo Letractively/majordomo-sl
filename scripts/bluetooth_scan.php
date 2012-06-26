@@ -1,6 +1,6 @@
 <?
 /*
-* @version 0.3 (06.09.2011 bug fixed)
+* @version 0.4 (06.09.2011 bug fixed)
 */
 
  include_once("./config.php");

@@ -6,7 +6,7 @@
 *
 * @package MajorDoMo
 * @author Serge Dzheigalo <jey@tut.by> http://smartliving.ru/
-* @version 0.3 (wizard, 00:01:48 [Jan 06, 2011])
+* @version 0.4 (wizard, 00:01:48 [Jan 06, 2011])
 */
 Define('DEF_TYPE_OPTIONS', '0=PING (HOST)|1=WEB PAGE (URL)'); // options for 'HOST TYPE'
 //

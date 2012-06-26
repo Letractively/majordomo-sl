@@ -6,7 +6,7 @@
 *
 * @package MajorDoMo
 * @author Serge Dzheigalo <jey@tut.by> http://smartliving.ru/
-* @version 0.1 (wizard, 14:07:59 [Jul 25, 2011])
+* @version 0.2 (wizard, 14:07:59 [Jul 25, 2011])
 */
 Define('DEF_ACTION_TYPE_OPTIONS', '1=Entering|0=Leaving'); // options for 'ACTION_TYPE'
 //

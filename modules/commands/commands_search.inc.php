@@ -1,6 +1,6 @@
 <?
 /*
-* @version 0.3 (auto-set)
+* @version 0.4 (auto-set)
 */
 
  global $menu_loaded;
