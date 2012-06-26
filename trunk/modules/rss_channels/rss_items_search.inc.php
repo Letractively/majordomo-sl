@@ -1,6 +1,6 @@
 <?
 /*
-* @version 0.1 (wizard)
+* @version 0.2 (wizard)
 */
  global $session;
   if ($this->owner->name=='panel') {

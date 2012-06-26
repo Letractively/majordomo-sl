@@ -1,6 +1,6 @@
 <?
 /*
-* @version 0.2 (wizard)
+* @version 0.3 (wizard)
 */
   if ($this->owner->name=='panel') {
    $out['CONTROLPANEL']=1;

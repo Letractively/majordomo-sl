@@ -1,5 +1,5 @@
 /*
-* @version 0.1 (auto-set)
+* @version 0.2 (auto-set)
 */
 var version = {major: 1, minor: 2, revision: 32, date: new Date("Aug 18, 2005"), extensions: {}};
 

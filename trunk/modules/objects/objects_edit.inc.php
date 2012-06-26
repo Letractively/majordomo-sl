@@ -1,6 +1,6 @@
 <?
 /*
-* @version 0.1 (auto-set)
+* @version 0.2 (auto-set)
 */
 
   if ($this->owner->name=='panel') {

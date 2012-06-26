@@ -4,7 +4,7 @@
 *
 * @package MajorDoMo
 * @author Serge Dzheigalo <jey@tut.by> http://smartliving.ru/
-* @version 0.2 (wizard, 21:04:03 [Apr 16, 2011])
+* @version 0.3 (wizard, 21:04:03 [Apr 16, 2011])
 */
 //
 //

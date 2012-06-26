@@ -1,6 +1,6 @@
 <?php
 /*
-* @version 0.2 (auto-set)
+* @version 0.3 (auto-set)
 */
 
 /**
