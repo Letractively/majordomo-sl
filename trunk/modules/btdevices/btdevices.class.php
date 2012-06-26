@@ -20,8 +20,8 @@ class btdevices extends module {
 */
 function btdevices() {
   $this->name="btdevices";
-  $this->title="btdevices";
-  $this->module_category="CMS";
+  $this->title="<#LANG_MODULE_BT_DEVICES#>";
+  $this->module_category="<#LANG_SECTION_OBJECTS#>";
   $this->checkInstalled();
 }
 /**

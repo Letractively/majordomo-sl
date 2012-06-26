@@ -26,7 +26,7 @@
  <tr>
   <form action="?" method="get" name="frmPlayerControl" id="frmPlayerControl">
   <td align="right" style="vertical-align:middle">
-  <div[#if TERMINALS_TOTAL="1"#] style="display:none"[#endif#]>
+  <div[#if TERMINALS_TOTAL="1" || TERMINALS_TOTAL="0"#] style="display:none"[#endif#]>
    <select name="play_terminal" id="selPlayTerminal">
     <option value="">
     [#begin TERMINALS#]

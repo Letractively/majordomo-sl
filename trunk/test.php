@@ -12,16 +12,27 @@
 
  $db=new mysql(DB_HOST, '', DB_USER, DB_PASSWORD, DB_NAME); // connecting to database
 
+// get settings
+$settings = SQLSelect('SELECT NAME, VALUE FROM settings');
+$total = count($settings);
+for ($i = 0; $i < $total; $i ++)
+        Define('SETTINGS_' . $settings[$i]['NAME'], $settings[$i]['VALUE']);
+
+// language selection by settings
+if (SETTINGS_SITE_LANGUAGE && file_exists(ROOT . 'languages/' . SETTINGS_SITE_LANGUAGE . '.php')) include_once (ROOT . 'languages/' . SETTINGS_SITE_LANGUAGE . '.php');
+include_once (ROOT . 'languages/default.php');
+
+if (defined('SETTINGS_SITE_TIMEZONE')) {
+ ini_set('date.timezone', SETTINGS_SITE_TIMEZONE);
+}
+
+
  header ('Content-Type: text/html; charset=utf-8');
 
- //echo GoogleTTS('Привет');
 
- //echo timeBetween('22:00', '13:00');
- //sendmail_html('info@atmatic.com', 'jey@tut.by', 'Hi there!', 'Hello world!!!');
- //echo date('Y-m-d H:i:s', time());
- //phpinfo();
- getObject('ThisComputer')->setProperty('minMsgLevel', 1);
- 
+
+ echo timeNow();
+
  $db->Disconnect(); // closing database connection
 
 

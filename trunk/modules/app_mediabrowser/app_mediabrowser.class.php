@@ -18,8 +18,8 @@ class app_mediabrowser extends module {
 */
 function app_mediabrowser() {
   $this->name="app_mediabrowser";
-  $this->title="Media Browser";
-  $this->module_category="Applications";
+  $this->title="<#LANG_APP_MEDIA_BROWSER#>";
+  $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
 /**

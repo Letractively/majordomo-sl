@@ -21,8 +21,8 @@ class app_gpstrack extends module {
 */
 function app_gpstrack() {
   $this->name="app_gpstrack";
-  $this->title="GPS Track";
-  $this->module_category="CMS";
+  $this->title="<#LANG_APP_GPSTRACK#>";
+  $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
 /**

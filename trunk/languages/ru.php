@@ -12,6 +12,8 @@ $dictionary=array(
 
 /* general */
 'WIKI_URL'=>'http://smartliving.ru/',
+'WELCOME_GREETING'=>'Добро пожаловать!',
+'WELCOME_TEXT'=>'Спасибо, что пользуйтесь MajorDoMo -- открытой платформой домашней автоматизации. <br/><br/>Узнайте больше и присоединяйтесь к сообществу: <a href="<#LANG_WIKI_URL#>" target=_blank>Веб-сайт</a> | <a href="<#LANG_WIKI_URL#>forum/" target=_blank>Форум</a> | <a href="https://www.facebook.com/SmartLivingRu" target=_blank>Facebook страница</a> <br/>&nbsp;<br/>&nbsp;<br/><small>P.S. Вы можете изменить или удалить эту страницу через <a href="/admin.php?pd=&md=panel&inst=&action=layouts">Панель управления</a> (логин/пароль: admin / admin)</small>',
 'CONTROL_PANEL'=>'Панель управления',
 'TERMINAL'=>'Терминал',
 'USER'=>'Пользователь',
@@ -37,6 +39,7 @@ $dictionary=array(
 'APP_PRODUCTS'=>'Продукты',
 'APP_TDWIKI'=>'Блокнот',
 'APP_WEATHER'=>'Погода',
+'APP_CALENDAR'=>'Календарь',
 
 'MODULE_OBJECTS_HISTORY'=>'История объектов',
 'MODULE_BT_DEVICES'=>'Bluetooth-устройства',
@@ -55,7 +58,7 @@ $dictionary=array(
 'MODULE_EVENTS'=>'События',
 'MODULE_JOBS'=>'Задания',
 'MODULE_MASTER_LOGIN'=>'Пароль доступа',
-'MODULE_SAVERESTORE'=>'Сохранение/обновление',
+'MODULE_SAVERESTORE'=>'Резерв. копия',
 'MODULE_WEBVARS'=>'Веб-переменные',
 'MODULE_PATTERNS'=>'Шаблоны поведения',
 'MODULE_ONEWIRE'=>'1-Wire',

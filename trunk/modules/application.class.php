@@ -101,7 +101,7 @@ function getParams() {
     exit;
    }
 
-   if (!defined('SETTINGS_SITE_LANGUAGE')) {
+   if (!defined('SETTINGS_SITE_LANGUAGE') || !defined('SETTINGS_SITE_TIMEZONE') ) {
     $this->action='first_start';
    }
 

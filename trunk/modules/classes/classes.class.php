@@ -20,8 +20,9 @@ class classes extends module {
 */
 function classes() {
   $this->name="classes";
-  $this->title="Classes";
-  $this->module_category="CMS";
+  $this->title="<#LANG_OBJECTS#>";
+  $this->module_category="<#LANG_SECTION_OBJECTS#>";
+
   $this->checkInstalled();
 }
 /**

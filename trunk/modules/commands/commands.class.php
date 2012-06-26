@@ -241,8 +241,11 @@ function usual(&$out) {
  function delete_commands($id) {
   $rec=SQLSelectOne("SELECT * FROM commands WHERE ID='$id'");
   // some action for related tables
-  if ($rec['SUB_LIST']!='' && $rec['SUB_LIST']!=$rec['ID']) {
-   return;
+  if ($rec['SUB_LIST']) {
+   $tmp=SQLSelect("SELECT ID FROM commands WHERE ID IN (".$rec['SUB_LIST'].") AND ID!='".$rec['ID']."'");
+   if ($tmp[0]['ID']) {
+    return;
+   }
   }
   SQLExec("DELETE FROM commands WHERE ID='".$rec['ID']."'");
  }

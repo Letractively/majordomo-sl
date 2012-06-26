@@ -22,7 +22,7 @@ class app_calendar extends module {
 */
 function app_calendar() {
   $this->name="app_calendar";
-  $this->title="Calendar";
+  $this->title="<#LANG_APP_CALENDAR#>";
   $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
