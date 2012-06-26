@@ -28,6 +28,11 @@ for ($i = 0; $i < $total; $i ++)
 if (SETTINGS_SITE_LANGUAGE && file_exists(ROOT . 'languages/' . SETTINGS_SITE_LANGUAGE . '.php')) include_once (ROOT . 'languages/' . SETTINGS_SITE_LANGUAGE . '.php');
 include_once (ROOT . 'languages/default.php');
 
+if (defined('SETTINGS_SITE_TIMEZONE')) {
+ ini_set('date.timezone', SETTINGS_SITE_TIMEZONE);
+}
+
+
 $qry="1";
 
 if ($_GET['level']) {

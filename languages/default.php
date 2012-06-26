@@ -11,9 +11,9 @@
 $dictionary=array(
 
 /* general */
-'WELCOME_GREETING'=>'Welcome!',
-'WELCOME_TEXT'=>'MajorDoMo is an open-source home automation system.',
 'WIKI_URL'=>'http://smartliving.ru/',
+'WELCOME_GREETING'=>'Welcome!',
+'WELCOME_TEXT'=>'Thank you for using MajorDoMo -- an open-source home automation platform. <br/><br/>Read more about it and join our community: <a href="<#LANG_WIKI_URL#>" target=_blank>Web-site</a> | <a href="<#LANG_WIKI_URL#>forum/" target=_blank>Forum</a> | <a href="https://www.facebook.com/SmartLivingRu" target=_blank>Facebook page</a> <br/>&nbsp;<br/>&nbsp;<br/><small>P.S. You can customize or delete this page using <a href="/admin.php?pd=&md=panel&inst=&action=layouts">Control Panel</a> (login/password: admin / admin)</small>',
 'CONTROL_PANEL'=>'Control Panel',
 'TERMINAL'=>'Terminal',
 'USER'=>'User',
@@ -39,6 +39,7 @@ $dictionary=array(
 'APP_PRODUCTS'=>'Products Inventory',
 'APP_TDWIKI'=>'TdWiKi Notepad',
 'APP_WEATHER'=>'Weather Informer',
+'APP_CALENDAR'=>'Calendar',
 
 'MODULE_OBJECTS_HISTORY'=>'Objects History',
 'MODULE_BT_DEVICES'=>'Bluetooth Devices',

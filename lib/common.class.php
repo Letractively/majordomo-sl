@@ -38,7 +38,7 @@
   SQLInsert('shouts', $rec);
 
   if ($level>=(int)getGlobal('minMsgLevel')) { //$voicemode!='off' && 
-   $google_file=GoogleTTS($ph);
+   $google_file=GoogleTTS($ph, SETTINGS_SITE_LANGUAGE);
    if ($google_file) {
     @touch($google_file);
     playSound($google_file, 1);
@@ -46,15 +46,6 @@
     //getObject("alice")->raiseEvent("say", array("say"=>$ph));
     safe_exec('cscript '.DOC_ROOT.'/rc/sapi.js '.$ph, 1);
    }
-   
-   /*
-   $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-   if (@socket_connect($socket, '127.0.0.1', '12001')) {
-    $msg='%Алиса#'.utf2win($ph);
-    socket_write($socket, $msg, strlen($msg));
-   }
-   @socket_close($socket);
-   */
   }
   postToTwitter($ph);
 

@@ -115,6 +115,17 @@
      $title=str_replace($m[0][$i], getGlobal($m[1][$i]), $title);
     }
    }
+
+   if (preg_match_all('/<#LANG_(\w+?)#>/is', $title, $m)) {
+    $total=count($m[0]);
+    for($i=0;$i<$total;$i++) {
+     
+    }
+    for($i=0;$i<$total;$i++) {
+     $title=str_replace($m[0][$i], constant('LANG_'.$m[1][$i]), $title);
+    }
+   }
+
    if (preg_match('/\[#.+?#\]/is', $title)) {
     if ($object) {
      $jTempl=new jTemplate($title, $object->data, $object);

@@ -17,6 +17,7 @@
    $filename=md5($message).'.mp3';
 
    if (file_exists(ROOT.'cached/voice/'.$filename)) {
+    @touch(ROOT.'cached/voice/'.$filename);
     return ROOT.'cached/voice/'.$filename;
    }
 

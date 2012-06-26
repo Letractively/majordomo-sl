@@ -18,8 +18,8 @@ class app_player extends module {
 */
 function app_player() {
   $this->name="app_player";
-  $this->title="Player Control";
-  $this->module_category="Applications";
+  $this->title="<#LANG_APP_PLAYER#>";
+  $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
 /**

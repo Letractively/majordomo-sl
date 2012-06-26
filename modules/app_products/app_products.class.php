@@ -18,8 +18,8 @@ class app_products extends module {
 */
 function app_products() {
   $this->name="app_products";
-  $this->title="Products";
-  $this->module_category="Applications";
+  $this->title="<#LANG_APP_PRODUCTS#>";
+  $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
 /**

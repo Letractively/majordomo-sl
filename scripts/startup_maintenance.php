@@ -26,22 +26,19 @@
  umask($old_mask);
 
  // CHECK/REPAIR/OPTIMIZE TABLES                
- /*
  $tables=SQLSelect("SHOW TABLES FROM db_terminal");
  $total=count($tables);
  for($i=0;$i<$total;$i++) {
   $table=$tables[$i]['Tables_in_db_terminal'];
-  echo $table." repair...";
-  SQLExec("REPAIR TABLE ".$table);
-  echo "OK\n";
-  echo $table." check...";
-  SQLExec("CHECK TABLE ".$table);
-  echo "OK\n";
-  echo $table." optimize...";
-  SQLExec("OPTIMIZE TABLE ".$table);
-  echo "OK\n";
+  echo $table.' ...';
+  if ($result=mysql_query("SELECT * FROM ".$table." LIMIT 1")) {
+   echo "OK\n";
+  } else {
+   echo " broken ... repair ...";
+   SQLExec("REPAIR TABLE ".$table);
+   echo "OK\n";
+  }
  }
- */
  SQLExec("DELETE FROM events WHERE ADDED>NOW()");
  SQLExec("DELETE FROM phistory WHERE ADDED>NOW()");
  SQLExec("DELETE FROM history WHERE ADDED>NOW()");

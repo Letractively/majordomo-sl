@@ -20,8 +20,8 @@ class app_tdwiki extends module {
 */
 function app_tdwiki() {
   $this->name="app_tdwiki";
-  $this->title="TdWiki";
-  $this->module_category="Applications";
+  $this->title="<#LANG_APP_TDWIKI#>";
+  $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
 /**
