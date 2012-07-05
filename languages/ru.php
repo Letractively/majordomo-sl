@@ -750,6 +750,9 @@ $dictionary=array(
 
 
 'VIRTUAL_USER'=>'Виртуальный пользователь', // app_gpstrack/gpslocations_edit.html; 
+
+'LONG_OPERATION_WARNING'=>'Внимание: данная операция может занять длительное время (несколько минут). Пожалуйста, дождитесь завершения после запуска.',
+
 'TEST'=>'test'
 
 

@@ -761,6 +761,9 @@ $dictionary=array(
 'EXECUTED'=>'Executed', // app_gpstrack/gpsactions_edit.html; app_gpstrack/gpsactions_search_admin.html; 
 
 'VIRTUAL_USER'=>'Virtual User', // app_gpstrack/gpslocations_edit.html; 
+
+'LONG_OPERATION_WARNING'=>'Note: This operation can take up to few minutes.<Br>Please, be patient :)',
+
 'TEST'=>'test'
 
 
