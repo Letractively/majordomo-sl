@@ -2,7 +2,7 @@
 /*
 * @package MajorDoMo
 * @author Serge Dzheigalo <jey@tut.by> http://smartliving.ru/
-* @version 0.6
+* @version 0.7
 */
 
 
@@ -41,10 +41,10 @@
    $google_file=GoogleTTS($ph, SETTINGS_SITE_LANGUAGE);
    if ($google_file) {
     @touch($google_file);
-    playSound($google_file, 1);
+    playSound($google_file, 1, $level);
    } else {
     //getObject("alice")->raiseEvent("say", array("say"=>$ph));
-    safe_exec('cscript '.DOC_ROOT.'/rc/sapi.js '.$ph, 1);
+    safe_exec('cscript '.DOC_ROOT.'/rc/sapi.js '.$ph, 1, $level);
    }
   }
   postToTwitter($ph);
@@ -431,16 +431,15 @@
 *
 * @access public
 */
- function playSound($filename, $exclusive=0) {
+ function playSound($filename, $exclusive=0, $priority=0) {
   if (file_exists(ROOT.'sounds/'.$filename.'.mp3')) {
    $filename=ROOT.'sounds/'.$filename.'.mp3';
   }
   if (file_exists($filename)) {
    if (substr(php_uname(), 0, 7) == "Windows") {
-    //safe_exec('cscript '.ROOT.'rc/playfile.vbs '.$filename);
-    safe_exec(DOC_ROOT.'/rc/madplay.exe '.$filename, $exclusive);
+    safe_exec(DOC_ROOT.'/rc/madplay.exe '.$filename, $exclusive, $priority);
    } else {
-    safe_exec('mpg321 '.$filename);
+    safe_exec('mpg321 '.$filename, $exclusive, $priority);
    }
   }
  }
@@ -515,11 +514,12 @@
 *
 * @access public
 */
- function safe_exec($command, $exclusive=0) {
+ function safe_exec($command, $exclusive=0, $priority=0) {
   $rec=array();
   $rec['ADDED']=date('Y-m-d H:i:s');
   $rec['COMMAND']=$command;
   $rec['EXCLUSIVE']=$exclusive;
+  $rec['PRIORITY']=$priority;
   $rec['ID']=SQLInsert('safe_execs', $rec);
   return $rec['ID'];
  }
