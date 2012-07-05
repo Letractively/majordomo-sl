@@ -692,7 +692,7 @@ function admin(&$out) {
   global $code;
   global $data;
   $code=1;
-  $data=1;
+  $data=0;
   $out['BACKUP']=1;
   $this->dump($out);
   $this->removeTree(ROOT.'saverestore/temp');
