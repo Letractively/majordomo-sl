@@ -225,11 +225,11 @@ function admin(&$out) {
  }
 
  if ($this->mode=='checkupdates') {
-  $this->checkupdates($out);
+  $this->checkupdatesSVN($out);
  }
 
  if ($this->mode=='downloadupdates') {
-  $this->downloadupdates($out);
+  $this->downloadupdatesSVN($out);
  }
 
  if ($this->mode=='checkapps') {
@@ -248,6 +248,7 @@ function admin(&$out) {
  if ($this->mode=='dump') {
   $this->dump($out);
   $this->redirect("?mode=clear");
+  //$this->redirect("?");
  }
 
  if ($this->mode=='delete') {
@@ -678,6 +679,94 @@ function admin(&$out) {
  
  }
 
+
+/**
+* Title
+*
+* Description
+*
+* @access public
+*/
+ function downloadUpdatesSVN(&$out) {
+
+  global $code;
+  global $data;
+  $code=1;
+  $data=1;
+  $out['BACKUP']=1;
+  $this->dump($out);
+  $this->removeTree(ROOT.'saverestore/temp');
+
+  include_once DIR_MODULES.'saverestore/phpsvnclient.php';
+  $url = 'http://majordomo-sl.googlecode.com/svn/';
+  $phpsvnclient = new phpsvnclient($url);
+  set_time_limit(0);
+  global $to_update;
+
+  $total=count($to_update);
+  for($i=0;$i<$total;$i++) {
+   $path='trunk/'.$to_update[$i];
+   $file_content = $phpsvnclient->getFile($path);
+   SaveFile(ROOT.$to_update[$i], $file_content);
+  }
+
+  $this->redirect("?ok_msg=".urlencode('Files have been updated!'));
+  
+ }
+
+/**
+* Title
+*
+* Description
+*
+* @access public
+*/
+ function checkUpdatesSVN(&$out) {
+  include_once DIR_MODULES.'saverestore/phpsvnclient.php';
+
+  $url = 'http://majordomo-sl.googlecode.com/svn/';
+
+  $phpsvnclient = new phpsvnclient($url);
+
+  set_time_limit(0);
+  //$phpsvnclient->createOrUpdateWorkingCopy('trunk/', ROOT.'saverestore/temp', true);
+
+  $cached_name=ROOT.'saverestore/svn_tree.txt';
+  if (!file_exists($cached_name) || (time()-filemtime($cached_name)>8*60*60)) {
+   $directory_tree = $phpsvnclient->getDirectoryTree('/trunk/');
+   SaveFile($cached_name, serialize($directory_tree));
+  } else {
+   $directory_tree=unserialize(LoadFile($cached_name));
+  }
+
+  $updated=array();
+  $total=count($directory_tree);
+  for($i=0;$i<$total;$i++) {
+   $item=$directory_tree[$i];
+   if ($item['type']!='file' || $item['path']=='trunk/config.php') {
+    continue;
+   }
+   $filename=str_replace('trunk/', ROOT, $item['path']);
+   @$fsize=filesize($filename);
+   $r_rfsize=$item['size'];
+   if ($fsize!=$r_rfsize || !file_exists($filename)) {
+    $updated[]=$item;
+   }
+
+  }
+
+
+  $out['OK_CHECK']=1;
+  if (!$updated[0]) {
+   $out['NO_UPDATES']=1; 
+  } else {
+     foreach($updated as $item) {
+      $item['path']=str_replace('trunk/', '', $item['path']);
+      $out['TO_UPDATE'][]=array('FILE'=>$item['path'], 'VERSION'=>$item['version'].' ('.$item['last-mod'].')');
+     }
+  }
+
+ }
 /**
 * Title
 *
@@ -905,11 +994,14 @@ function getLocalFilesTree($dir, $pattern, $ex_pattern, &$log, $verbose) {
 
        chdir(ROOT.'saverestore/temp');
 
+       if (substr(php_uname(), 0, 7) == "Windows") {
        // for windows only
-       exec(DOC_ROOT.'/gunzip ../../'.$file, $output, $res);
-       exec(DOC_ROOT.'/tar xvf ../../'.str_replace('.tgz', '.tar', $file), $output, $res);
-
+       @exec(DOC_ROOT.'/gunzip ../../'.$file, $output, $res);
+       @exec(DOC_ROOT.'/tar xvf ../../'.str_replace('.tgz', '.tar', $file), $output, $res);
        @unlink('../../'.str_replace('.tgz', '.tar', $file));
+       } else {
+        exec('tar xzvf ../../'.$file, $output, $res);
+       }
        //print_r($output);exit;
 
        if (1) {
@@ -1085,15 +1177,25 @@ function getLocalFilesTree($dir, $pattern, $ex_pattern, &$log, $verbose) {
 
 
    // packing into tar.gz
-   $tar_name.=date('Y-m-d__h-i-s').'.tgz';
+   if (substr(php_uname(), 0, 7) == "Windows") {
+    $tar_name.=date('Y-m-d__h-i-s').'.tar';
+   } else {
+    $tar_name.=date('Y-m-d__h-i-s').'.tgz';
+   }
 
    if ($out['BACKUP']) {
     $tar_name='backup_'.$tar_name;
    }
 
-   chdir(ROOT.'saverestore/temp');
-   exec('tar cvzf ../'.$tar_name.' .');
-   chdir('../../');
+   if (substr(php_uname(), 0, 7) == "Windows") {
+    exec('tar.exe  --strip-components=2 -cvf ./saverestore/'.$tar_name.' ./saverestore/temp/');
+   } else {
+    chdir(ROOT.'saverestore/temp');
+    exec('tar cvzf ../'.$tar_name.' .');
+    chdir('../../');
+   }
+
+
   }
  }
 
@@ -1177,11 +1279,11 @@ function getLocalFilesTree($dir, $pattern, $ex_pattern, &$log, $verbose) {
     if (Is_Dir($destination."/".$file) && ($file!='.') && ($file!='..')) {
      $res=$this->removeTree($destination."/".$file);
     } elseif (Is_File($destination."/".$file)) {
-     $res=unlink($destination."/".$file);
+     $res=@unlink($destination."/".$file);
     }
   }     
   closedir($dir); 
-  $res=rmdir($destination);
+  $res=@rmdir($destination);
  }
  return $res;
  }

@@ -18,6 +18,42 @@
 
    <big><#LANG_UPDATES#></big>
    <br>
+
+   <form action="?" method="post" enctype="multipart/form-data">
+   [#if OK_CHECK#]
+
+     [#if NO_UPDATES#]
+     <p><b><font color="green"><#LANG_NO_UPDATES_AVAILABLE#></font></b></p>
+     [#else#]
+     <p><b>Updates available:</b>
+      <table border="0" cellspacing=0>
+       [#begin TO_UPDATE#]
+       <tr>
+        <td valign="top"><input type="checkbox" name="to_update[]" value="[#FILE#]" checked></td>
+        <td valign="top"><b>[#FILE#]</b> (<#LANG_NEW_VERSION#>: [#VERSION#])</td>
+       </tr>
+       [#end TO_UPDATE#]
+      </table>
+     </p>
+
+   <input type="submit" name="submit" value="Install selected updates &gt;&gt;&gt;">
+   <input type="hidden" name="mode" value="downloadupdates">
+
+
+     [#endif#]
+
+   [#else#]
+
+   [#if ERROR_MESSAGE!=""#]<p><font color="red"><b>[#ERROR_MESSAGE#]</b></font></p>[#endif#]
+
+   <p>Note: This operation can take up to few minutes.<Br>Please, be patient :)</p>
+
+   <input type="submit" name="submit" value="Check for updates &gt;&gt;&gt;">
+   <input type="hidden" name="mode" value="checkupdates">
+   [#endif#]
+   </form>
+
+   <!--#
    <form action="?" method="post" enctype="multipart/form-data">
    [#if OK_CHECK#]
 
@@ -49,7 +85,9 @@
    <input type="hidden" name="mode" value="checkupdates">
    [#endif#]
    </form>
+   #-->
 
+   <!--#
    <hr size="1">
    <big><#LANG_INSTALL_NEW_MODULES#></big>
    <br>
@@ -91,8 +129,10 @@
    [#endif OK_BROWSE#]
 
    </form>
+   #-->
 
 
+   <!--#
    <hr size="1">
    <big><#LANG_SUBMIT_NEWER_FILES#></big>
    <Br>
@@ -136,6 +176,7 @@
    <input type="hidden" name="mode" value="checksubmit">
    [#endif#]
    </form>
+   #-->
 
 
    <hr size="1">
