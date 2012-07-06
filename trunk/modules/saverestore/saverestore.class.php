@@ -707,7 +707,10 @@ function admin(&$out) {
   for($i=0;$i<$total;$i++) {
    $path='trunk/'.$to_update[$i];
    $file_content = $phpsvnclient->getFile($path);
-   SaveFile(ROOT.$to_update[$i], $file_content);
+   @SaveFile(ROOT.$to_update[$i], $file_content);
+   if (file_exists(dirname(ROOT.$to_update[$i]).'/installed')) {
+    @unlink(dirname(ROOT.$to_update[$i]).'/installed');
+   }
   }
 
   $this->redirect("?ok_msg=".urlencode('Files have been updated!'));
