@@ -34,6 +34,18 @@
   <b>
    [#TITLE#]
   </a></b>
+  <br>
+  <small>
+  [#if TYPE="html"#]
+  <a href="/page/[#ID#].html" target=_blank>/page/[#ID#].html</a>
+  [#endif TYPE#]
+  [#if TYPE="url"#]
+  <a href="[#URL#]" target=_blank>[#URL#]</a>
+  [#endif TYPE#]
+  [#if TYPE="app"#]
+  <a href="/popup/[#APP#].html" target=_blank>/popup/[#APP#].html</a>
+  [#endif TYPE#]
+  </small>
  </td>
  <td
    align=center

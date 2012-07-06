@@ -97,7 +97,7 @@
 </ul>
 
 [#begin LAYOUTS#]
-<div id="tabs-[#ID#]">[#if TYPE="html"#]<div id="htmlTab[#NUM#]">[#inc ../cms/layouts/<#LAYOUTS.ID#>.html#]</div>[#endif#][#if TYPE="app"#]...[#endif TYPE#][#if TYPE="url"#]...[#endif TYPE#]</div>
+<div id="tabs-[#ID#]">...</div>
 [#end LAYOUTS#]
 
 <div id="tabs-last">
@@ -139,6 +139,11 @@ $(document).ready(function() {
           [#if TYPE="url"#]
            if ($('#tabs-[#ID#]').html()=='...') {
             $('#tabs-[#ID#]').html('<iframe src="[#URL#]" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
+           }
+          [#endif TYPE#]
+          [#if TYPE="html"#]
+           if ($('#tabs-[#ID#]').html()=='...') {
+            $('#tabs-[#ID#]').html('<iframe src="/page/[#ID#].html" width=100% height="'+iFrameHeight+'" border="0" frameborder="0"></iframe>');
            }
           [#endif TYPE#]
          }

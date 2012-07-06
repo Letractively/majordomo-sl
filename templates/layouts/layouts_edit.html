@@ -71,7 +71,7 @@
  :
  </td>
  <td valign=top>
- <textarea name="code" rows=12 cols=100>[#CODE#]</textarea>
+ <textarea name="code" rows=12 cols=80>[#CODE#]</textarea>
  </td>
 </tr>
 [#endif TYPE#]
@@ -99,6 +99,24 @@
  </td>
 </tr>
 [#endif TYPE#]
+
+[#if ID!=""#]
+<tr>
+ <td valign="top" align="right"><#LANG_URL#> (preview):</td>
+ <td valign="top">
+ [#if TYPE="html"#]
+  <a href="/page/[#ID#].html" target=_blank>/page/[#ID#].html</a>
+  [#endif TYPE#]
+  [#if TYPE="url"#]
+  <a href="[#URL#]" target=_blank>[#URL#]</a>
+  [#endif TYPE#]
+  [#if TYPE="app"#]
+  <a href="/popup/[#APP#].html" target=_blank>/popup/[#APP#].html</a>
+  [#endif TYPE#]
+</td>
+</tr>
+[#endif#]
+
 <tr>
  <td colspan=2 align=center>
  [#if ID!=""#]

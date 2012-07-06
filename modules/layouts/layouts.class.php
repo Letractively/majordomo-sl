@@ -128,6 +128,9 @@ function admin(&$out) {
   if ($this->view_mode=='edit_layouts') {
    $this->edit_layouts($out, $this->id);
   }
+  if ($this->view_mode=='view_layouts') {
+   $this->view_layouts($out, $this->id);
+  }
   if ($this->view_mode=='delete_layouts') {
    $this->delete_layouts($this->id);
    $this->redirect("?");
@@ -160,6 +163,22 @@ function usual(&$out) {
  function edit_layouts(&$out, $id) {
   require(DIR_MODULES.$this->name.'/layouts_edit.inc.php');
  }
+
+/**
+* Title
+*
+* Description
+*
+* @access public
+*/
+ function view_layouts(&$out, $id) {
+  $rec=SQLSelectOne("SELECT * FROM layouts WHERE ID='".(int)$id."'");
+  if (!$rec['ID']) {
+   return 0;
+  }
+  outHash($rec, $out);
+ }
+
 /**
 * layouts delete record
 *
