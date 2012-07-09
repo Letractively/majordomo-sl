@@ -102,7 +102,7 @@ if (defined('SETTINGS_SITE_TIMEZONE')) {
 
   SQLExec("DELETE FROM safe_execs WHERE ADDED<'".date('Y-m-d H:i:s', time()-180)."'");
 
-  $safe_execs=SQLSelect("SELECT * FROM safe_execs WHERE EXCLUSIVE=1 LIMIT 1 ORDER BY PRIORITY DESC");
+  $safe_execs=SQLSelect("SELECT * FROM safe_execs WHERE EXCLUSIVE=1 ORDER BY PRIORITY DESC, ID LIMIT 1");
   $total=count($safe_execs);
   for($i=0;$i<$total;$i++) {
    $command=utf2win($safe_execs[$i]['COMMAND']);
@@ -113,7 +113,7 @@ if (defined('SETTINGS_SITE_TIMEZONE')) {
   }
 
 
-  $safe_execs=SQLSelect("SELECT * FROM safe_execs WHERE EXCLUSIVE=0 ORDER BY PRIORITY DESC");
+  $safe_execs=SQLSelect("SELECT * FROM safe_execs WHERE EXCLUSIVE=0 ORDER BY PRIORITY DESC, ID");
   $total=count($safe_execs);
   for($i=0;$i<$total;$i++) {
    $command=utf2win($safe_execs[$i]['COMMAND']);
