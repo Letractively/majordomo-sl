@@ -52,7 +52,6 @@
       }
 
     
-    if ($player_type) {
 
      if ($command=='pause') {
       $result=xbmc_request($ch, $terminal, 'Player.PlayPause', array('playerid'=>(int)$player_id));
@@ -76,7 +75,4 @@
 
 
 
-    }
-
-   //print_r();
 ?>

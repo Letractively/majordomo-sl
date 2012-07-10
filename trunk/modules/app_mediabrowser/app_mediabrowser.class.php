@@ -225,6 +225,8 @@ function usual(&$out) {
   $out['COLLECTIONS_TOTAL']=1;
  }
 
+
+
  if ($collection_id) {
   $collection=SQLSelectOne("SELECT * FROM collections WHERE ID='".(int)$collection_id."'");
   $path=($collection['PATH']);//addslashes
@@ -261,6 +263,7 @@ function usual(&$out) {
 
 
   $act_dir=$path.$folder;
+
 
 
   $out['MEDIA_PATH']=win2utf($path);
