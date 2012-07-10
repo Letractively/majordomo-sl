@@ -453,13 +453,31 @@
 */
  function playMedia($path, $host='localhost') {
   $terminal=SQLSelectOne("SELECT * FROM terminals WHERE HOST LIKE '".DBSafe($host)."' OR NAME LIKE '".DBSafe($host)."' OR TITLE LIKE '".DBSafe($host)."'");
-  if ($terminal['ID']) {
-   $host=$terminal['HOST'];
+  if (!$terminal['ID']) {
+   $terminal=SQLSelectOne("SELECT * FROM terminals WHERE CANPLAY=1 ORDER BY ID");
   }
-  $url='http://'.$host;
-  $path=preg_replace('/\\\\$/is', '', $path);
-  $url.="/rc/?command=vlc_play&param=".urlencode(''.utf2win($path).'');
-  $res=getURL($url, 0);
+  if (!$terminal['ID']) {
+   $terminal=SQLSelectOne("SELECT * FROM terminals WHERE 1 ORDER BY ID");
+  }
+
+  if (!$terminal['ID']) {
+   return 0;
+  }
+
+  include_once(DIR_MODULES.'app_player/app_player.class.php');
+  $player=new app_player();
+  $player->terminal_id=$terminal['ID'];
+  $player->play=$path;
+
+  global $ajax;
+  $ajax=1;
+
+  global $command;
+  $command='refresh';
+
+  $player->intCall=1;
+  $player->usual($out);
+
  }
 
 /**

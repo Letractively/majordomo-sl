@@ -199,7 +199,9 @@ function usual(&$out) {
  if ($ajax!='') {
   global $command;
   if ($command!='') {
-   echo $command.' ';
+   if (!$this->intCall) {
+    echo $command.' ';
+   }
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
@@ -208,10 +210,13 @@ function usual(&$out) {
     curl_setopt($ch, CURLOPT_USERPWD, $terminal['PLAYER_USERNAME'].':'.$terminal['PLAYER_PASSWORD']);
    }
 
-   if (!$terminal['PLAYER_PORT']) {
+   if (!$terminal['PLAYER_PORT'] && $terminal['PLAYER_TYPE']=='foobar') {
+    $terminal['PLAYER_PORT']='8888';
+   } elseif (!$terminal['PLAYER_PORT'] && $terminal['PLAYER_TYPE']=='xbmc') {
+    $terminal['PLAYER_PORT']='8080';
+   } elseif (!$terminal['PLAYER_PORT']) {
     $terminal['PLAYER_PORT']='80';
    }
-
 
     if ($terminal['PLAYER_TYPE']=='vlc' || $terminal['PLAYER_TYPE']=='') {
 
@@ -249,19 +254,28 @@ function usual(&$out) {
       }
    } elseif ($terminal['PLAYER_TYPE']=='xbmc') {
     include(DIR_MODULES.'app_player/xbmc.php');
+
+   } elseif ($terminal['PLAYER_TYPE']=='foobar') {
+    include(DIR_MODULES.'app_player/foobar.php');
    }
 
    // close cURL resource, and free up system resources
    curl_close($ch);    
 
   }
-  if ($session->data['PLAY_TERMINAL']!='') {
-   echo " on ".$session->data['PLAY_TERMINAL'].' ';
+
+
+  if (!$this->intCall) {
+
+   if ($session->data['PLAY_TERMINAL']!='') {
+    echo " on ".$session->data['PLAY_TERMINAL'].' ';
+   }
+
+
+   echo "OK (".$res.")";
+   $session->save();
+   exit;
   }
-  //echo " terminal:".$terminal['HOST']." ";
-  echo "OK (".$res.")";
-  $session->save();
-  exit;
  }
 
    $terminals=SQLSelect("SELECT * FROM terminals WHERE CANPLAY=1 ORDER BY TITLE");
