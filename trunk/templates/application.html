@@ -9,7 +9,9 @@
 <meta name="keywords" content="{#if CMS_KEYWORDS!=""#}{#CMS_KEYWORDS#}{#endif#}">
 <meta name="description" content="{#if CMS_DESCRIPTION!=""#}{#CMS_DESCRIPTION#}{#endif#}">
 [#if POPUP="1"#]
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 [#endif#]
 <link href="<#ROOTHTML#>stl.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="/css/ui-darkness/jquery-ui-1.8.6.custom.css"/>
@@ -17,7 +19,6 @@
 <link rel="stylesheet" type="text/css" href="/css/jquery.gritter.css" />
 <script type="text/javascript" src="/jquerymobile/jquery-1.7.1.min.js"></script>
 [#if POPUP="1"#]
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--#
 <link rel="stylesheet" href="/jquerymobile/jquery.mobile-1.0a4.min.css" />             
 <script type="text/javascript" src="/jquerymobile/custom-scripting.js"></script>               
