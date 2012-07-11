@@ -89,6 +89,13 @@ for($i=0;$i<$total;$i++) {
     'VALUE'=>$language
     ), 
    array(
+    'NAME'=>'VOICE_LANGUAGE', 
+    'TITLE'=>'Voice notifications language', 
+    'TYPE'=>'text',
+    'DEFAULT'=>'en',
+    'VALUE'=>$language
+    ), 
+   array(
     'NAME'=>'SITE_TIMEZONE', 
     'TITLE'=>'Time zone', 
     'TYPE'=>'text',
@@ -99,7 +106,7 @@ for($i=0;$i<$total;$i++) {
 
 
    foreach($settings as $k=>$v) {
-    $rec=SQLSelectOne("SELECT ID FROM settings WHERE NAME='".$v['NAME']."'");
+    $rec=SQLSelectOne("SELECT * FROM settings WHERE NAME='".$v['NAME']."'");
     if (!$rec['ID']) {
      $rec['NAME']=$v['NAME'];
      $rec['VALUE']=$v['VALUE'];
@@ -107,8 +114,11 @@ for($i=0;$i<$total;$i++) {
      $rec['TITLE']=$v['TITLE'];
      $rec['TYPE']=$v['TYPE'];
      $rec['ID']=SQLInsert('settings', $rec);
-     Define('SETTINGS_'.$rec['NAME'], $v['DEFAULT']);
+    } else {
+     $rec['VALUE']=$v['VALUE'];
+     SQLUpdate('settings', $rec);
     }
+    Define('SETTINGS_'.$rec['NAME'], $v['VALUE']);
    }
 
    SaveFile(ROOT.'reboot', '1');
