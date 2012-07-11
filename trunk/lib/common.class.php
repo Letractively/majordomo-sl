@@ -38,7 +38,16 @@
   SQLInsert('shouts', $rec);
 
   if ($level>=(int)getGlobal('minMsgLevel')) { //$voicemode!='off' && 
-   $google_file=GoogleTTS($ph, SETTINGS_SITE_LANGUAGE);
+
+   $lang='en';
+   if (defined('SETTINGS_SITE_LANGUAGE')) {
+    $lang=SETTINGS_SITE_LANGUAGE;
+   }
+   if (defined('SETTINGS_VOICE_LANGUAGE')) {
+    $lang=SETTINGS_VOICE_LANGUAGE;
+   }
+
+   $google_file=GoogleTTS($ph, $lang);
    if ($google_file) {
     @touch($google_file);
     playSound($google_file, 1, $level);
