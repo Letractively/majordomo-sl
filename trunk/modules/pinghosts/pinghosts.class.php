@@ -183,10 +183,10 @@ function usual(&$out) {
 *
 * @access public
 */
- function checkAllHosts() {
+ function checkAllHosts($limit=1000) {
 
   // ping hosts
-  $pings=SQLSelect("SELECT * FROM pinghosts WHERE CHECK_NEXT<=NOW()");
+  $pings=SQLSelect("SELECT * FROM pinghosts WHERE CHECK_NEXT<=NOW() ORDER BY CHECK_NEXT LIMIT ".$limit);
   $total=count($pings);
   for($i=0;$i<$total;$i++) {
    $host=$pings[$i];

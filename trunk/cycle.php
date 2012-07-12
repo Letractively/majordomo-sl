@@ -162,7 +162,7 @@ if (defined('SETTINGS_SITE_TIMEZONE')) {
    $rss_ch->updateChannel($to_update[$i]['ID']);
   }
 
-  $pinghosts->checkAllHosts(); // checking all hosts
+  $pinghosts->checkAllHosts(1); // checking all hosts
 
   $webvars->checkAllVars(); // check all web vars
 
