@@ -547,6 +547,7 @@ $dictionary=array(
 'QUANTITY'=>'Кол-во', // app_products/products_edit_history.html; app_products/products_search_admin.html; app_products/products_edit_default.html; 
 'ACTION'=>'Действие', // app_products/products_edit_history.html; 
 'CATEGORY'=>'Категория', // app_products/all_products.html; app_products/all_products.html; app_products/products_edit_default.html; 
+'ADD_NEW_CATEGORY'=>'Добавить категорию',
 'PRODUCT'=>'Продукт', // app_products/all_products.html; 
 
 

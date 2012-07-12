@@ -60,6 +60,7 @@ function getParams() {
   global $view_mode;
   global $edit_mode;
   global $tab;
+  global $data_source;
   if (isset($id)) {
    $this->id=$id;
   }
@@ -72,6 +73,11 @@ function getParams() {
   if (isset($edit_mode)) {
    $this->edit_mode=$edit_mode;
   }
+
+  if (isset($data_source)) {
+   $this->data_source=$data_source;
+  }
+
   if (isset($tab)) {
    $this->tab=$tab;
   }
@@ -97,6 +103,7 @@ function run() {
   if (IsSet($this->owner->name)) {
    $out['PARENT_NAME']=$this->owner->name;
   }
+  $out['DATA_SOURCE']=$this->data_source;
   $out['VIEW_MODE']=$this->view_mode;
   $out['EDIT_MODE']=$this->edit_mode;
   $out['MODE']=$this->mode;
@@ -139,7 +146,6 @@ function admin(&$out) {
   if ($this->view_mode=='' || $this->view_mode=='search_scripts') {
    $this->search_scripts($out);
   }
-
   if ($this->view_mode=='run_script') {
    $this->runScript($this->id);
    exit;
@@ -154,6 +160,24 @@ function admin(&$out) {
    $this->redirect("?");
   }
  }
+
+ if ($this->data_source=='categories') {
+  if ($this->view_mode=='' || $this->view_mode=='search_categories') {
+   //$this->search_scripts($out);
+   $result=SQLSelect("SELECT * FROM script_categories ORDER BY TITLE");
+   if ($result) {
+    $out['RESULT']=$result;
+   }
+  }
+  if ($this->view_mode=='edit_categories') {
+   $this->edit_categories($out, $this->id);
+  }
+  if ($this->view_mode=='delete_categories') {
+   $this->delete_categories($this->id);
+   $this->redirect("?data_source=".$this->data_source);
+  }
+ }
+
 }
 /**
 * FrontEnd
@@ -181,6 +205,10 @@ function usual(&$out) {
  function edit_scripts(&$out, $id) {
   require(DIR_MODULES.$this->name.'/scripts_edit.inc.php');
  }
+
+ function edit_categories(&$out, $id) {
+  require(DIR_MODULES.$this->name.'/categories_edit.inc.php');
+ }
 /**
 * scripts delete record
 *
@@ -190,6 +218,13 @@ function usual(&$out) {
   $rec=SQLSelectOne("SELECT * FROM scripts WHERE ID='$id'");
   // some action for related tables
   SQLExec("DELETE FROM scripts WHERE ID='".$rec['ID']."'");
+ }
+
+ function delete_categories($id) {
+  $rec=SQLSelectOne("SELECT * FROM script_categories WHERE ID='$id'");
+  // some action for related tables
+  SQLExec("UPDATE scripts SET CATEGORY_ID=0 WHERE CATEGORY_ID='".$rec['ID']."'");
+  SQLExec("DELETE FROM script_categories WHERE ID='".$rec['ID']."'");
  }
 /**
 * Install
@@ -229,7 +264,12 @@ scripts - Scripts
  scripts: DESCRIPTION text
  scripts: CODE text
  scripts: TYPE int(3) unsigned NOT NULL DEFAULT 0
+ scripts: CATEGORY_ID int(10) unsigned NOT NULL DEFAULT 0
  scripts: XML text
+
+ script_categories: ID int(10) unsigned NOT NULL auto_increment
+ script_categories: TITLE varchar(255) NOT NULL DEFAULT ''
+
 
  safe_execs: ID int(10) unsigned NOT NULL auto_increment
  safe_execs: COMMAND text NOT NULL DEFAULT ''

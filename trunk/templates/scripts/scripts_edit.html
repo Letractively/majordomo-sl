@@ -39,6 +39,19 @@
 </tr>
 
 <tr>
+ <td valign="top" align="right"><#LANG_CATEGORY#>:</td>
+ <td valign="top">
+  <select name="category_id">
+   <option value="0">
+   [#begin CATEGORIES#]
+   <option value="[#ID#]" [#if ID="<#CATEGORY_ID#>"#] selected[#endif#]>[#TITLE#]
+   [#end CATEGORIES#]
+  </select>
+ </td>
+</tr>
+
+
+<tr>
  <td valign="top" align="right"><#LANG_TYPE#>:</td>
  <td valign="top">
  <label><input type="radio" name="type" class="script_type" value="0"[#if TYPE!="1"#] checked[#endif#]> PHP</label>

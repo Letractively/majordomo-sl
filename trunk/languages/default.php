@@ -559,6 +559,7 @@ $dictionary=array(
 'QUANTITY'=>'Qty', // app_products/products_edit_history.html; app_products/products_search_admin.html; app_products/products_edit_default.html; 
 'ACTION'=>'Action', // app_products/products_edit_history.html; 
 'CATEGORY'=>'Category', // app_products/all_products.html; app_products/all_products.html; app_products/products_edit_default.html; 
+'ADD_NEW_CATEGORY'=>'Add new category',
 'PRODUCT'=>'Product', // app_products/all_products.html; 
 
 

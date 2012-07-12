@@ -11,7 +11,7 @@
   //searching 'TITLE' (varchar)
   global $title;
   if ($title!='') {
-   $qry.=" AND TITLE LIKE '%".DBSafe($title)."%'";
+   $qry.=" AND scripts.TITLE LIKE '%".DBSafe($title)."%'";
    $out['TITLE']=$title;
   }
   // QUERY READY
@@ -36,15 +36,31 @@
    }
    $session->data['scripts_sort']=$sortby;
   }
-  if (!$sortby) $sortby="TITLE";
+  $sortby="script_categories.TITLE, scripts.TITLE";
   $out['SORTBY']=$sortby;
+  $out['TOTAL_CATEGORIES']=0;
   // SEARCH RESULTS
-  $res=SQLSelect("SELECT * FROM scripts WHERE $qry ORDER BY $sortby");
+  $res=SQLSelect("SELECT scripts.*, script_categories.TITLE as CATEGORY FROM scripts LEFT JOIN script_categories ON scripts.CATEGORY_ID=script_categories.ID WHERE $qry ORDER BY $sortby");
+  $old_category='';
   if ($res[0]['ID']) {
    $total=count($res);
    for($i=0;$i<$total;$i++) {
-    // some action for every record if required
+    if (!$res[$i]['CATEGORY']) {
+     $res[$i]['CATEGORY']=LANG_OTHER;
+    }
+
+    if ($res[$i]['CATEGORY']!=$old_category) {
+     $out['TOTAL_CATEGORIES']++;
+     $old_category=$res[$i]['CATEGORY'];
+     $res[$i]['NEW_CATEGORY']=1;
+    }
+    if ($i==$total-1) {
+     $res[$i]['LAST']=1;
+    }
+
    }
    $out['RESULT']=$res;
   }
+
+
 ?>
