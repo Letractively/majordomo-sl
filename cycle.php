@@ -156,7 +156,7 @@ if (defined('SETTINGS_SITE_TIMEZONE')) {
   }
 
   //updating RSS channels
-  $to_update=SQLSelect("SELECT ID, TITLE FROM rss_channels WHERE NEXT_UPDATE<=NOW()");
+  $to_update=SQLSelect("SELECT ID, TITLE FROM rss_channels WHERE NEXT_UPDATE<=NOW() LIMIT 1");
   $total=count($to_update);
   for($i=0;$i<$total;$i++) {
    $rss_ch->updateChannel($to_update[$i]['ID']);
