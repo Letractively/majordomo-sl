@@ -169,6 +169,7 @@ if (defined('SETTINGS_SITE_TIMEZONE')) {
   $watchfolders->checkAllFolders(); // checking all watching folders
 
   if (defined('ONEWIRE_SERVER')) {
+   $onw->updateStarred(); // check starred 1wire properties
    $onw->updateDevices(); // check all 1wire devices
   }
 

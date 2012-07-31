@@ -318,6 +318,69 @@ function usual(&$out) {
 
  }
 
+
+ /**
+ * Title
+ *
+ * Description
+ *
+ * @access public
+ */
+  function updateStarred() {
+
+   if (!defined('ONEWIRE_SERVER')) {
+    return 0;
+   }
+
+   $ow=new OWNet(ONEWIRE_SERVER);
+
+   $properties=SQLSelect("SELECT owproperties.*, owdevices.SCRIPT_ID, owdevices.CODE, owdevices.UDID FROM owproperties, owdevices WHERE owdevices.ID=owproperties.DEVICE_ID AND owproperties.STARRED=1 ORDER BY owproperties.UPDATED DESC");
+   $total=count($properties);
+
+   for($i=0;$i<$total;$i++) {
+    $prec=$properties[$i];
+    $old_value=$prec['VALUE'];
+    $value=$ow->get($prec['PATH'],OWNET_MSG_READ,false);
+
+    if (!$value) {
+     $device='/'.$prec['UDID'];
+     $tmp=$ow->get($device,OWNET_MSG_DIR,false);
+     if (!$tmp) {
+      continue;
+     }
+    }
+
+
+    if ($value!=$old_value) {
+     $prec['VALUE']=$value;
+     $prec['UPDATED']=date('Y-m-d H:i:s');
+
+     $script_id=$prec['SCRIPT_ID'];
+     $code=$prec['CODE'];
+
+     unset($prec['SCRIPT_ID']);
+     unset($prec['CODE']);
+     unset($prec['UDID']);
+     SQLUpdate('owproperties', $prec);
+
+
+     if ($prec['LINKED_OBJECT'] && $prec['LINKED_PROPERTY']) {
+      sg($prec['LINKED_OBJECT'].'.'.$prec['LINKED_PROPERTY'], $prec['VALUE'], 1);
+     }
+
+     $changed_values=array();
+     $changed_values[$prec['SYSNAME']]=array('OLD_VALUE'=>$old_value, 'VALUE'=>$prec['VALUE']);
+
+     $params=$changed_values;
+     if ($script_id) {
+      runScript($script_id, $params);
+     } elseif ($code) {
+      eval($code);
+     }
+    }
+   }
+  }
+
 /**
 * Title
 *
@@ -438,6 +501,7 @@ onewire - onewire
  owproperties: VALUE varchar(255) NOT NULL DEFAULT ''
  owproperties: CHECK_LATEST datetime
  owproperties: UPDATED datetime
+ owproperties: STARRED int(3) unsigned NOT NULL DEFAULT '0'
  owproperties: LINKED_OBJECT varchar(255) NOT NULL DEFAULT ''
  owproperties: LINKED_PROPERTY varchar(255) NOT NULL DEFAULT ''
 
