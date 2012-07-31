@@ -707,6 +707,9 @@ function admin(&$out) {
   for($i=0;$i<$total;$i++) {
    $path='trunk/'.$to_update[$i];
    $file_content = $phpsvnclient->getFile($path);
+   if (!is_dir(dirname(ROOT.$to_update[$i]))) {
+    @mkdir(dirname(ROOT.$to_update[$i]), 0777);
+   }
    @SaveFile(ROOT.$to_update[$i], $file_content);
    if (file_exists(dirname(ROOT.$to_update[$i]).'/installed')) {
     @unlink(dirname(ROOT.$to_update[$i]).'/installed');

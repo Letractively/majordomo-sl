@@ -765,6 +765,8 @@ $dictionary=array(
 
 'LONG_OPERATION_WARNING'=>'Note: This operation can take up to few minutes.<Br>Please, be patient :)',
 
+'STARRED'=>'Starred',
+
 'TEST'=>'test'
 
 
