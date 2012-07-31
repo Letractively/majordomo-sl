@@ -37,7 +37,7 @@
    }
    $session->data['pinghosts_sort']=$sortby;
   }
-  $sortby="ID DESC";
+  $sortby="pinghosts.TITLE";
   $out['SORTBY']=$sortby;
   // SEARCH RESULTS
   $res=SQLSelect("SELECT * FROM pinghosts WHERE $qry ORDER BY $sortby");

@@ -106,6 +106,12 @@ function run() {
   if ($this->single_rec) {
    $out['SINGLE_REC']=1;
   }
+
+  if ($this->mobile) {
+   $out['MOBILE']=1;
+  }
+
+
   $this->data=$out;
   $p=new parser(DIR_TEMPLATES.$this->name."/".$this->name.".html", $this->data, $this);
   $this->result=$p->result;
