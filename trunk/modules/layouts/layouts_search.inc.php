@@ -42,7 +42,7 @@
    }
    $session->data['layouts_sort']=$sortby;
   }
-  if (!$sortby) $sortby="PRIORITY DESC,TITLE";
+  $sortby="PRIORITY DESC,TITLE";
   $out['SORTBY']=$sortby;
   // SEARCH RESULTS
   $res=SQLSelect("SELECT * FROM layouts WHERE $qry ORDER BY $sortby");
