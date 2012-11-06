@@ -15,7 +15,7 @@ class control_access extends module {
   // setting module name
   $this->name="control_access";
   $this->title="Control Access";
-  $this->module_category="System";
+  $this->module_category="<#LANG_SECTION_SYSTEM#>";
   $this->checkInstalled();
  }
 
