@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 * @version 0.2 (auto-set)
 */
@@ -37,6 +37,25 @@
 
    global $mobile;
    $rec['MOBILE']=$mobile;
+
+   global $is_admin;
+   $rec['IS_ADMIN']=$is_admin;
+
+   global $is_default;
+   $rec['IS_DEFAULT']=$is_default;
+
+   global $password;
+   $rec['PASSWORD']=$password;
+
+   global $avatar;
+   global $avatar_name;
+   if ($avatar!='') {
+    if ($rec['AVATAR']!='') {
+     @unlink(ROOT.'cms/avatars/'.$rec['AVATAR']);
+    }
+    $rec['AVATAR']=$rec['ID'].'_'.$avatar_name;
+    copy($avatar, ROOT.'cms/avatars/'.$rec['AVATAR']);
+   }
 
   //UPDATING RECORD
    if ($ok) {
